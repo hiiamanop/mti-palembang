@@ -3645,7 +3645,7 @@ details[open].eastsFaqItem summary::after { content: "−"; }
 
 .dialogHero {
   position: relative;
-  min-height: 470px;
+  min-height: 420px;
   display: flex;
   align-items: center;
   isolation: isolate;
@@ -3673,67 +3673,117 @@ details[open].eastsFaqItem summary::after { content: "−"; }
 }
 
 .dialogHeroContent {
-  padding-top: 86px;
-  padding-bottom: 86px;
+  width: 100%;
+  padding-top: 56px;
+  padding-bottom: 56px;
   color: var(--white);
 }
 
 .dialogEyebrow {
   width: fit-content;
+  display: inline-flex;
+  align-items: center;
   gap: 8px;
-  min-height: 34px;
+  min-height: 32px;
   padding-inline: 12px;
   border: 1px solid rgba(255, 255, 255, 0.22);
   border-radius: 8px;
   color: #dbe7ff;
   background: rgba(255, 255, 255, 0.11);
   font-size: 13px;
-  font-weight: 900;
+  font-weight: 800;
+  letter-spacing: 0.02em;
 }
 
 .dialogHero h1 {
-  max-width: 820px;
-  margin: 24px 0 18px;
-  font-size: 64px;
-  line-height: 0.98;
-  font-weight: 900;
+  max-width: 840px;
+  margin: 16px 0 14px;
+  font-size: 42px;
+  line-height: 1.15;
+  font-weight: 800;
+  letter-spacing: -0.02em;
 }
 
 .dialogHero p {
-  max-width: 690px;
+  max-width: 700px;
   margin: 0;
-  color: rgba(255, 255, 255, 0.82);
-  font-size: 18px;
-  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 16px;
+  line-height: 1.6;
 }
 
 .dialogHeroStats {
-  margin-top: 34px;
-  gap: 10px;
+  margin-top: 24px;
+  gap: 12px;
   flex-wrap: wrap;
 }
 
 .dialogHeroStats span {
-  min-width: 146px;
-  min-height: 74px;
+  min-width: 140px;
+  min-height: 64px;
   display: grid;
   align-content: center;
-  gap: 4px;
-  padding: 13px 16px;
+  gap: 2px;
+  padding: 10px 16px;
   border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: 8px;
   background: rgba(7, 15, 38, 0.42);
-}
-
-.dialogHeroStats strong {
-  font-size: 24px;
-  line-height: 1;
-}
-
-.dialogHeroStats span {
+  backdrop-filter: blur(12px);
   color: rgba(255, 255, 255, 0.72);
   font-size: 12px;
   font-weight: 800;
+}
+
+.dialogHeroStats strong {
+  font-size: 22px;
+  line-height: 1.1;
+  color: var(--white);
+}
+
+.heroActions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 24px;
+  flex-wrap: wrap;
+}
+
+.heroBtnPrimary,
+.heroBtnSecondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 42px;
+  padding: 0 20px;
+  border-radius: 8px;
+  font-size: 13.5px;
+  font-weight: 800;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.heroBtnPrimary {
+  background: var(--blue);
+  color: var(--white);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 16px rgba(17, 46, 129, 0.4);
+}
+
+.heroBtnPrimary:hover {
+  background: #1e4fd8;
+  color: var(--white);
+}
+
+.heroBtnSecondary {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(8px);
+}
+
+.heroBtnSecondary:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
 }
 
 .dialogIntroStrip {
@@ -5154,16 +5204,16 @@ details[open] .wilayahChevron { transform: rotate(-135deg); }
   }
 
   .dialogHero {
-    min-height: 430px;
+    min-height: 380px;
   }
 
   .dialogHeroContent {
-    padding-top: 68px;
-    padding-bottom: 68px;
+    padding-top: 44px;
+    padding-bottom: 44px;
   }
 
   .dialogHero h1 {
-    font-size: 44px;
+    font-size: 34px;
   }
 
   .dialogIntroStrip {
