@@ -113,9 +113,8 @@ const aksesItems = [
 
 const tentangLinks = [
   { label: "Sejarah MTI", href: "/sejarah-mti", active: true },
-  { label: "Struktur Organisasi", href: "#" },
-  { label: "MTI Wilayah", href: "#" },
-  { label: "Identitas Organisasi", href: "#" }
+  { label: "Struktur Organisasi", href: "/struktur-organisasi" },
+  { label: "Identitas Organisasi", href: "/identitas-organisasi" }
 ];
 
 export default function SejarahMTIPage() {

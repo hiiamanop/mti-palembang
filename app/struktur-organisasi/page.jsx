@@ -61,8 +61,7 @@ const divisions = [
 const tentangLinks = [
   { label: "Sejarah MTI", href: "/sejarah-mti" },
   { label: "Struktur Organisasi", href: "/struktur-organisasi", active: true },
-  { label: "MTI Wilayah", href: "#" },
-  { label: "Identitas Organisasi", href: "#" }
+  { label: "Identitas Organisasi", href: "/identitas-organisasi" }
 ];
 
 const aksesItems = [

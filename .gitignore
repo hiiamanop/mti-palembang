@@ -25,3 +25,6 @@ Thumbs.db
 # local agent/tooling state
 .qodo/
 .docs/
+
+AGENTS.md 
+CLAUDE.md

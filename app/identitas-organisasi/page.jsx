@@ -92,7 +92,6 @@ const misi = [
 const tentangLinks = [
   { label: "Sejarah MTI", href: "/sejarah-mti" },
   { label: "Struktur Organisasi", href: "/struktur-organisasi" },
-  { label: "MTI Wilayah", href: "/struktur-mti-wilayah" },
   { label: "Identitas Organisasi", href: "/identitas-organisasi", active: true }
 ];
 
