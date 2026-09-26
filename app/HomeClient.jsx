@@ -227,17 +227,6 @@ export default function HomeClient({
       {programUnggulan.length > 0 ? (
         <section className="programUnggulanSection">
           <div className="wideShell">
-            <div className="editorialSectionHeader centered">
-              <div className="headerKicker">
-                <span className="kickerBar" />
-                <span className="kickerText">AKSI NYATA &amp; KOLABORASI</span>
-              </div>
-              <div className="headerMain">
-                <h2>Program Unggulan MTI Sumatera Selatan</h2>
-                <p>Wadah berkala dialog, advokasi aspirasi publik, dan kajian kebijakan berkelanjutan.</p>
-              </div>
-            </div>
-
             <ProgramCarousel items={programUnggulan} />
           </div>
         </section>

@@ -6071,215 +6071,262 @@ details[open] .wilayahChevron { transform: rotate(-135deg); }
   object-fit: cover;
 }
 
-/* ── Section 3: Program Unggulan MTI Sumsel (Carousel) ─────── */
+/* ── Section 3: Program Unggulan MTI Sumsel (Multi-Card Gallery Slider) ── */
 .programUnggulanSection {
-  padding: 80px 0 96px;
+  padding: 84px 0 96px;
   background: #f8fafd;
   border-bottom: 1px solid var(--line);
 }
 
-.programCarouselWrap {
-  position: relative;
-  max-width: 1040px;
-  margin: 0 auto;
-}
-
-.carouselTrackViewport {
-  overflow: hidden;
-  border-radius: 24px;
-  box-shadow: 0 20px 48px -16px rgba(17, 46, 129, 0.16);
-  border: 1px solid var(--line);
-  background: var(--white);
-}
-
-.carouselTrack {
-  display: flex;
-  transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
-  will-change: transform;
-}
-
-.carouselSlide {
-  min-width: 100%;
-  flex-shrink: 0;
-  box-sizing: border-box;
-}
-
-.slideCard {
-  display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
-  align-items: stretch;
-  min-height: 440px;
-  background: var(--white);
-}
-
-.slideMedia {
-  position: relative;
-  overflow: hidden;
-  background: #0b1330;
-  min-height: 380px;
-}
-
-.slideImage {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.slideMediaOverlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 60%, rgba(6, 14, 36, 0.4) 100%);
-  pointer-events: none;
-}
-
-.slidePatternFallback {
-  width: 100%;
-  height: 100%;
-  min-height: 380px;
+.programShowcase {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  background: linear-gradient(135deg, #0b1330 0%, #112e81 60%, #1e3a8a 100%);
-  color: var(--white);
-  position: relative;
+  gap: 32px;
 }
 
-.slidePatternFallback span {
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.7);
-}
-
-.slidePatternIcon {
-  color: var(--sky);
-}
-
-.slideContent {
-  padding: 48px 44px;
+.programHeaderRow {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  background: var(--white);
-}
-
-.slideTagRow {
-  display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-between;
-  margin-bottom: 20px;
+  gap: 28px;
 }
 
-.slideBadge {
-  display: inline-block;
-  font-size: 11px;
+.programHeaderTitles h2 {
+  font-size: clamp(26px, 3.2vw, 36px);
+  color: var(--ink);
   font-weight: 800;
-  color: var(--blue);
-  background: #eef3ff;
-  padding: 6px 12px;
-  border-radius: 8px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  border: 1px solid rgba(17, 46, 129, 0.12);
-}
-
-.slideCounter {
-  font-size: 12px;
-  font-weight: 900;
-  color: var(--sky);
-  letter-spacing: 0.14em;
-}
-
-.slideTitle {
-  font-size: clamp(24px, 2.5vw, 32px);
-  font-weight: 900;
-  color: #0b1330;
-  line-height: 1.25;
-  margin: 0 0 16px;
   letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin: 0 0 10px;
 }
 
-.slideSummary {
-  font-size: 15.5px;
-  line-height: 1.75;
-  color: #475569;
+.programHeaderTitles p {
+  max-width: 640px;
   margin: 0;
+  color: #64748b;
+  font-size: 15px;
+  line-height: 1.7;
 }
 
-.carouselControlBar {
+.programControls {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  margin-top: 24px;
-  padding: 0 8px;
+  gap: 20px;
+  flex-shrink: 0;
 }
 
-.carouselDots {
+.programCounter {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  font-size: 14px;
+  color: #94a3b8;
+  font-weight: 700;
+}
+
+.programCounter strong {
+  font-size: 18px;
+  color: var(--blue);
+  font-weight: 900;
+}
+
+.programNavGroup {
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-.carouselDot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  border: none;
-  background: #cbd5e1;
-  cursor: pointer;
-  padding: 0;
-  transition: all 0.25s ease;
-}
-
-.carouselDot.active {
-  width: 28px;
-  border-radius: 10px;
-  background: var(--blue);
-}
-
-.carouselNavBtns {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.carouselArrowBtn {
+.programNavBtn {
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  border: 1px solid var(--line);
+  border: 1px solid #cbd5e1;
   background: var(--white);
   color: var(--blue);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all 0.2s ease;
-  box-shadow: 0 4px 12px rgba(17, 46, 129, 0.06);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 12px rgba(17, 46, 129, 0.05);
 }
 
-.carouselArrowBtn:hover {
+.programNavBtn:hover:not(.disabled) {
   background: var(--blue);
   color: var(--white);
   border-color: var(--blue);
   transform: translateY(-2px);
-  box-shadow: 0 8px 18px rgba(17, 46, 129, 0.2);
+  box-shadow: 0 10px 20px -4px rgba(17, 46, 129, 0.28);
+}
+
+.programNavBtn.disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Track Viewport */
+.programTrackContainer {
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding: 8px 4px 20px;
+  margin: -8px -4px -20px;
+  scrollbar-width: none;
+}
+
+.programTrackContainer::-webkit-scrollbar {
+  display: none;
+}
+
+.programTrack {
+  display: flex;
+  gap: 24px;
+  width: max-content;
+  min-width: 100%;
+}
+
+/* Card Design */
+.programCardItem {
+  width: 360px;
+  flex-shrink: 0;
+  scroll-snap-align: start;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 30px -12px rgba(17, 46, 129, 0.08);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.programCardItem:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 44px -16px rgba(17, 46, 129, 0.18);
+  border-color: #cbd5e1;
+}
+
+.programCardMedia {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: #0b1330;
+}
+
+.programCardMedia img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  display: block;
+}
+
+.programCardItem:hover .programCardMedia img {
+  transform: scale(1.06);
+}
+
+.mediaScrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(6, 14, 36, 0.1) 40%, rgba(6, 14, 36, 0.65) 100%);
+  pointer-events: none;
+}
+
+.programBadge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  padding: 5px 12px;
+  border-radius: 8px;
+  background: rgba(11, 19, 48, 0.82);
+  backdrop-filter: blur(8px);
+  color: var(--white);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.programIndexTag {
+  position: absolute;
+  bottom: 14px;
+  right: 14px;
+  font-size: 13px;
+  font-weight: 900;
+  color: var(--white);
+  letter-spacing: 0.1em;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+.programCardContent {
+  padding: 26px 26px 24px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.programCardContent h3 {
+  margin: 0 0 10px;
+  font-size: 19px;
+  font-weight: 800;
+  color: #0b1330;
+  line-height: 1.35;
+}
+
+.programCardContent p {
+  margin: 0 0 20px;
+  font-size: 14px;
+  line-height: 1.7;
+  color: #475569;
+  flex: 1;
+}
+
+.programCardFoot {
+  padding-top: 16px;
+  border-top: 1px solid #f1f5f9;
+}
+
+.programActionLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--blue);
+  transition: gap 0.2s ease, color 0.2s ease;
+}
+
+.programCardItem:hover .programActionLink {
+  gap: 12px;
+  color: var(--sky);
+}
+
+.actionArrow {
+  transition: transform 0.2s ease;
+}
+
+.programCardItem:hover .actionArrow {
+  transform: translateX(3px);
 }
 
 @media (max-width: 900px) {
-  .slideCard {
-    grid-template-columns: 1fr;
+  .programHeaderRow {
+    flex-direction: column;
+    align-items: flex-start;
   }
-  .slideMedia,
-  .slidePatternFallback {
-    min-height: 240px;
+  .programCardItem {
+    width: 320px;
   }
-  .slideContent {
-    padding: 32px 24px;
+}
+
+@media (max-width: 600px) {
+  .programCardItem {
+    width: 290px;
   }
 }
 
