@@ -4,6 +4,7 @@ import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { createClient } from '../../lib/supabase/server';
 import { createAdminClient } from '../../lib/supabase/admin';
+import { isValidISODate } from '../../lib/kegiatan';
 
 async function checkAuth() {
   const supabase = await createClient();
@@ -140,6 +141,74 @@ export async function toggleBeritaPublished(id) {
   revalidatePath('/');
   revalidatePath('/mti-dalam-berita');
   revalidatePath('/admin/berita');
+}
+
+// ── Kegiatan MTI ──────────────────────────────────────────────────────────────
+
+function kegiatanInput(formData) {
+  const title = String(formData.get('title') || '').trim();
+  const date = String(formData.get('date') || '');
+  if (!title) return { error: 'Judul kegiatan wajib diisi.' };
+  if (!isValidISODate(date)) return { error: 'Tanggal kegiatan tidak valid.' };
+  return {
+    row: {
+      title,
+      date,
+      image: String(formData.get('image') || '').trim(),
+      summary: String(formData.get('summary') || '').trim()
+    }
+  };
+}
+
+function revalidateKegiatan() {
+  revalidatePath('/kegiatan-mti');
+  revalidatePath('/admin');
+  revalidatePath('/admin/kegiatan');
+}
+
+export async function addKegiatanItem(formData) {
+  const supabase = await checkAuth();
+  const input = kegiatanInput(formData);
+  if (input.error) return input;
+  const { error } = await supabase.from('kegiatan').insert({ ...input.row, published: false });
+  if (error) return { error: error.message };
+  revalidateKegiatan();
+  return { success: true };
+}
+
+export async function saveKegiatanItem(id, formData) {
+  const supabase = await checkAuth();
+  const input = kegiatanInput(formData);
+  if (input.error) return input;
+  const { error } = await supabase.from('kegiatan').update(input.row).eq('id', id);
+  if (error) return { error: error.message };
+  revalidateKegiatan();
+  return { success: true };
+}
+
+export async function deleteKegiatanItem(id) {
+  const supabase = await checkAuth();
+  const { error } = await supabase.from('kegiatan').delete().eq('id', id);
+  if (error) return { error: error.message };
+  revalidateKegiatan();
+  return { success: true };
+}
+
+export async function toggleKegiatanPublished(id) {
+  const supabase = await checkAuth();
+  const { data, error: readError } = await supabase
+    .from('kegiatan')
+    .select('published')
+    .eq('id', id)
+    .single();
+  if (readError) return { error: readError.message };
+  const { error } = await supabase
+    .from('kegiatan')
+    .update({ published: !data.published })
+    .eq('id', id);
+  if (error) return { error: error.message };
+  revalidateKegiatan();
+  return { success: true };
 }
 
 // ── Beranda ───────────────────────────────────────────────────────────────────

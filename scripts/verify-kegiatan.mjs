@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { readFile } from 'node:fs/promises';
 import {
   filterKegiatanByYear,
   formatKegiatanDate,
@@ -23,4 +24,19 @@ assert.deepEqual(filterKegiatanByYear(items, 2026).map((item) => item.id), ['b',
 assert.equal(formatKegiatanDate('2026-09-20'), '20 September 2026');
 assert.equal(formatKegiatanDate('invalid'), '');
 
-console.log('Kegiatan date and year helpers verified.');
+const cmsSource = await readFile(new URL('../lib/cms.js', import.meta.url), 'utf8');
+assert.match(cmsSource, /export async function getKegiatan\(\)/);
+assert.match(cmsSource, /\.from\('kegiatan'\)/);
+assert.match(cmsSource, /\.order\('date', \{ ascending: false \}\)/);
+
+const actionsSource = await readFile(new URL('../app/admin/actions.js', import.meta.url), 'utf8');
+for (const name of [
+  'addKegiatanItem',
+  'saveKegiatanItem',
+  'deleteKegiatanItem',
+  'toggleKegiatanPublished'
+]) {
+  assert.equal(actionsSource.includes(`export async function ${name}`), true, `${name} missing`);
+}
+
+console.log('Kegiatan date, year, data access, and actions verified.');
