@@ -92,12 +92,19 @@ async function createAdmin() {
 
 // ── 4: seed data (hanya isi kalau tabel masih kosong) ─────────────────────────
 async function seedList(table, rowsFn, file) {
-  const { count } = await supabase.from(table).select('*', { count: 'exact', head: true });
+  const { count, error: countError } = await supabase
+    .from(table)
+    .select('*', { count: 'exact', head: true });
+  if (countError) throw countError;
   if (count && count > 0) {
     console.log(`  ✓ ${table}: sudah ada ${count} baris (dilewati)`);
     return;
   }
   const items = await readJSON(file);
+  if (items.length === 0) {
+    console.log(`  ✓ ${table}: kosong`);
+    return;
+  }
   const rows = items.map(rowsFn);
   const { error } = await supabase.from(table).insert(rows);
   if (error) throw error;
