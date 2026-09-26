@@ -47,6 +47,7 @@ export default async function AdminDashboard() {
         <div className="adminQuickLinks">
           <Link href="/admin/berita" className="adminBtn adminBtnPrimary">Kelola Berita</Link>
           <Link href="/admin/kegiatan" className="adminBtn adminBtnSecondary">Kelola Kegiatan</Link>
+          <Link href="/admin/struktur-organisasi" className="adminBtn adminBtnSecondary">Struktur Organisasi</Link>
           <Link href="/admin/beranda" className="adminBtn adminBtnSecondary">Edit Beranda</Link>
           <Link href="/admin/media" className="adminBtn adminBtnSecondary">Kelola Media</Link>
           <Link href="/admin/jurnal" className="adminBtn adminBtnSecondary">Kelola Jurnal</Link>

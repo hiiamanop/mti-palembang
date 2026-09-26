@@ -37,4 +37,11 @@ const actionsSource = await readFile(new URL('../app/admin/actions.js', import.m
 assert.match(actionsSource, /export async function saveStrukturOrganisasi\(formData\)/);
 assert.match(actionsSource, /ORGANIZATION_KEYS/);
 
-console.log('Fixed organization structure, empty seed, data access, and save action verified.');
+const adminFormSource = await readFile(
+  new URL('../app/admin/struktur-organisasi/StrukturOrganisasiForm.jsx', import.meta.url),
+  'utf8'
+);
+assert.match(adminFormSource, /ORGANIZATION_GROUPS/);
+assert.match(adminFormSource, /Simpan Struktur Organisasi/);
+
+console.log('Fixed organization structure, empty seed, data access, save action, and admin form verified.');
