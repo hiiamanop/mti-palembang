@@ -5,6 +5,7 @@ import { redirect } from 'next/navigation';
 import { createClient } from '../../lib/supabase/server';
 import { createAdminClient } from '../../lib/supabase/admin';
 import { isValidISODate } from '../../lib/kegiatan';
+import { ORGANIZATION_KEYS } from '../../lib/organization-structure';
 
 async function checkAuth() {
   const supabase = await createClient();
@@ -33,6 +34,24 @@ async function getSingleton(supabase, table) {
 
 async function saveSingleton(supabase, table, value) {
   await supabase.from(table).update({ data: value }).eq('id', 1);
+}
+
+// ── Struktur Organisasi ───────────────────────────────────────────────────────
+
+export async function saveStrukturOrganisasi(formData) {
+  const supabase = await checkAuth();
+  const names = Object.fromEntries(
+    ORGANIZATION_KEYS.map((key) => [key, String(formData.get(key) || '').trim()])
+  );
+  const { error } = await supabase
+    .from('struktur_organisasi')
+    .update({ data: { names } })
+    .eq('id', 1);
+  if (error) return { error: error.message };
+  revalidatePath('/struktur-organisasi');
+  revalidatePath('/admin');
+  revalidatePath('/admin/struktur-organisasi');
+  return { success: true };
 }
 
 // ── Auth ──────────────────────────────────────────────────────────────────────

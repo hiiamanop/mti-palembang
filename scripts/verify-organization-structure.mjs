@@ -30,4 +30,11 @@ const seed = JSON.parse(
 );
 assert.deepEqual(seed, { names: {} });
 
-console.log('Fixed organization structure and empty seed verified.');
+const cmsSource = await readFile(new URL('../lib/cms.js', import.meta.url), 'utf8');
+assert.match(cmsSource, /export async function getStrukturOrganisasi\(\)/);
+
+const actionsSource = await readFile(new URL('../app/admin/actions.js', import.meta.url), 'utf8');
+assert.match(actionsSource, /export async function saveStrukturOrganisasi\(formData\)/);
+assert.match(actionsSource, /ORGANIZATION_KEYS/);
+
+console.log('Fixed organization structure, empty seed, data access, and save action verified.');
