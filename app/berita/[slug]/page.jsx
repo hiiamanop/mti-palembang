@@ -4,16 +4,12 @@ import {
   ArrowRight,
   CalendarDays,
   Clock,
-  Search,
   Tag,
   UserRound
 } from 'lucide-react';
-import DialogNav from '../../components/DialogNav';
+import Header from '../../components/layout/Header';
+import Footer from '../../components/layout/Footer';
 import { getBerita } from '../../../lib/cms';
-
-const IMG = {
-  logo: 'https://mti.or.id/wp-content/uploads/2023/01/cropped-cropped-MTI_LOGO_PNG-1-270x270.png'
-};
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
@@ -46,53 +42,11 @@ export default async function NewsDetailPage({ params }) {
 
   return (
     <main className="newsDetailPage">
-      <div className="topGradient" />
-
-      <div className="utilityBar">
-        <div className="wideShell utilityInner">
-          <div className="utilityLeft">
-            <span className="liveDot" />
-            <strong>Berita MTI</strong>
-            <span className="divider">.</span>
-            <span>{article.detailDate}</span>
-          </div>
-          <div className="utilityRight">
-            <span>secretariat@mti.or.id</span>
-            <a href="https://www.linkedin.com/company/sinergi-mti/">LinkedIn</a>
-            <a href="https://www.instagram.com/masyarakatransportasi/">Instagram</a>
-            <a href="https://twitter.com/sinergi_mti">X</a>
-            <strong>ID</strong>
-            <span>EN</span>
-          </div>
-        </div>
-      </div>
-
-      <section className="masthead">
-        <div className="wideShell mastheadInner">
-          <div className="editionMeta">
-            <span>DETAIL BERITA</span>
-            <p>Masyarakat Transportasi Indonesia</p>
-          </div>
-          <a className="logoLockup" href="/#" aria-label="MTI home">
-            <img src={IMG.logo} alt="MTI" />
-            <span className="logoFallback">MTI</span>
-            <span>
-              <strong>MTI</strong>
-              <small>Masyarakat Transportasi Indonesia</small>
-            </span>
-          </a>
-          <div className="mastheadTools">
-            <button className="iconButton" type="button" aria-label="Cari">
-              <Search size={18} aria-hidden="true" />
-            </button>
-            <a className="subscribeButton desktopOnly" href="/#newsletter">
-              Berlangganan
-            </a>
-          </div>
-        </div>
-      </section>
-
-      <DialogNav activeItem="Kegiatan MTI" />
+      <Header
+        activeItem="Kegiatan MTI"
+        editionTitle="DETAIL BERITA"
+        editionSubtitle="Masyarakat Transportasi Indonesia"
+      />
 
       <article className="newsDetailHero">
         <div className="wideShell newsDetailHeroInner">
@@ -177,69 +131,7 @@ export default async function NewsDetailPage({ params }) {
         </aside>
       </section>
 
-      <footer className="footer">
-        <div className="wideShell footerGrid">
-          <div>
-            <div className="footerBrand">
-              <img src={IMG.logo} alt="MTI" />
-              <span>
-                <strong>MTI</strong>
-                <small>Masyarakat Transportasi Indonesia</small>
-              </span>
-            </div>
-            <p>
-              Organisasi profesi yang menghimpun pakar, akademisi, praktisi, dan birokrat untuk
-              pembangunan transportasi nasional yang berkelanjutan.
-            </p>
-            <p className="address">
-              Wisma Nugra Santana 13th Floor, Jl. Jend. Sudirman Kav 7-8, Karet Tengsin, Jakarta.
-            </p>
-          </div>
-          <FooterLinks
-            title="Kegiatan"
-            items={['Dialog & Sinergi Kebijakan', 'MTI Dalam Berita', 'Jalan-Jalan']}
-          />
-          <FooterLinks
-            title="Tentang"
-            items={['Sejarah MTI', 'Struktur Organisasi', 'MTI Wilayah']}
-          />
-          <FooterLinks
-            title="Program"
-            items={['16th EASTS Conference', 'AKSES Nusantara', 'AKSES Utama']}
-          />
-        </div>
-        <div className="footerBottom">
-          <div className="wideShell">
-            <span>Masyarakat Transportasi Indonesia &copy; 2026. All rights reserved.</span>
-            <span>
-              <a href="/">Beranda</a>
-              <a href="mailto:secretariat@mti.or.id">Kontak</a>
-            </span>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </main>
   );
-}
-
-function FooterLinks({ title, items }) {
-  return (
-    <div className="footerLinks">
-      <h3>{title}</h3>
-      {items.map((item) => (
-        <a href={footerHref(item)} key={item}>
-          {item}
-        </a>
-      ))}
-    </div>
-  );
-}
-
-function footerHref(item) {
-  if (item === 'Dialog & Sinergi Kebijakan') return '/dialog-kebijakan';
-  if (item === 'MTI Dalam Berita') return '/mti-dalam-berita';
-  if (item === 'Jalan-Jalan') return '/kegiatan-mti/jalan-jalan';
-  if (item === '16th EASTS Conference') return '/easts';
-  if (item === 'AKSES Nusantara') return '/#akses';
-  return '#';
 }

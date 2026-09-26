@@ -1,61 +1,15 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import {
   ArrowRight,
-  Check,
-  ChevronDown,
-  Menu,
-  Play,
-  Search,
-  X
+  Play
 } from 'lucide-react';
 import aksesBanner from '../assets/Banner-AKSES.jpg';
-import newsletterOverlay from '../assets/Banner-AKSES 2.png';
-
-const IMG = {
-  logo: 'https://mti.or.id/wp-content/uploads/2023/01/cropped-cropped-MTI_LOGO_PNG-1-270x270.png'
-};
-
-const navItems = [
-  { label: '16th EASTS Conference', href: '/easts', badge: true },
-  { label: 'Beranda', href: '#', active: true },
-  {
-    label: 'Kegiatan MTI',
-    href: '#berita',
-    children: [
-      { label: 'Dialog dan Sinergi Kebijakan', href: '/dialog-kebijakan' },
-      { label: 'MTI Dalam Berita', href: '/mti-dalam-berita' },
-      { label: 'Jalan-Jalan', href: '/kegiatan-mti/jalan-jalan' }
-    ]
-  },
-  {
-    label: 'Rekomendasi Kebijakan',
-    href: '#',
-    children: [
-      { label: 'Opini', href: '/opini' },
-      { label: 'AKSES Utama', href: '/aksesutama' }
-    ]
-  },
-  { label: 'AKSES Nusantara', href: '/aksesnusantara' },
-  {
-    label: 'Tentang Kami',
-    href: '#tentang',
-    children: [
-      { label: 'Sejarah MTI', href: '/sejarah-mti' },
-      { label: 'Struktur Organisasi', href: '/struktur-organisasi' },
-      {
-        label: 'MTI Wilayah',
-        href: '/struktur-mti-wilayah',
-        children: [
-          { label: 'Struktur MTI Wilayah', href: '/struktur-mti-wilayah' },
-          { label: 'Kegiatan Wilayah', href: '/mti-wilayah/jalan-jalan' }
-        ]
-      },
-      { label: 'Identitas Organisasi', href: '/identitas-organisasi' }
-    ]
-  }
-];
+import Header from './components/layout/Header';
+import Footer from './components/layout/Footer';
+import Newsletter from './components/shared/Newsletter';
+import { SITE_CONFIG } from '../lib/site-config';
 
 const signatureTags = ['Kegiatan MTI', 'Dialog Kebijakan', 'Kabar Wilayah', 'Publikasi AKSES'];
 
@@ -64,22 +18,6 @@ const catStyles = {
   Sinergi: { bg: '#e6f0fc', color: '#2e6fd0' },
   Dialog: { bg: '#e6eaf7', color: '#112e81' }
 };
-
-function formatDate(date) {
-  return date.toLocaleDateString('id-ID', {
-    weekday: 'long',
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric'
-  });
-}
-
-function formatTime(date) {
-  return date.toLocaleTimeString('id-ID', {
-    hour: '2-digit',
-    minute: '2-digit'
-  });
-}
 
 export default function HomeClient({
   beritaItems = [],
@@ -90,21 +28,7 @@ export default function HomeClient({
   mediaData = null,
   aksesData = null
 }) {
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const [openDropdown, setOpenDropdown] = useState(null);
-  const [openSubLabel, setOpenSubLabel] = useState(null);
   const [filter, setFilter] = useState('Semua');
-  const [now, setNow] = useState(null);
-  const [nlDone, setNlDone] = useState(false);
-  const [nlName, setNlName] = useState('');
-  const [nlEmail, setNlEmail] = useState('');
-  const [subscriber, setSubscriber] = useState('rekan MTI');
-
-  useEffect(() => {
-    setNow(new Date());
-    const clock = setInterval(() => setNow(new Date()), 1000);
-    return () => clearInterval(clock);
-  }, []);
 
   const news = useMemo(() => {
     const filtered =
@@ -115,16 +39,6 @@ export default function HomeClient({
       tagColor: catStyles[item.cat]?.color || catStyles.Berita.color
     }));
   }, [filter, beritaItems]);
-
-  function handleNewsletter(event) {
-    event.preventDefault();
-    setSubscriber(nlName.trim() || 'rekan MTI');
-    setNlDone(true);
-    setNlEmail('');
-  }
-
-  const dateText = now ? formatDate(now) : 'Sabtu, 20 Juni 2026';
-  const timeText = now ? formatTime(now) : '17.00';
 
   const mainVideoUrl = mediaData?.mainVideo?.url || '';
   const miniVideos = mediaData?.miniVideos?.filter((v) => v.visible) || [];
@@ -142,161 +56,7 @@ export default function HomeClient({
 
   return (
     <main className="newsroom">
-      <div className="topGradient" />
-
-      <div className="utilityBar">
-        <div className="wideShell utilityInner">
-          <div className="utilityLeft">
-            <span className="liveDot" />
-            <strong>{dateText}</strong>
-            <span className="divider">.</span>
-            <span>{timeText} WIB</span>
-          </div>
-          <div className="utilityRight">
-            <span>secretariat@mti.or.id</span>
-            <a href="https://www.linkedin.com/company/sinergi-mti/">LinkedIn</a>
-            <a href="https://www.instagram.com/masyarakatransportasi/">Instagram</a>
-            <a href="https://twitter.com/sinergi_mti">X</a>
-            <strong>ID</strong>
-            <span>EN</span>
-          </div>
-        </div>
-      </div>
-
-      <section className="masthead">
-        <div className="wideShell mastheadInner">
-          <div className="editionMeta">
-            <span>EDISI HARI INI</span>
-            <p>Wisma Nugra Santana, Jakarta</p>
-          </div>
-          <a className="logoLockup" href="#" aria-label="MTI home">
-            <img src={IMG.logo} alt="MTI" />
-            <span className="logoFallback">MTI</span>
-            <span>
-              <strong>MTI SUMSEL</strong>
-              <small>MASYARAKAT TRANSPORTASI INDONESIA</small>
-              <small>SUMATERA SELATAN</small>
-            </span>
-          </a>
-          <div className="mastheadTools">
-            <button className="iconButton" type="button" aria-label="Cari">
-              <Search size={18} aria-hidden="true" />
-            </button>
-            <a className="subscribeButton desktopOnly" href="#newsletter">
-              Berlangganan
-            </a>
-            <button
-              className="iconButton mobileOnly"
-              type="button"
-              aria-label={mobileOpen ? 'Tutup menu' : 'Buka menu'}
-              aria-expanded={mobileOpen}
-              onClick={() => {
-                setMobileOpen((value) => !value);
-                setOpenDropdown(null);
-              }}
-            >
-              {mobileOpen ? <X size={21} aria-hidden="true" /> : <Menu size={21} aria-hidden="true" />}
-            </button>
-          </div>
-        </div>
-      </section>
-
-      <header className="navStrip">
-        <div className="wideShell navInner">
-          <nav
-            className="desktopNav"
-            aria-label="Navigasi utama"
-            onMouseLeave={() => {
-              setOpenDropdown(null);
-              setOpenSubLabel(null);
-            }}
-          >
-            {navItems.map((item, index) => (
-              <div
-                className="navItem"
-                key={item.label}
-                onMouseEnter={() => {
-                  setOpenDropdown(index);
-                  setOpenSubLabel(null);
-                }}
-              >
-                <a className={item.active ? 'active' : ''} href={item.href}>
-                  {item.badge ? <span className="navBadge" /> : null}
-                  {item.label}
-                  {item.children ? <ChevronDown size={12} aria-hidden="true" /> : null}
-                </a>
-                {item.children && openDropdown === index ? (
-                  <div className="dropdownPanel">
-                    {item.children.map((child) => (
-                      <div
-                        className="navDropItem"
-                        key={child.label || child}
-                        onMouseEnter={() => setOpenSubLabel(child.label || child)}
-                      >
-                        <a href={child.href || '#'}>
-                          <span />
-                          {child.label || child}
-                          {child.children ? <ChevronDown size={11} aria-hidden="true" /> : null}
-                        </a>
-                        {child.children && openSubLabel === (child.label || child) ? (
-                          <div className="navSubDropdown">
-                            {child.children.map((sub) => (
-                              <a key={sub.label} href={sub.href || '#'}>
-                                {sub.label}
-                              </a>
-                            ))}
-                          </div>
-                        ) : null}
-                      </div>
-                    ))}
-                  </div>
-                ) : null}
-              </div>
-            ))}
-          </nav>
-          <a className="aksesLink desktopOnly" href="/aksesnusantara">
-            AKSES Nusantara{aksesEdition ? ` ${aksesEdition}` : ''}
-            <ArrowRight size={14} aria-hidden="true" />
-          </a>
-        </div>
-        {mobileOpen ? (
-          <nav className="mobileNav" aria-label="Navigasi mobile">
-            {navItems.map((item, index) => (
-              <div className="mobileNavGroup" key={item.label}>
-                {item.children ? (
-                  <button
-                    type="button"
-                    onClick={() => setOpenDropdown((value) => (value === index ? null : index))}
-                  >
-                    {item.label}
-                    <ChevronDown size={16} aria-hidden="true" />
-                  </button>
-                ) : (
-                  <a href={item.href || '#'} onClick={() => setMobileOpen(false)}>
-                    {item.label}
-                  </a>
-                )}
-                {item.children && openDropdown === index ? (
-                  <div className="mobileSubmenu">
-                    {item.children.map((child) => (
-                      <a
-                        href={child.href || '#'}
-                        key={child.label || child}
-                        onClick={() => setMobileOpen(false)}
-                      >
-                        {child.label || child}
-                      </a>
-                    ))}
-                  </div>
-                ) : null}
-              </div>
-            ))}
-            <a className="mobileSubscribe" href="#newsletter" onClick={() => setMobileOpen(false)}>
-              Berlangganan Newsletter
-            </a>
-          </nav>
-        ) : null}
-      </header>
+      <Header activeItem="Beranda" aksesEdition={aksesEdition} />
 
       {tickerItems.length > 0 ? (
         <section className="tickerBand" aria-label="Berita terkini">
@@ -336,7 +96,7 @@ export default function HomeClient({
 
           <div className="signatureBoard" aria-hidden="true">
             <div className="boardHeader">
-              <img src={IMG.logo} alt="" />
+              <img src={SITE_CONFIG.logo} alt="" />
               <span>
                 <strong>Catatan Redaksi</strong>
                 <small>Diperbarui berkala</small>
@@ -585,121 +345,8 @@ export default function HomeClient({
         </section>
       ) : null}
 
-      <section className="newsletter" id="newsletter">
-        <div className="newsletterTexture" />
-        <img className="newsletterOverlay" src={newsletterOverlay.src} alt="" aria-hidden="true" />
-        <div className="newsletterInner">
-          <p>Sinergi Mewarnai Kemajuan Transportasi Indonesia</p>
-          <h2>Berlangganan Newsletter MTI</h2>
-          <span>
-            Kabar kegiatan, rekomendasi kebijakan, dan jurnal AKSES Nusantara langsung ke email Anda.
-          </span>
-          {nlDone ? (
-            <div className="successBox">
-              <i>
-                <Check size={16} aria-hidden="true" />
-              </i>
-              Terima kasih, {subscriber}. Anda berhasil berlangganan.
-            </div>
-          ) : (
-            <form className="newsletterForm" onSubmit={handleNewsletter}>
-              <input
-                value={nlName}
-                onChange={(event) => setNlName(event.target.value)}
-                placeholder="Nama"
-                aria-label="Nama"
-              />
-              <input
-                value={nlEmail}
-                onChange={(event) => setNlEmail(event.target.value)}
-                type="email"
-                placeholder="Email"
-                aria-label="Email"
-                required
-              />
-              <button type="submit">Subscribe</button>
-            </form>
-          )}
-        </div>
-      </section>
-
-      <footer className="footer">
-        <div className="wideShell footerGrid">
-          <div>
-            <div className="footerBrand">
-              <img src={IMG.logo} alt="MTI" />
-              <span>
-                <strong>MTI</strong>
-                <small>Masyarakat Transportasi Indonesia</small>
-              </span>
-            </div>
-            <p>
-              Organisasi profesi yang menghimpun pakar, akademisi, praktisi, dan birokrat untuk
-              pembangunan transportasi nasional yang berkelanjutan.
-            </p>
-            <p className="address">
-              Wisma Nugra Santana 13th Floor, Jl. Jend. Sudirman Kav 7-8, Karet Tengsin, Jakarta.
-            </p>
-            <div className="socials">
-              <a href="https://www.linkedin.com/company/sinergi-mti/" aria-label="LinkedIn">
-                in
-              </a>
-              <a href="https://www.instagram.com/masyarakatransportasi/" aria-label="Instagram">
-                IG
-              </a>
-              <a href="https://twitter.com/sinergi_mti" aria-label="X">
-                X
-              </a>
-              <a href="https://www.facebook.com/groups/158206227226" aria-label="Facebook">
-                f
-              </a>
-            </div>
-          </div>
-          <FooterLinks
-            title="Kegiatan"
-            items={['Dialog & Sinergi Kebijakan', 'MTI Dalam Berita', 'Jalan-Jalan', 'Rekomendasi Kebijakan']}
-          />
-          <FooterLinks
-            title="Tentang"
-            items={['Sejarah MTI', 'Struktur Organisasi', 'MTI Wilayah', 'Identitas Organisasi']}
-          />
-          <FooterLinks
-            title="Program"
-            items={['16th EASTS Conference', 'AKSES Nusantara', 'AKSES Utama', 'Opini']}
-          />
-        </div>
-        <div className="footerBottom">
-          <div className="wideShell">
-            <span>Masyarakat Transportasi Indonesia &copy; {new Date().getFullYear()}. All rights reserved.</span>
-            <span>
-              <a href="#">Kebijakan Privasi</a>
-              <a href="#">Kontak</a>
-            </span>
-          </div>
-        </div>
-      </footer>
+      <Newsletter />
+      <Footer />
     </main>
   );
-}
-
-function FooterLinks({ title, items }) {
-  return (
-    <div className="footerLinks">
-      <h3>{title}</h3>
-      {items.map((item) => (
-        <a href={footerHref(item)} key={item}>
-          {item}
-        </a>
-      ))}
-    </div>
-  );
-}
-
-function footerHref(item) {
-  if (item === 'Dialog & Sinergi Kebijakan') return '/dialog-kebijakan';
-  if (item === 'MTI Dalam Berita') return '/mti-dalam-berita';
-  if (item === 'Jalan-Jalan') return '/kegiatan-mti/jalan-jalan';
-  if (item === '16th EASTS Conference') return '/easts';
-  if (item === 'AKSES Nusantara') return '/aksesnusantara';
-  return '#';
 }

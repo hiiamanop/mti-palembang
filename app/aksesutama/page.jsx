@@ -4,10 +4,10 @@ import {
   CalendarDays,
   Download,
   FileText,
-  Search,
   Sparkles
 } from "lucide-react";
-import DialogNav from "../components/DialogNav";
+import Header from "../components/layout/Header";
+import Footer from "../components/layout/Footer";
 
 export const metadata = {
   title: "AKSES Utama | MTI",
@@ -108,53 +108,7 @@ const focusAreas = ["Kebijakan Nasional", "Keselamatan", "Logistik & Konektivita
 export default function AksesUtamaPage() {
   return (
     <main className="dialogPolicyPage aksesUtamaPage">
-      <div className="topGradient" />
-
-      <div className="utilityBar">
-        <div className="wideShell utilityInner">
-          <div className="utilityLeft">
-            <span className="liveDot" />
-            <strong>Selasa, 23 Juni 2026</strong>
-            <span className="divider">.</span>
-            <span>15.11 WIB</span>
-          </div>
-          <div className="utilityRight">
-            <span>secretariat@mti.or.id</span>
-            <a href="https://www.linkedin.com/company/sinergi-mti/">LinkedIn</a>
-            <a href="https://www.instagram.com/masyarakatransportasi/">Instagram</a>
-            <a href="https://twitter.com/sinergi_mti">X</a>
-            <strong>ID</strong>
-            <span>EN</span>
-          </div>
-        </div>
-      </div>
-
-      <section className="masthead">
-        <div className="wideShell mastheadInner">
-          <div className="editionMeta">
-            <span>EDISI HARI INI</span>
-            <p>Wisma Nugra Santana, Jakarta</p>
-          </div>
-          <a className="logoLockup" href="/#" aria-label="MTI home">
-            <img src={IMG.logo} alt="MTI" />
-            <span className="logoFallback">MTI</span>
-            <span>
-              <strong>MTI</strong>
-              <small>Masyarakat Transportasi Indonesia</small>
-            </span>
-          </a>
-          <div className="mastheadTools">
-            <button className="iconButton" type="button" aria-label="Cari">
-              <Search size={18} aria-hidden="true" />
-            </button>
-            <a className="subscribeButton desktopOnly" href="/#newsletter">
-              Berlangganan
-            </a>
-          </div>
-        </div>
-      </section>
-
-      <DialogNav activeItem="Rekomendasi Kebijakan" />
+      <Header activeItem="Rekomendasi Kebijakan" />
 
       <section className="tickerBand" aria-label="Berita terkini">
         <div className="tickerLabel">
@@ -342,67 +296,7 @@ export default function AksesUtamaPage() {
         </div>
       </section>
 
-      <footer className="footer">
-        <div className="wideShell footerGrid">
-          <div>
-            <div className="footerBrand">
-              <img src={IMG.logo} alt="MTI" />
-              <span>
-                <strong>MTI</strong>
-                <small>Masyarakat Transportasi Indonesia</small>
-              </span>
-            </div>
-            <p>
-              Organisasi profesi yang menghimpun pakar, akademisi, praktisi, dan birokrat untuk
-              pembangunan transportasi nasional yang berkelanjutan.
-            </p>
-            <p className="address">
-              Wisma Nugra Santana 13th Floor, Jl. Jend. Sudirman Kav 7-8, Karet Tengsin, Jakarta.
-            </p>
-          </div>
-          <FooterLinks
-            title="Kegiatan"
-            items={["Dialog & Sinergi Kebijakan", "MTI Dalam Berita", "Jalan-Jalan", "Rekomendasi Kebijakan"]}
-          />
-          <FooterLinks title="Tentang" items={["Sejarah MTI", "Struktur Organisasi", "MTI Wilayah", "Identitas Organisasi"]} />
-          <FooterLinks title="Program" items={["16th EASTS Conference", "AKSES Nusantara", "AKSES Utama", "Opini"]} />
-        </div>
-        <div className="footerBottom">
-          <div className="wideShell">
-            <span>Masyarakat Transportasi Indonesia &copy; 2026. All rights reserved.</span>
-            <span>
-              <a href="/">Beranda</a>
-              <a href="mailto:secretariat@mti.or.id">Kontak</a>
-            </span>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </main>
   );
-}
-
-function FooterLinks({ title, items }) {
-  return (
-    <div className="footerLinks">
-      <h3>{title}</h3>
-      {items.map((item) => (
-        <a href={footerHref(item)} key={item}>
-          {item}
-        </a>
-      ))}
-    </div>
-  );
-}
-
-function footerHref(item) {
-  if (item === "Dialog & Sinergi Kebijakan") return "/dialog-kebijakan";
-  if (item === "MTI Dalam Berita") return "/mti-dalam-berita";
-  if (item === "Jalan-Jalan") return "/kegiatan-mti/jalan-jalan";
-  if (item === "16th EASTS Conference") return "/easts";
-  if (item === "AKSES Nusantara") return "/aksesnusantara";
-  if (item === "AKSES Utama") return "/aksesutama";
-  if (item === "Opini") return "/opini";
-  if (item === "Sejarah MTI") return "/sejarah-mti";
-  if (item === "Struktur Organisasi") return "/struktur-organisasi";
-  return "#";
 }
