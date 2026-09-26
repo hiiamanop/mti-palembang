@@ -9,7 +9,8 @@ export const metadata = {
 };
 
 export default async function KegiatanPage() {
-  const kegiatan = await getKegiatan();
+  const allKegiatan = await getKegiatan();
+  const kegiatan = allKegiatan.filter((item) => item.published);
   return (
     <main className="kegiatanPage">
       <Header activeItem="Kegiatan MTI" />
