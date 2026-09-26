@@ -6071,7 +6071,7 @@ details[open] .wilayahChevron { transform: rotate(-135deg); }
   object-fit: cover;
 }
 
-/* ── Section 3: Program Unggulan MTI Sumsel (Multi-Card Gallery Slider) ── */
+/* ── Section 3: Program Unggulan MTI Sumsel (Grid 3 Kartu Simetris) ── */
 .programUnggulanSection {
   padding: 84px 0 96px;
   background: #f8fafd;
@@ -6079,120 +6079,17 @@ details[open] .wilayahChevron { transform: rotate(-135deg); }
 }
 
 .programShowcase {
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
+  width: 100%;
 }
 
-.programHeaderRow {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
+.programCardsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 28px;
+  width: 100%;
 }
 
-.programHeaderTitles h2 {
-  font-size: clamp(26px, 3.2vw, 36px);
-  color: var(--ink);
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  line-height: 1.2;
-  margin: 0 0 10px;
-}
-
-.programHeaderTitles p {
-  max-width: 640px;
-  margin: 0;
-  color: #64748b;
-  font-size: 15px;
-  line-height: 1.7;
-}
-
-.programControls {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  flex-shrink: 0;
-}
-
-.programCounter {
-  display: flex;
-  align-items: baseline;
-  gap: 4px;
-  font-size: 14px;
-  color: #94a3b8;
-  font-weight: 700;
-}
-
-.programCounter strong {
-  font-size: 18px;
-  color: var(--blue);
-  font-weight: 900;
-}
-
-.programNavGroup {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.programNavBtn {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  border: 1px solid #cbd5e1;
-  background: var(--white);
-  color: var(--blue);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 4px 12px rgba(17, 46, 129, 0.05);
-}
-
-.programNavBtn:hover:not(.disabled) {
-  background: var(--blue);
-  color: var(--white);
-  border-color: var(--blue);
-  transform: translateY(-2px);
-  box-shadow: 0 10px 20px -4px rgba(17, 46, 129, 0.28);
-}
-
-.programNavBtn.disabled {
-  opacity: 0.35;
-  cursor: not-allowed;
-  transform: none;
-  box-shadow: none;
-}
-
-/* Track Viewport */
-.programTrackContainer {
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  padding: 8px 4px 20px;
-  margin: -8px -4px -20px;
-  scrollbar-width: none;
-}
-
-.programTrackContainer::-webkit-scrollbar {
-  display: none;
-}
-
-.programTrack {
-  display: flex;
-  gap: 24px;
-  width: max-content;
-  min-width: 100%;
-}
-
-/* Card Design */
 .programCardItem {
-  width: 360px;
-  flex-shrink: 0;
-  scroll-snap-align: start;
   background: var(--white);
   border: 1px solid var(--line);
   border-radius: 20px;
@@ -6314,19 +6211,16 @@ details[open] .wilayahChevron { transform: rotate(-135deg); }
   transform: translateX(3px);
 }
 
-@media (max-width: 900px) {
-  .programHeaderRow {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .programCardItem {
-    width: 320px;
+@media (max-width: 960px) {
+  .programCardsGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
   }
 }
 
-@media (max-width: 600px) {
-  .programCardItem {
-    width: 290px;
+@media (max-width: 640px) {
+  .programCardsGrid {
+    grid-template-columns: 1fr;
   }
 }
 
