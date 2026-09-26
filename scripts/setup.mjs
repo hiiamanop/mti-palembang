@@ -163,8 +163,8 @@ async function seed() {
     visible: i.visible ?? false
   }), 'artikel.json');
 
-  await seedSingleton('beranda', 'beranda.json');
-  await seedSingleton('media', 'media.json');
+  await seedSingletonIfMissing('beranda', 'beranda.json');
+  await seedSingletonIfMissing('media', 'media.json');
   await seedSingletonIfMissing('struktur_organisasi', 'struktur-organisasi.json');
 }
 

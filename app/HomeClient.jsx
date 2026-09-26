@@ -45,21 +45,76 @@ export default function HomeClient({
   const miniVideos = mediaData?.miniVideos?.filter((v) => v.visible) || [];
   const hasMedia = Boolean(mainVideoUrl || miniVideos.length);
 
+  const activePengenalan = {
+    title:
+      pengenalan?.title ||
+      'Masyarakat Transportasi Indonesia Wilayah Sumatera Selatan',
+    description:
+      pengenalan?.description ||
+      'Lembaga pemikir (think tank) independen yang menghimpun akademisi, praktisi, birokrat, dan pemerhati transportasi di Sumsel.',
+    image: pengenalan?.image || DEFAULT_HERO_BG
+  };
+
+  const activeVisiMisi = {
+    tag: visiMisi?.tag || 'VISI, MISI & TUJUAN',
+    visi:
+      visiMisi?.visi ||
+      'Terwujudnya MTI sebagai organisasi yang menjadi acuan profesional bidang transportasi, menuju terbentuknya sistem transportasi yang berkelanjutan dan sesuai dengan aspirasi segenap pemangku kepentingan.',
+    misi:
+      visiMisi?.misi?.length
+        ? visiMisi.misi
+        : [
+            'Menumbuh kembangkan profesionalitas pelaku kegiatan bidang transportasi',
+            'Memberikan pelayanan advokasi untuk pengambil keputusan bidang transportasi',
+            'Mendorong interaksi sinergis antar pemangku kepentingan untuk peningkatan kualitas layanan transportasi'
+          ],
+    tujuan:
+      visiMisi?.tujuan?.length
+        ? visiMisi.tujuan
+        : [
+            'Meningkatnya jumlah dan kualitas pelaku profesional bidang transportasi bersertifikasi',
+            'Meningkatnya jumlah kota dan wilayah yang menerapkan prinsip-prinsip transportasi berkelanjutan',
+            'Meningkatnya jumlah regulasi bidang transportasi yang sejalan dengan aspirasi masyarakat dan prinsip transportasi berkelanjutan'
+          ],
+    image: visiMisi?.image || ''
+  };
+
+  const activePrograms = programUnggulan?.length
+    ? programUnggulan
+    : [
+        {
+          id: 'p1',
+          image:
+            'https://mti.or.id/wp-content/uploads/2026/03/WhatsApp-Image-2026-03-11-at-20.25.20-scaled.jpeg',
+          tag: 'FORUM DISKUSI',
+          title: 'Forum Diskusi Transportasi Sumsel (FDTS)',
+          summary:
+            'Diskusi berkala membahas isu hangat transportasi lokal bersama Dishub dan operator.'
+        },
+        {
+          id: 'p2',
+          image:
+            'https://mti.or.id/wp-content/uploads/2023/07/Screenshot-2023-07-01-at-17.28.41.png',
+          tag: 'ASPIRASI PUBLIK',
+          title: 'MTI Mendengar / Suara Warga',
+          summary:
+            'Saluran aspirasi masyarakat terkait fasilitas halte, trotoar, dan layanan angkutan umum.'
+        },
+        {
+          id: 'p3',
+          image:
+            'https://mti.or.id/wp-content/uploads/2025/11/WhatsApp-Image-2025-11-15-at-15.20.45.jpeg',
+          tag: 'RISET & KEBIJAKAN',
+          title: 'Kajian & Policy Brief',
+          summary:
+            'Ringkasan riset kebijakan yang diserahkan ke pengambil keputusan.'
+        }
+      ];
+
   const hasHero = Boolean(leadStory?.title || heroSide.length);
-  const hasPengenalan = Boolean(
-    pengenalan?.title ||
-    pengenalan?.description ||
-    pengenalan?.image
-  );
-
-  const hasVisiMisi = Boolean(
-    visiMisi?.visi ||
-    visiMisi?.misi?.length ||
-    visiMisi?.tujuan?.length ||
-    visiMisi?.image
-  );
-
-  const heroBg = pengenalan?.image || DEFAULT_HERO_BG;
+  const hasPengenalan = true;
+  const hasVisiMisi = true;
+  const heroBg = activePengenalan.image;
 
   return (
     <main className="newsroom">
@@ -93,11 +148,9 @@ export default function HomeClient({
 
           <div className="wideShell dialogHeroContent">
             <span className="dialogEyebrow">Beranda</span>
-            <h1>
-              {pengenalan.title || 'Masyarakat Transportasi Indonesia Wilayah Sumatera Selatan'}
-            </h1>
-            {pengenalan.description ? (
-              <p>{pengenalan.description}</p>
+            <h1>{activePengenalan.title}</h1>
+            {activePengenalan.description ? (
+              <p>{activePengenalan.description}</p>
             ) : null}
 
             <div className="homeHeroActions" style={{ marginTop: 32 }}>
@@ -120,7 +173,7 @@ export default function HomeClient({
             <div className="editorialSectionHeader">
               <div className="headerKicker">
                 <span className="kickerBar" />
-                <span className="kickerText">{visiMisi.tag || 'VISI, MISI &amp; TUJUAN'}</span>
+                <span className="kickerText">{activeVisiMisi.tag}</span>
               </div>
               <div className="headerMain">
                 <h2>Landasan Strategis MTI Sumatera Selatan</h2>
@@ -145,21 +198,14 @@ export default function HomeClient({
                 <div className="visiBlock">
                   <span className="subHeadLabel">VISI</span>
                   <blockquote className="visiQuoteText">
-                    &ldquo;{visiMisi.visi || 'Terwujudnya MTI sebagai organisasi yang menjadi acuan profesional bidang transportasi, menuju terbentuknya sistem transportasi yang berkelanjutan dan sesuai dengan aspirasi segenap pemangku kepentingan.'}&rdquo;
+                    &ldquo;{activeVisiMisi.visi}&rdquo;
                   </blockquote>
                 </div>
 
                 <div className="misiBlock">
                   <span className="subHeadLabel">MISI</span>
                   <ul className="misiList">
-                    {(visiMisi.misi?.length
-                      ? visiMisi.misi
-                      : [
-                          'Menumbuh kembangkan profesionalitas pelaku kegiatan bidang transportasi',
-                          'Memberikan pelayanan advokasi untuk pengambil keputusan bidang transportasi',
-                          'Mendorong interaksi sinergis antar pemangku kepentingan untuk peningkatan kualitas layanan transportasi'
-                        ]
-                    ).map((item, idx) => (
+                    {activeVisiMisi.misi.map((item, idx) => (
                       <li key={idx} className="misiItem">
                         <span className="misiDot">&bull;</span>
                         <span className="misiText">{item}</span>
@@ -185,14 +231,7 @@ export default function HomeClient({
                 </p>
 
                 <div className="tujuanList">
-                  {(visiMisi.tujuan?.length
-                    ? visiMisi.tujuan
-                    : [
-                        'Meningkatnya jumlah dan kualitas pelaku profesional bidang transportasi bersertifikasi',
-                        'Meningkatnya jumlah kota dan wilayah yang menerapkan prinsip-prinsip transportasi berkelanjutan',
-                        'Meningkatnya jumlah regulasi bidang transportasi yang sejalan dengan aspirasi masyarakat dan prinsip transportasi berkelanjutan'
-                      ]
-                  ).map((item, idx) => (
+                  {activeVisiMisi.tujuan.map((item, idx) => (
                     <div key={idx} className="tujuanItem">
                       <div className="tujuanNumber">0{idx + 1}</div>
                       <div className="tujuanContent">
@@ -204,20 +243,20 @@ export default function HomeClient({
               </div>
             </div>
 
-            {visiMisi.image ? (
+            {activeVisiMisi.image ? (
               <div className="visiMisiBannerImage">
-                <img src={visiMisi.image} alt="Dokumentasi MTI Sumsel" />
+                <img src={activeVisiMisi.image} alt="Dokumentasi MTI Sumsel" />
               </div>
             ) : null}
           </div>
         </section>
       ) : null}
 
-      {/* ── Section 3: Program Unggulan MTI Sumsel (Carousel) ── */}
-      {programUnggulan.length > 0 ? (
+      {/* ── Section 3: Program Unggulan MTI Sumsel (Grid 3 Kartu) ── */}
+      {activePrograms.length > 0 ? (
         <section className="programUnggulanSection">
           <div className="wideShell">
-            <ProgramCarousel items={programUnggulan} />
+            <ProgramCarousel items={activePrograms} />
           </div>
         </section>
       ) : null}
