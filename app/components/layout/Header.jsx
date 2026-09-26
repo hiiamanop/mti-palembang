@@ -15,11 +15,7 @@ function isItemActive(item, activeItem) {
   );
 }
 
-export default function Header({
-  activeItem,
-  editionTitle = 'EDISI HARI INI',
-  editionSubtitle = 'Wisma Nugra Santana, Jakarta'
-}) {
+export default function Header({ activeItem }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
   const [openSubLabel, setOpenSubLabel] = useState(null);
@@ -31,11 +27,6 @@ export default function Header({
 
       <section className="masthead">
         <div className="wideShell mastheadInner">
-          <div className="editionMeta">
-            <span>{editionTitle}</span>
-            <p>{editionSubtitle}</p>
-          </div>
-
           <LogoLockup href="/" />
 
           <div className="mastheadTools">
