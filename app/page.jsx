@@ -18,8 +18,9 @@ export default async function Home() {
       heroSide={beranda.heroSide || []}
       leadStory={beranda.leadStory || null}
       mediaData={media}
-      aboutSumsel={beranda.aboutSumsel || null}
+      pengenalan={beranda.pengenalan || null}
       fokusIsu={beranda.fokusIsu || []}
+      programUnggulan={beranda.programUnggulan || []}
     />
   );
 }

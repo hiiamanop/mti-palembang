@@ -5766,26 +5766,26 @@ details[open] .wilayahChevron { transform: rotate(-135deg); }
   border: 1px solid #f5c6c0;
 }
 
-/* ── Tentang MTI Sumsel & Fokus Isu ─── */
+/* ── Section 1: Pengenalan MTI Sumsel ─ */
 
-.aboutSumselSection {
+.pengenalanSection {
   padding: 68px 0;
   background: var(--white);
   border-bottom: 1px solid var(--line);
 }
 
-.aboutSumselGrid {
+.pengenalanGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 52px;
   align-items: center;
 }
 
-.aboutSumselGrid.noMedia {
+.pengenalanGrid.noMedia {
   grid-template-columns: 1fr;
 }
 
-.aboutSumselTag {
+.pengenalanTag {
   display: inline-block;
   color: var(--blue);
   font-size: 12px;
@@ -5795,26 +5795,26 @@ details[open] .wilayahChevron { transform: rotate(-135deg); }
   margin-bottom: 10px;
 }
 
-.aboutSumselContent h2 {
+.pengenalanContent h2 {
   font-size: clamp(26px, 3.2vw, 38px);
   color: var(--ink);
   line-height: 1.25;
   margin: 0 0 16px;
 }
 
-.aboutSumselLead {
+.pengenalanLead {
   font-size: 16px;
   line-height: 1.8;
   color: var(--text);
   margin: 0;
 }
 
-.aboutSumselMedia {
+.pengenalanMedia {
   display: flex;
   justify-content: center;
 }
 
-.aboutSumselImage {
+.pengenalanImage {
   width: 100%;
   max-height: 420px;
   object-fit: cover;
@@ -5823,7 +5823,7 @@ details[open] .wilayahChevron { transform: rotate(-135deg); }
   border: 1px solid var(--line);
 }
 
-.aboutSumselPillars {
+.pengenalanPillars {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 22px;
@@ -5832,7 +5832,7 @@ details[open] .wilayahChevron { transform: rotate(-135deg); }
   border-top: 1px solid var(--line);
 }
 
-.aboutSumselPillarCard {
+.pengenalanPillarCard {
   padding: 24px;
   background: #f8faff;
   border: 1px solid #e2e8f6;
@@ -5840,7 +5840,7 @@ details[open] .wilayahChevron { transform: rotate(-135deg); }
   transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.aboutSumselPillarCard:hover {
+.pengenalanPillarCard:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 24px rgba(17, 46, 129, 0.08);
 }
@@ -5854,7 +5854,7 @@ details[open] .wilayahChevron { transform: rotate(-135deg); }
   letter-spacing: 0.1em;
 }
 
-.aboutSumselPillarCard strong {
+.pengenalanPillarCard strong {
   display: block;
   color: var(--blue);
   font-size: 16px;
@@ -5863,12 +5863,14 @@ details[open] .wilayahChevron { transform: rotate(-135deg); }
   line-height: 1.35;
 }
 
-.aboutSumselPillarCard p {
+.pengenalanPillarCard p {
   margin: 0;
   font-size: 13.5px;
   color: var(--text);
   line-height: 1.65;
 }
+
+/* ── Section 2: Fokus Isu Transportasi Sumsel ── */
 
 .fokusIsuSection {
   padding: 68px 0 84px;
@@ -5940,14 +5942,86 @@ details[open] .wilayahChevron { transform: rotate(-135deg); }
   line-height: 1.65;
 }
 
+/* ── Section 3: Program Unggulan MTI Sumsel ──── */
+
+.programUnggulanSection {
+  padding: 68px 0 84px;
+  background: var(--white);
+  border-bottom: 1px solid var(--line);
+}
+
+.programUnggulanGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+  margin-top: 36px;
+}
+
+.programUnggulanCard {
+  background: #fbfcfe;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(17, 46, 129, 0.04);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.programUnggulanCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 36px -12px rgba(17, 46, 129, 0.14);
+}
+
+.programUnggulanCard img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+}
+
+.programUnggulanBody {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.programUnggulanTag {
+  display: inline-block;
+  align-self: flex-start;
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--violet);
+  background: #f0eeff;
+  padding: 4px 10px;
+  border-radius: 6px;
+  margin-bottom: 12px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.programUnggulanBody h3 {
+  margin: 0 0 10px;
+  font-size: 18px;
+  line-height: 1.35;
+  color: var(--ink);
+}
+
+.programUnggulanBody p {
+  margin: 0;
+  font-size: 13.5px;
+  color: var(--text);
+  line-height: 1.65;
+}
+
 @media (max-width: 900px) {
-  .aboutSumselGrid { grid-template-columns: 1fr; gap: 32px; }
-  .aboutSumselPillars { grid-template-columns: 1fr; }
-  .fokusIsuGrid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .pengenalanGrid { grid-template-columns: 1fr; gap: 32px; }
+  .pengenalanPillars { grid-template-columns: 1fr; }
+  .fokusIsuGrid, .programUnggulanGrid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
 }
 
 @media (max-width: 600px) {
-  .fokusIsuGrid { grid-template-columns: 1fr; }
+  .fokusIsuGrid, .programUnggulanGrid { grid-template-columns: 1fr; }
 }
 
 /* ── Kegiatan MTI ─────────────────────── */

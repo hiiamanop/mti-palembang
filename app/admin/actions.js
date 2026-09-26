@@ -277,12 +277,12 @@ export async function saveBeranda(section, formData) {
       title: formData.get('title') || beranda.akses.title,
       description: formData.get('description') || beranda.akses.description
     };
-  } else if (section === 'aboutSumsel') {
-    beranda.aboutSumsel = {
-      tag: String(formData.get('aboutTag') || '').trim(),
-      title: String(formData.get('aboutTitle') || '').trim(),
-      description: String(formData.get('aboutDescription') || '').trim(),
-      image: String(formData.get('aboutImage') || '').trim(),
+  } else if (section === 'pengenalan') {
+    beranda.pengenalan = {
+      tag: String(formData.get('pengenalanTag') || '').trim(),
+      title: String(formData.get('pengenalanTitle') || '').trim(),
+      description: String(formData.get('pengenalanDescription') || '').trim(),
+      image: String(formData.get('pengenalanImage') || '').trim(),
       pillars: [
         {
           title: String(formData.get('pillarTitle1') || '').trim(),
@@ -305,6 +305,21 @@ export async function saveBeranda(section, formData) {
     const titles = formData.getAll('fokusTitle');
     const summaries = formData.getAll('fokusSummary');
     beranda.fokusIsu = ids
+      .map((id, i) => ({
+        id: id || generateId(),
+        image: images[i] || '',
+        tag: tags[i] || '',
+        title: titles[i] || '',
+        summary: summaries[i] || ''
+      }))
+      .filter((item) => item.title || item.image || item.summary);
+  } else if (section === 'programUnggulan') {
+    const ids = formData.getAll('programId');
+    const images = formData.getAll('programImage');
+    const tags = formData.getAll('programTag');
+    const titles = formData.getAll('programTitle');
+    const summaries = formData.getAll('programSummary');
+    beranda.programUnggulan = ids
       .map((id, i) => ({
         id: id || generateId(),
         image: images[i] || '',

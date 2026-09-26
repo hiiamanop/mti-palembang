@@ -5,29 +5,97 @@ import { saveBeranda } from '../actions';
 import ImageUpload from '../components/ImageUpload';
 
 const TABS = [
-  { key: 'aboutSumsel', label: 'Tentang MTI Sumsel' },
-  { key: 'fokusIsu', label: 'Fokus Isu Sumsel' },
+  { key: 'pengenalan', label: '1. Pengenalan MTI Sumsel' },
+  { key: 'fokusIsu', label: '2. Fokus Isu Sumsel' },
+  { key: 'programUnggulan', label: '3. Program Unggulan' },
   { key: 'leadStory', label: 'Berita Utama' },
   { key: 'heroSide', label: 'Sorotan' },
   { key: 'ticker', label: 'Ticker' }
 ];
 
 export default function BerandaForm({ beranda }) {
-  const [activeTab, setActiveTab] = useState('aboutSumsel');
+  const [activeTab, setActiveTab] = useState('pengenalan');
   const [isPending, startTransition] = useTransition();
   const [status, setStatus] = useState('');
 
-  const [aboutSumsel] = useState(
-    beranda.aboutSumsel || {
-      tag: '',
-      title: '',
-      description: '',
+  const [pengenalan] = useState(
+    beranda.pengenalan || {
+      tag: 'TENTANG KAMI',
+      title: 'Masyarakat Transportasi Indonesia Wilayah Sumatera Selatan',
+      description:
+        'Lembaga pemikir (think tank) independen yang menghimpun akademisi, praktisi, birokrat, dan pemerhati transportasi di Sumsel.',
       image: '',
-      pillars: []
+      pillars: [
+        {
+          title: 'Riset & Rekomendasi',
+          desc: 'Memberi masukan berbasis data kepada Pemprov Sumsel & Pemkot/Pemkab.'
+        },
+        {
+          title: 'Advokasi Publik',
+          desc: 'Mendorong transportasi yang inklusif, aman, dan terjangkau.'
+        },
+        {
+          title: 'Kolaborasi Multi-Pihak',
+          desc: 'Menjembatani regulator (Kemenhub/Dishub), operator, dan masyarakat.'
+        }
+      ]
     }
   );
 
-  const [fokusIsu, setFokusIsu] = useState(beranda.fokusIsu || []);
+  const [fokusIsu, setFokusIsu] = useState(
+    beranda.fokusIsu?.length
+      ? beranda.fokusIsu
+      : [
+          {
+            id: 'f1',
+            image: '',
+            tag: 'INTEGRASI MODA',
+            title: 'Integrasi Moda LRT & Feeder Palembang',
+            summary:
+              'Optimalisasi okupansi LRT Sumsel, integrasi feeder bus, dan tarif integrasi.'
+          },
+          {
+            id: 'f2',
+            image: '',
+            tag: 'KESELAMATAN JALAN',
+            title: 'Keselamatan & Mobilitas Publik Jalan Raya',
+            summary:
+              'Standar keselamatan angkutan jalan, fasilitas pejalan kaki, dan perlindungan pengguna jalan.'
+          }
+        ]
+  );
+
+  const [programUnggulan, setProgramUnggulan] = useState(
+    beranda.programUnggulan?.length
+      ? beranda.programUnggulan
+      : [
+          {
+            id: 'p1',
+            image: '',
+            tag: 'FORUM DISKUSI',
+            title: 'Forum Diskusi Transportasi Sumsel (FDTS)',
+            summary:
+              'Diskusi berkala membahas isu hangat transportasi lokal bersama Dishub dan operator.'
+          },
+          {
+            id: 'p2',
+            image: '',
+            tag: 'ASPIRASI PUBLIK',
+            title: 'MTI Mendengar / Suara Warga',
+            summary:
+              'Saluran aspirasi masyarakat terkait fasilitas halte, trotoar, dan layanan angkutan umum.'
+          },
+          {
+            id: 'p3',
+            image: '',
+            tag: 'RISET & KEBIJAKAN',
+            title: 'Kajian & Policy Brief',
+            summary:
+              'Ringkasan riset kebijakan yang diserahkan ke pengambil keputusan.'
+          }
+        ]
+  );
+
   const [ticker, setTicker] = useState(beranda.ticker || []);
   const [heroSide, setHeroSide] = useState(beranda.heroSide || []);
 
@@ -39,14 +107,19 @@ export default function BerandaForm({ beranda }) {
     });
   };
 
-  const handleAboutSubmit = (e) => {
+  const handlePengenalanSubmit = (e) => {
     e.preventDefault();
-    save('aboutSumsel', new FormData(e.target));
+    save('pengenalan', new FormData(e.target));
   };
 
   const handleFokusSubmit = (e) => {
     e.preventDefault();
     save('fokusIsu', new FormData(e.target));
+  };
+
+  const handleProgramSubmit = (e) => {
+    e.preventDefault();
+    save('programUnggulan', new FormData(e.target));
   };
 
   const handleTickerSubmit = (e) => {
@@ -64,7 +137,7 @@ export default function BerandaForm({ beranda }) {
     save('heroSide', new FormData(e.target));
   };
 
-  const pillars = aboutSumsel.pillars || [];
+  const pillars = pengenalan.pillars || [];
 
   return (
     <div>
@@ -83,25 +156,25 @@ export default function BerandaForm({ beranda }) {
         ))}
       </div>
 
-      {activeTab === 'aboutSumsel' && (
+      {activeTab === 'pengenalan' && (
         <div className="adminCard" style={{ padding: '24px' }}>
-          <h3 style={{ margin: '0 0 16px' }}>Tentang MTI Sumatera Selatan</h3>
-          <form onSubmit={handleAboutSubmit} className="adminForm">
+          <h3 style={{ margin: '0 0 16px' }}>Section 1: Pengenalan MTI Sumatera Selatan</h3>
+          <form onSubmit={handlePengenalanSubmit} className="adminForm">
             <div className="adminFormRow">
               <div className="adminFormGroup" style={{ flex: '0 0 180px' }}>
                 <label>Tag / Label</label>
                 <input
-                  name="aboutTag"
-                  defaultValue={aboutSumsel.tag || 'TENTANG MTI SUMSEL'}
-                  placeholder="TENTANG MTI SUMSEL"
+                  name="pengenalanTag"
+                  defaultValue={pengenalan.tag || 'TENTANG KAMI'}
+                  placeholder="TENTANG KAMI"
                 />
               </div>
               <div className="adminFormGroup" style={{ flex: 1 }}>
                 <label>Judul Utama</label>
                 <input
-                  name="aboutTitle"
+                  name="pengenalanTitle"
                   defaultValue={
-                    aboutSumsel.title ||
+                    pengenalan.title ||
                     'Masyarakat Transportasi Indonesia Wilayah Sumatera Selatan'
                   }
                   placeholder="Judul profil organisasi..."
@@ -110,38 +183,38 @@ export default function BerandaForm({ beranda }) {
             </div>
 
             <div className="adminFormGroup">
-              <label>Gambar Resmi / Dokumentasi MTI Sumsel</label>
-              <ImageUpload name="aboutImage" defaultValue={aboutSumsel.image || ''} />
+              <label>Gambar Resmi / Dokumentasi Pengenalan</label>
+              <ImageUpload name="pengenalanImage" defaultValue={pengenalan.image || ''} />
             </div>
 
             <div className="adminFormGroup">
-              <label>Deskripsi Profil</label>
+              <label>Pernyataan Misi / Deskripsi</label>
               <textarea
-                name="aboutDescription"
+                name="pengenalanDescription"
                 defaultValue={
-                  aboutSumsel.description ||
-                  'Lembaga pemikir independen yang menghimpun akademisi, praktisi, birokrat, dan pemerhati transportasi di Sumatera Selatan untuk mewujudkan sistem mobilitas yang aman, tertib, terintegrasi, dan berkelanjutan.'
+                  pengenalan.description ||
+                  'Lembaga pemikir (think tank) independen yang menghimpun akademisi, praktisi, birokrat, dan pemerhati transportasi di Sumsel.'
                 }
-                rows={4}
-                placeholder="Penjelasan profil dan mandat MTI Sumsel..."
+                rows={3}
+                placeholder="Penjelasan mandat organisasi di Sumsel..."
               />
             </div>
 
             <h4 style={{ margin: '24px 0 12px', fontSize: 15 }}>
-              Poin / Nilai Gerak (Maksimal 3 Pilar)
+              3 Pilar Gerak MTI Sumsel
             </h4>
 
             {[1, 2, 3].map((num, i) => {
               const p = pillars[i] || {};
               const defaultTitles = [
-                'Riset & Rekomendasi Kebijakan',
-                'Advokasi Transportasi Publik',
-                'Kolaborasi Multipihak'
+                'Riset & Rekomendasi',
+                'Advokasi Publik',
+                'Kolaborasi Multi-Pihak'
               ];
               const defaultDescs = [
-                'Menghasilkan kajian berbasis data ilmiah untuk mendukung keputusan strategis pemerintah daerah.',
-                'Mendorong integrasi antarmoda dan layanan transportasi yang inklusif serta terjangkau.',
-                'Menjembatani akademisi, operator transportasi, pemangku kebijakan, dan masyarakat.'
+                'Memberi masukan berbasis data kepada Pemprov Sumsel & Pemkot/Pemkab.',
+                'Mendorong transportasi yang inklusif, aman, dan terjangkau.',
+                'Menjembatani regulator (Kemenhub/Dishub), operator, dan masyarakat.'
               ];
               return (
                 <div key={num} className="adminFormSection" style={{ marginBottom: 16 }}>
@@ -151,7 +224,7 @@ export default function BerandaForm({ beranda }) {
                     <input
                       name={`pillarTitle${num}`}
                       defaultValue={p.title ?? defaultTitles[i]}
-                      placeholder="Judul pilar/nilai..."
+                      placeholder="Judul pilar..."
                     />
                   </div>
                   <div className="adminFormGroup">
@@ -169,7 +242,7 @@ export default function BerandaForm({ beranda }) {
 
             <div className="adminFormActions">
               <button type="submit" className="adminBtn adminBtnPrimary" disabled={isPending}>
-                {isPending ? 'Menyimpan...' : 'Simpan Tentang MTI Sumsel'}
+                {isPending ? 'Menyimpan...' : 'Simpan Pengenalan MTI Sumsel'}
               </button>
             </div>
           </form>
@@ -178,10 +251,10 @@ export default function BerandaForm({ beranda }) {
 
       {activeTab === 'fokusIsu' && (
         <div className="adminCard" style={{ padding: '24px' }}>
-          <h3 style={{ margin: '0 0 8px' }}>Fokus Isu Transportasi Sumsel</h3>
+          <h3 style={{ margin: '0 0 8px' }}>Section 2: Fokus Isu Transportasi Sumsel</h3>
           <p style={{ margin: '0 0 20px', color: '#667085', fontSize: 14 }}>
-            Tambahkan kartu fokus isu sesuai gambar dokumentasi yang Anda miliki. Bebas tambah
-            atau hapus kartu.
+            Tantangan transportasi lokal Sumatera Selatan. Setiap item memiliki slot upload
+            gambar dan ringkasan.
           </p>
 
           <form onSubmit={handleFokusSubmit} className="adminForm">
@@ -196,7 +269,7 @@ export default function BerandaForm({ beranda }) {
                     marginBottom: 12
                   }}
                 >
-                  <div className="adminFormSectionTitle">Item Fokus #{i + 1}</div>
+                  <div className="adminFormSectionTitle">Kartu Fokus #{i + 1}</div>
                   <button
                     type="button"
                     className="adminBtn adminBtnSmall adminBtnDanger"
@@ -217,7 +290,7 @@ export default function BerandaForm({ beranda }) {
                     <input
                       name="fokusTag"
                       defaultValue={item.tag || ''}
-                      placeholder="LRT SUMSEL / TRANSPORTASI DARAT"
+                      placeholder="INTEGRASI MODA / KESELAMATAN JALAN"
                     />
                   </div>
                   <div className="adminFormGroup" style={{ flex: 1 }}>
@@ -231,12 +304,12 @@ export default function BerandaForm({ beranda }) {
                 </div>
 
                 <div className="adminFormGroup">
-                  <label>Ringkasan / Keterangan</label>
+                  <label>Ringkasan</label>
                   <textarea
                     name="fokusSummary"
                     defaultValue={item.summary || ''}
                     rows={3}
-                    placeholder="Ringkasan penjelasan fokus isu..."
+                    placeholder="Penjelasan ringkas fokus isu..."
                   />
                 </div>
               </div>
@@ -252,19 +325,116 @@ export default function BerandaForm({ beranda }) {
                   {
                     id: Date.now().toString(),
                     image: '',
-                    tag: 'TRANSPORTASI SUMSEL',
+                    tag: 'FOKUS SUMSEL',
                     title: '',
                     summary: ''
                   }
                 ])
               }
             >
-              + Tambah Item Fokus
+              + Tambah Kartu Fokus
             </button>
 
             <div className="adminFormActions">
               <button type="submit" className="adminBtn adminBtnPrimary" disabled={isPending}>
                 {isPending ? 'Menyimpan...' : 'Simpan Fokus Isu'}
+              </button>
+            </div>
+          </form>
+        </div>
+      )}
+
+      {activeTab === 'programUnggulan' && (
+        <div className="adminCard" style={{ padding: '24px' }}>
+          <h3 style={{ margin: '0 0 8px' }}>Section 3: Program Unggulan MTI Sumsel</h3>
+          <p style={{ margin: '0 0 20px', color: '#667085', fontSize: 14 }}>
+            Aksi dan kegiatan rutin MTI Sumsel (Forum Diskusi, Suara Warga, Kajian Kebijakan).
+            Setiap program memiliki slot upload gambar.
+          </p>
+
+          <form onSubmit={handleProgramSubmit} className="adminForm">
+            {programUnggulan.map((item, i) => (
+              <div key={item.id || i} className="adminFormSection" style={{ marginBottom: 20 }}>
+                <input type="hidden" name="programId" value={item.id || ''} />
+                <div
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    marginBottom: 12
+                  }}
+                >
+                  <div className="adminFormSectionTitle">Program #{i + 1}</div>
+                  <button
+                    type="button"
+                    className="adminBtn adminBtnSmall adminBtnDanger"
+                    onClick={() =>
+                      setProgramUnggulan(programUnggulan.filter((_, idx) => idx !== i))
+                    }
+                  >
+                    Hapus
+                  </button>
+                </div>
+
+                <div className="adminFormGroup">
+                  <label>Gambar / Dokumentasi Program</label>
+                  <ImageUpload name="programImage" defaultValue={item.image || ''} />
+                </div>
+
+                <div className="adminFormRow">
+                  <div className="adminFormGroup" style={{ flex: '0 0 220px' }}>
+                    <label>Tag / Kategori</label>
+                    <input
+                      name="programTag"
+                      defaultValue={item.tag || ''}
+                      placeholder="FORUM DISKUSI / ASPIRASI"
+                    />
+                  </div>
+                  <div className="adminFormGroup" style={{ flex: 1 }}>
+                    <label>Judul Program</label>
+                    <input
+                      name="programTitle"
+                      defaultValue={item.title || ''}
+                      placeholder="Nama program..."
+                    />
+                  </div>
+                </div>
+
+                <div className="adminFormGroup">
+                  <label>Keterangan Program</label>
+                  <textarea
+                    name="programSummary"
+                    defaultValue={item.summary || ''}
+                    rows={3}
+                    placeholder="Penjelasan program..."
+                  />
+                </div>
+              </div>
+            ))}
+
+            <button
+              type="button"
+              className="adminBtn adminBtnSecondary"
+              style={{ marginBottom: 20 }}
+              onClick={() =>
+                setProgramUnggulan([
+                  ...programUnggulan,
+                  {
+                    id: Date.now().toString(),
+                    image: '',
+                    tag: 'PROGRAM MTI',
+                    title: '',
+                    summary: ''
+                  }
+                ])
+              }
+            >
+              + Tambah Program
+            </button>
+
+            <div className="adminFormActions">
+              <button type="submit" className="adminBtn adminBtnPrimary" disabled={isPending}>
+                {isPending ? 'Menyimpan...' : 'Simpan Program Unggulan'}
               </button>
             </div>
           </form>

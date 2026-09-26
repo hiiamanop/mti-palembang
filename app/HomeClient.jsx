@@ -1,10 +1,7 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import {
-  ArrowRight,
-  Play
-} from 'lucide-react';
+import { ArrowRight, Play } from 'lucide-react';
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import Newsletter from './components/shared/Newsletter';
@@ -21,8 +18,9 @@ export default function HomeClient({
   heroSide = [],
   leadStory = null,
   mediaData = null,
-  aboutSumsel = null,
-  fokusIsu = []
+  pengenalan = null,
+  fokusIsu = [],
+  programUnggulan = []
 }) {
   const [filter, setFilter] = useState('Semua');
 
@@ -41,11 +39,11 @@ export default function HomeClient({
   const hasMedia = Boolean(mainVideoUrl || miniVideos.length);
 
   const hasHero = Boolean(leadStory?.title || heroSide.length);
-  const hasAboutSumsel = Boolean(
-    aboutSumsel?.title ||
-    aboutSumsel?.description ||
-    aboutSumsel?.image ||
-    aboutSumsel?.pillars?.length
+  const hasPengenalan = Boolean(
+    pengenalan?.title ||
+    pengenalan?.description ||
+    pengenalan?.image ||
+    pengenalan?.pillars?.length
   );
 
   return (
@@ -72,35 +70,36 @@ export default function HomeClient({
         </section>
       ) : null}
 
-      {hasAboutSumsel ? (
-        <section className="aboutSumselSection">
+      {/* ── Section 1: Pengenalan MTI Sumsel ────────────────── */}
+      {hasPengenalan ? (
+        <section className="pengenalanSection">
           <div className="wideShell">
-            <div className={`aboutSumselGrid ${!aboutSumsel.image ? 'noMedia' : ''}`}>
-              <div className="aboutSumselContent">
-                <span className="aboutSumselTag">{aboutSumsel.tag || 'TENTANG MTI SUMSEL'}</span>
+            <div className={`pengenalanGrid ${!pengenalan.image ? 'noMedia' : ''}`}>
+              <div className="pengenalanContent">
+                <span className="pengenalanTag">{pengenalan.tag || 'TENTANG KAMI'}</span>
                 <h2>
-                  {aboutSumsel.title ||
+                  {pengenalan.title ||
                     'Masyarakat Transportasi Indonesia Wilayah Sumatera Selatan'}
                 </h2>
-                {aboutSumsel.description ? (
-                  <p className="aboutSumselLead">{aboutSumsel.description}</p>
+                {pengenalan.description ? (
+                  <p className="pengenalanLead">{pengenalan.description}</p>
                 ) : null}
               </div>
-              {aboutSumsel.image ? (
-                <div className="aboutSumselMedia">
+              {pengenalan.image ? (
+                <div className="pengenalanMedia">
                   <img
-                    src={aboutSumsel.image}
-                    alt={aboutSumsel.title || 'MTI Sumsel'}
-                    className="aboutSumselImage"
+                    src={pengenalan.image}
+                    alt={pengenalan.title || 'MTI Sumsel'}
+                    className="pengenalanImage"
                   />
                 </div>
               ) : null}
             </div>
 
-            {aboutSumsel.pillars?.length ? (
-              <div className="aboutSumselPillars">
-                {aboutSumsel.pillars.map((pillar, i) => (
-                  <div className="aboutSumselPillarCard" key={i}>
+            {pengenalan.pillars?.length ? (
+              <div className="pengenalanPillars">
+                {pengenalan.pillars.map((pillar, i) => (
+                  <div className="pengenalanPillarCard" key={i}>
                     <span className="pillarNumber">0{i + 1}</span>
                     <strong>{pillar.title}</strong>
                     {pillar.desc ? <p>{pillar.desc}</p> : null}
@@ -112,6 +111,7 @@ export default function HomeClient({
         </section>
       ) : null}
 
+      {/* ── Section 2: Fokus Isu Transportasi Sumsel ────────── */}
       {fokusIsu.length > 0 ? (
         <section className="fokusIsuSection">
           <div className="wideShell">
@@ -119,8 +119,8 @@ export default function HomeClient({
               <div className="titleLockup">
                 <span />
                 <div>
-                  <small>Fokus &amp; Isu Strategis</small>
-                  <h2>Fokus Transportasi Sumatera Selatan</h2>
+                  <small>Tantangan &amp; Isu Lokal</small>
+                  <h2>Fokus Isu Transportasi Sumatera Selatan</h2>
                 </div>
               </div>
             </div>
@@ -142,6 +142,38 @@ export default function HomeClient({
         </section>
       ) : null}
 
+      {/* ── Section 3: Program Unggulan MTI Sumsel ──────────── */}
+      {programUnggulan.length > 0 ? (
+        <section className="programUnggulanSection">
+          <div className="wideShell">
+            <div className="sectionHeader">
+              <div className="titleLockup">
+                <span />
+                <div>
+                  <small>Aksi Nyata &amp; Kolaborasi</small>
+                  <h2>Program Unggulan MTI Sumatera Selatan</h2>
+                </div>
+              </div>
+            </div>
+            <div className="programUnggulanGrid">
+              {programUnggulan.map((item, i) => (
+                <article className="programUnggulanCard" key={item.id || i}>
+                  {item.image ? (
+                    <img src={item.image} alt={item.title || ''} />
+                  ) : null}
+                  <div className="programUnggulanBody">
+                    {item.tag ? <span className="programUnggulanTag">{item.tag}</span> : null}
+                    <h3>{item.title}</h3>
+                    {item.summary ? <p>{item.summary}</p> : null}
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+      ) : null}
+
+      {/* ── Hero / Lead Story & Sorotan ─────────────────────── */}
       {hasHero ? (
         <section className="wideShell heroGrid">
           {leadStory?.title ? (
@@ -189,6 +221,7 @@ export default function HomeClient({
         </section>
       ) : null}
 
+      {/* ── MTI Dalam Berita ─────────────────────────────────── */}
       {news.length > 0 ? (
         <section className="wideShell newsSection" id="berita">
           <div className="sectionHeader">
@@ -234,6 +267,7 @@ export default function HomeClient({
         </section>
       ) : null}
 
+      {/* ── MTI di Media ────────────────────────────────────── */}
       {hasMedia ? (
         <section className="wideShell mediaSection">
           <div className="sectionHeader single">

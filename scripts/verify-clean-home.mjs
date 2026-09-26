@@ -13,7 +13,7 @@ for (const value of forbidden) {
   assert.equal(source.includes(value), false, `sample fallback remains: ${value}`);
 }
 
-for (const guard of ['tickerItems.length > 0', 'hasHero', 'news.length > 0', 'hasMedia', 'hasAboutSumsel', 'fokusIsu.length > 0']) {
+for (const guard of ['tickerItems.length > 0', 'hasHero', 'news.length > 0', 'hasMedia', 'hasPengenalan', 'fokusIsu.length > 0', 'programUnggulan.length > 0']) {
   assert.equal(source.includes(guard), true, `missing empty-state guard: ${guard}`);
 }
 
