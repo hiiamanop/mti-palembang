@@ -39,4 +39,11 @@ for (const name of [
   assert.equal(actionsSource.includes(`export async function ${name}`), true, `${name} missing`);
 }
 
-console.log('Kegiatan date, year, data access, and actions verified.');
+for (const path of [
+  '../app/admin/kegiatan/page.jsx',
+  '../app/admin/kegiatan/KegiatanForm.jsx'
+]) {
+  await readFile(new URL(path, import.meta.url), 'utf8');
+}
+
+console.log('Kegiatan helpers, data access, actions, and admin routes verified.');

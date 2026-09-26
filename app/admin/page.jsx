@@ -1,11 +1,12 @@
 import Link from 'next/link';
-import { getBerita, getMedia, getJurnal, getArtikel } from '../../lib/cms';
+import { getBerita, getKegiatan, getMedia, getJurnal, getArtikel } from '../../lib/cms';
 
 export const metadata = { title: 'Dashboard - MTI CMS' };
 
 export default async function AdminDashboard() {
-  const [berita, media, jurnal, artikel] = await Promise.all([
+  const [berita, kegiatan, media, jurnal, artikel] = await Promise.all([
     getBerita(),
+    getKegiatan(),
     getMedia(),
     getJurnal(),
     getArtikel()
@@ -16,6 +17,7 @@ export default async function AdminDashboard() {
 
   const stats = [
     { label: 'Total Berita', value: berita.length, sub: `${publishedBerita} Dipublikasi`, href: '/admin/berita', color: '#4647ae' },
+    { label: 'Total Kegiatan', value: kegiatan.length, sub: `${kegiatan.filter((item) => item.published).length} Dipublikasi`, href: '/admin/kegiatan', color: '#2e6fd0' },
     { label: 'Total Media', value: media.miniVideos.length, sub: `${visibleMedia} Ditampilkan`, href: '/admin/media', color: '#2e6fd0' },
     { label: 'Total Jurnal', value: jurnal.length, sub: `${jurnal.filter((j) => j.visible).length} Aktif`, href: '/admin/jurnal', color: '#112e81' },
     { label: 'Total Artikel', value: artikel.length, sub: `${artikel.filter((a) => a.visible).length} Ditampilkan`, href: '/admin/artikel', color: '#1a6b4a' }
@@ -44,6 +46,7 @@ export default async function AdminDashboard() {
         <h2 style={{ margin: '0 0 16px', fontSize: 16 }}>Akses Cepat</h2>
         <div className="adminQuickLinks">
           <Link href="/admin/berita" className="adminBtn adminBtnPrimary">Kelola Berita</Link>
+          <Link href="/admin/kegiatan" className="adminBtn adminBtnSecondary">Kelola Kegiatan</Link>
           <Link href="/admin/beranda" className="adminBtn adminBtnSecondary">Edit Beranda</Link>
           <Link href="/admin/media" className="adminBtn adminBtnSecondary">Kelola Media</Link>
           <Link href="/admin/jurnal" className="adminBtn adminBtnSecondary">Kelola Jurnal</Link>
