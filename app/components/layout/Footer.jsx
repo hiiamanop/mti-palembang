@@ -10,6 +10,7 @@ export default function Footer() {
             <span>
               <strong>{SITE_CONFIG.name}</strong>
               <small>{SITE_CONFIG.fullName}</small>
+              <small>{SITE_CONFIG.region}</small>
             </span>
           </div>
           <p>{SITE_CONFIG.description}</p>
