@@ -44,4 +44,21 @@ const adminFormSource = await readFile(
 assert.match(adminFormSource, /ORGANIZATION_GROUPS/);
 assert.match(adminFormSource, /Simpan Struktur Organisasi/);
 
-console.log('Fixed organization structure, empty seed, data access, save action, and admin form verified.');
+const publicSource = await readFile(
+  new URL('../app/struktur-organisasi/page.jsx', import.meta.url),
+  'utf8'
+);
+for (const oldName of [
+  'Tulus Abadi',
+  'Agus Taufik Mulyono',
+  'Bambang Susantono',
+  'Wimpy Santosa',
+  'Siti Maimunah',
+  'Russ Bona Frazila'
+]) {
+  assert.equal(publicSource.includes(oldName), false, `hardcoded person remains: ${oldName}`);
+}
+assert.match(publicSource, /getStrukturOrganisasi/);
+assert.match(publicSource, /resolveOrganizationGroup/);
+
+console.log('Fixed organization structure, database, CMS, and public page verified without hardcoded names.');

@@ -6,6 +6,11 @@ import {
 } from "lucide-react";
 import Header from "../components/layout/Header";
 import Footer from "../components/layout/Footer";
+import { getStrukturOrganisasi } from "../../lib/cms";
+import {
+  ORGANIZATION_GROUPS,
+  resolveOrganizationGroup
+} from "../../lib/organization-structure";
 
 export const metadata = {
   title: "Struktur Organisasi | Masyarakat Transportasi Indonesia",
@@ -19,43 +24,6 @@ const IMG = {
   akses36: "https://mti.or.id/wp-content/uploads/2026/04/36.jpg",
   orgChart: "https://mti.or.id/wp-content/uploads/2025/11/1761963524570.jpg"
 };
-
-
-const leadership = [
-  { role: "Ketua Umum", name: "Dr. Ir. Tulus Abadi, M.M.", badge: "Ketua" },
-  { role: "Wakil Ketua Umum I", name: "Prof. Dr. Ir. Agus Taufik Mulyono, S.T., M.T.", badge: "Wakil" },
-  { role: "Wakil Ketua Umum II", name: "Dr. Ir. Djoko Setijowarno, M.T.", badge: "Wakil" },
-  { role: "Sekretaris Jenderal", name: "Dr. Ir. Aditya Dwi Laksana, M.T.", badge: "Sekjen" },
-  { role: "Wakil Sekretaris Jenderal", name: "Ir. Haris Muhammadun, M.T.", badge: "Wakil Sekjen" },
-  { role: "Bendahara Umum", name: "Ir. Sri Lestari Wahyuningrum, M.M.", badge: "Bendahara" },
-  { role: "Wakil Bendahara Umum", name: "Drs. Ahmad Syafrin Liputo, M.T.", badge: "Wakil Bendahara" }
-];
-
-const advisory = [
-  { role: "Ketua Dewan Pembina", name: "Prof. Dr. Ir. Bambang Susantono" },
-  { role: "Anggota Dewan Pembina", name: "Dr. Ir. Danang Parikesit, M.Sc." },
-  { role: "Anggota Dewan Pembina", name: "Dr. Ir. Suroyo Alimoeso, M.M." }
-];
-
-const experts = [
-  { role: "Ketua Majelis Pakar", name: "Prof. Dr. Ir. Wimpy Santosa, M.Eng." },
-  { role: "Anggota Majelis Pakar", name: "Prof. Dr. Ir. Ofyar Z. Tamin" },
-  { role: "Anggota Majelis Pakar", name: "Prof. Dr. Ir. Sigit Priyanto, M.Sc." },
-  { role: "Anggota Majelis Pakar", name: "Dr. Ir. Alvinsyah, M.T." }
-];
-
-const divisions = [
-  { name: "Transportasi Jalan", head: "Ir. Siti Maimunah, M.T." },
-  { name: "Transportasi Kereta Api", head: "Dr. Ir. Mohamad Risal Wasal, M.M." },
-  { name: "Transportasi Laut", head: "Dr. Capt. Heru Sutrisno, M.M." },
-  { name: "Transportasi Udara", head: "Capt. Novianto Herupratomo, M.Sc." },
-  { name: "Transportasi Perkotaan & TOD", head: "Dr. Ir. Ade Hartono, M.M." },
-  { name: "Keselamatan Transportasi", head: "Dr. Ir. Ahmad Munawar, M.Sc." },
-  { name: "Logistik & Supply Chain", head: "Dr. Ir. Rudy Hermawan K., M.T." },
-  { name: "Kebijakan & Regulasi", head: "Dr. Ir. Kuncoro Harto Widodo, M.Eng." },
-  { name: "Transportasi Perdesaan & 3T", head: "Ir. Rachmat Nugraha, M.T." },
-  { name: "Riset, Inovasi & Teknologi", head: "Prof. Dr. Ir. Russ Bona Frazila" }
-];
 
 const tentangLinks = [
   { label: "Sejarah MTI", href: "/sejarah-mti" },
@@ -71,11 +39,17 @@ const aksesItems = [
   ["3T & Konektivitas Nusantara", "Edisi 32", "Nov 2025"]
 ];
 
-export default function StrukturOrganisasiPage() {
+export default async function StrukturOrganisasiPage() {
+  const { names } = await getStrukturOrganisasi();
+
+  const advisory = resolveOrganizationGroup(ORGANIZATION_GROUPS.advisory, names);
+  const experts = resolveOrganizationGroup(ORGANIZATION_GROUPS.experts, names);
+  const leadership = resolveOrganizationGroup(ORGANIZATION_GROUPS.leadership, names);
+  const divisions = resolveOrganizationGroup(ORGANIZATION_GROUPS.divisions, names);
+
   return (
     <main className="dialogPolicyPage">
       <Header activeItem="Tentang Kami" />
-
 
       <section className="dialogHero">
         <img src={IMG.hero} alt="" aria-hidden="true" />
@@ -127,7 +101,7 @@ export default function StrukturOrganisasiPage() {
             <h3 className="orgSectionTitle">Dewan Pembina</h3>
             <div className="orgAdvisoryGrid">
               {advisory.map((p) => (
-                <div className="orgAdvisoryCard" key={p.name}>
+                <div className="orgAdvisoryCard" key={p.key}>
                   <span>{p.role}</span>
                   <strong>{p.name}</strong>
                 </div>
@@ -140,7 +114,7 @@ export default function StrukturOrganisasiPage() {
             <h3 className="orgSectionTitle">Majelis Pakar</h3>
             <div className="orgAdvisoryGrid">
               {experts.map((p) => (
-                <div className="orgAdvisoryCard" key={p.name}>
+                <div className="orgAdvisoryCard" key={p.key}>
                   <span>{p.role}</span>
                   <strong>{p.name}</strong>
                 </div>
@@ -153,7 +127,7 @@ export default function StrukturOrganisasiPage() {
             <h3 className="orgSectionTitle">Pengurus Harian</h3>
             <div className="orgLeaderGrid">
               {leadership.map((p) => (
-                <div className="orgLeaderCard" key={p.role}>
+                <div className="orgLeaderCard" key={p.key}>
                   <span className="orgBadge">{p.badge}</span>
                   <div className="orgLeaderBody">
                     <small>{p.role}</small>
@@ -169,10 +143,10 @@ export default function StrukturOrganisasiPage() {
             <h3 className="orgSectionTitle">Bidang Teknis</h3>
             <div className="orgDivisionGrid">
               {divisions.map((d, i) => (
-                <div className="orgDivisionCard" key={d.name}>
+                <div className="orgDivisionCard" key={d.key}>
                   <span className="orgDivisionNum">Bidang {i + 1}</span>
-                  <strong>{d.name}</strong>
-                  <small>{d.head}</small>
+                  <strong>{d.role}</strong>
+                  <small>{d.name}</small>
                 </div>
               ))}
             </div>
@@ -251,7 +225,7 @@ export default function StrukturOrganisasiPage() {
             <p>
               Kepengurusan MTI mencerminkan keberagaman keahlian di bidang transportasi — dari
               teknik, kebijakan publik, logistik, hingga manajemen — bersinergi untuk mendorong
-              pembangunan transportasi nasional yang aman, merata, dan berkelanjutan.
+              pembangunan transportasi nasional yang berkelanjutan.
             </p>
           </div>
           <div className="mediaNewsBandIcon">
