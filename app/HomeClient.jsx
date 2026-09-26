@@ -56,7 +56,7 @@ export default function HomeClient({
 
   return (
     <main className="newsroom">
-      <Header activeItem="Beranda" aksesEdition={aksesEdition} />
+      <Header activeItem="Beranda" />
 
       {tickerItems.length > 0 ? (
         <section className="tickerBand" aria-label="Berita terkini">

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { ArrowRight, ChevronDown, Menu, Search, X } from 'lucide-react';
+import { ChevronDown, Menu, Search, X } from 'lucide-react';
 import UtilityBar from './UtilityBar';
 import LogoLockup from './LogoLockup';
 import { SITE_CONFIG } from '../../../lib/site-config';
@@ -18,8 +18,7 @@ function isItemActive(item, activeItem) {
 export default function Header({
   activeItem,
   editionTitle = 'EDISI HARI INI',
-  editionSubtitle = 'Wisma Nugra Santana, Jakarta',
-  aksesEdition = ''
+  editionSubtitle = 'Wisma Nugra Santana, Jakarta'
 }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
@@ -118,10 +117,6 @@ export default function Header({
               );
             })}
           </nav>
-          <a className="aksesLink desktopOnly" href="/aksesnusantara">
-            AKSES Nusantara{aksesEdition ? ` ${aksesEdition}` : ''}
-            <ArrowRight size={14} aria-hidden="true" />
-          </a>
         </div>
 
         {mobileOpen ? (
