@@ -53,9 +53,12 @@ const supabase = createClient(NEXT_PUBLIC_SUPABASE_URL, SUPABASE_SERVICE_ROLE_KE
 
 // ── 1 & 2: jalankan SQL skema + storage lewat koneksi Postgres ────────────────
 async function runSql() {
+  const dbHost = new URL(SUPABASE_DB_URL).hostname;
   const client = new pg.Client({
     connectionString: SUPABASE_DB_URL,
-    ssl: { rejectUnauthorized: false }
+    ...(['localhost', '127.0.0.1', '::1'].includes(dbHost)
+      ? {}
+      : { ssl: { rejectUnauthorized: false } })
   });
   await client.connect();
   try {
@@ -92,12 +95,19 @@ async function createAdmin() {
 
 // ── 4: seed data (hanya isi kalau tabel masih kosong) ─────────────────────────
 async function seedList(table, rowsFn, file) {
-  const { count } = await supabase.from(table).select('*', { count: 'exact', head: true });
+  const { count, error: countError } = await supabase
+    .from(table)
+    .select('*', { count: 'exact', head: true });
+  if (countError) throw countError;
   if (count && count > 0) {
     console.log(`  ✓ ${table}: sudah ada ${count} baris (dilewati)`);
     return;
   }
   const items = await readJSON(file);
+  if (items.length === 0) {
+    console.log(`  ✓ ${table}: kosong`);
+    return;
+  }
   const rows = items.map(rowsFn);
   const { error } = await supabase.from(table).insert(rows);
   if (error) throw error;
@@ -111,6 +121,21 @@ async function seedSingleton(table, file) {
   console.log(`  ✓ ${table}: 1 baris (upsert)`);
 }
 
+async function seedSingletonIfMissing(table, file) {
+  const { count, error: countError } = await supabase
+    .from(table)
+    .select('*', { count: 'exact', head: true });
+  if (countError) throw countError;
+  if (count && count > 0) {
+    console.log(`  ✓ ${table}: sudah ada (dilewati)`);
+    return;
+  }
+  const data = await readJSON(file);
+  const { error } = await supabase.from(table).insert({ id: 1, data });
+  if (error) throw error;
+  console.log(`  ✓ ${table}: singleton dibuat`);
+}
+
 async function seed() {
   console.log('→ Seed data dari folder data/...');
   await seedList('berita', (i) => ({
@@ -120,6 +145,11 @@ async function seed() {
     highlights: i.highlights ?? [], source_url: i.sourceUrl ?? '',
     published: i.published ?? false
   }), 'berita.json');
+
+  await seedList('kegiatan', (i) => ({
+    title: i.title, date: i.date, image: i.image ?? '', summary: i.summary ?? '',
+    published: i.published ?? false
+  }), 'kegiatan.json');
 
   await seedList('jurnal', (i) => ({
     title: i.title, edition: i.edition, date: i.date, topic: i.topic,
@@ -133,8 +163,9 @@ async function seed() {
     visible: i.visible ?? false
   }), 'artikel.json');
 
-  await seedSingleton('beranda', 'beranda.json');
-  await seedSingleton('media', 'media.json');
+  await seedSingletonIfMissing('beranda', 'beranda.json');
+  await seedSingletonIfMissing('media', 'media.json');
+  await seedSingletonIfMissing('struktur_organisasi', 'struktur-organisasi.json');
 }
 
 async function main() {

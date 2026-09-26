@@ -1,2 +1,5 @@
-export { metadata } from "../../mti-wilayah/jalan-jalan/page";
-export { default } from "../../mti-wilayah/jalan-jalan/page";
+import { permanentRedirect } from 'next/navigation';
+
+export default function LegacyKegiatanPage() {
+  permanentRedirect('/kegiatan-mti');
+}

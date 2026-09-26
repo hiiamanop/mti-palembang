@@ -4,6 +4,8 @@ import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { createClient } from '../../lib/supabase/server';
 import { createAdminClient } from '../../lib/supabase/admin';
+import { isValidISODate } from '../../lib/kegiatan';
+import { ORGANIZATION_KEYS } from '../../lib/organization-structure';
 
 async function checkAuth() {
   const supabase = await createClient();
@@ -32,6 +34,24 @@ async function getSingleton(supabase, table) {
 
 async function saveSingleton(supabase, table, value) {
   await supabase.from(table).update({ data: value }).eq('id', 1);
+}
+
+// ── Struktur Organisasi ───────────────────────────────────────────────────────
+
+export async function saveStrukturOrganisasi(formData) {
+  const supabase = await checkAuth();
+  const names = Object.fromEntries(
+    ORGANIZATION_KEYS.map((key) => [key, String(formData.get(key) || '').trim()])
+  );
+  const { error } = await supabase
+    .from('struktur_organisasi')
+    .update({ data: { names } })
+    .eq('id', 1);
+  if (error) return { error: error.message };
+  revalidatePath('/struktur-organisasi');
+  revalidatePath('/admin');
+  revalidatePath('/admin/struktur-organisasi');
+  return { success: true };
 }
 
 // ── Auth ──────────────────────────────────────────────────────────────────────
@@ -142,6 +162,74 @@ export async function toggleBeritaPublished(id) {
   revalidatePath('/admin/berita');
 }
 
+// ── Kegiatan MTI ──────────────────────────────────────────────────────────────
+
+function kegiatanInput(formData) {
+  const title = String(formData.get('title') || '').trim();
+  const date = String(formData.get('date') || '');
+  if (!title) return { error: 'Judul kegiatan wajib diisi.' };
+  if (!isValidISODate(date)) return { error: 'Tanggal kegiatan tidak valid.' };
+  return {
+    row: {
+      title,
+      date,
+      image: String(formData.get('image') || '').trim(),
+      summary: String(formData.get('summary') || '').trim()
+    }
+  };
+}
+
+function revalidateKegiatan() {
+  revalidatePath('/kegiatan-mti');
+  revalidatePath('/admin');
+  revalidatePath('/admin/kegiatan');
+}
+
+export async function addKegiatanItem(formData) {
+  const supabase = await checkAuth();
+  const input = kegiatanInput(formData);
+  if (input.error) return input;
+  const { error } = await supabase.from('kegiatan').insert({ ...input.row, published: false });
+  if (error) return { error: error.message };
+  revalidateKegiatan();
+  return { success: true };
+}
+
+export async function saveKegiatanItem(id, formData) {
+  const supabase = await checkAuth();
+  const input = kegiatanInput(formData);
+  if (input.error) return input;
+  const { error } = await supabase.from('kegiatan').update(input.row).eq('id', id);
+  if (error) return { error: error.message };
+  revalidateKegiatan();
+  return { success: true };
+}
+
+export async function deleteKegiatanItem(id) {
+  const supabase = await checkAuth();
+  const { error } = await supabase.from('kegiatan').delete().eq('id', id);
+  if (error) return { error: error.message };
+  revalidateKegiatan();
+  return { success: true };
+}
+
+export async function toggleKegiatanPublished(id) {
+  const supabase = await checkAuth();
+  const { data, error: readError } = await supabase
+    .from('kegiatan')
+    .select('published')
+    .eq('id', id)
+    .single();
+  if (readError) return { error: readError.message };
+  const { error } = await supabase
+    .from('kegiatan')
+    .update({ published: !data.published })
+    .eq('id', id);
+  if (error) return { error: error.message };
+  revalidateKegiatan();
+  return { success: true };
+}
+
 // ── Beranda ───────────────────────────────────────────────────────────────────
 
 export async function saveBeranda(section, formData) {
@@ -208,10 +296,50 @@ export async function saveBeranda(section, formData) {
       title: formData.get('title') || beranda.akses.title,
       description: formData.get('description') || beranda.akses.description
     };
+  } else if (section === 'pengenalan') {
+    beranda.pengenalan = {
+      tag: '',
+      title: String(formData.get('pengenalanTitle') || '').trim(),
+      description: String(formData.get('pengenalanDescription') || '').trim(),
+      image: String(formData.get('pengenalanImage') || '').trim()
+    };
+  } else if (section === 'visiMisi') {
+    const misiItems = formData.getAll('misiItem').map((s) => String(s || '').trim()).filter(Boolean);
+    const tujuanItems = formData.getAll('tujuanItem').map((s) => String(s || '').trim()).filter(Boolean);
+    beranda.visiMisi = {
+      tag: String(formData.get('visiMisiTag') || '').trim(),
+      visi: String(formData.get('visiText') || '').trim(),
+      misi: misiItems,
+      tujuan: tujuanItems,
+      image: String(formData.get('visiMisiImage') || '').trim()
+    };
+  } else if (section === 'kegiatanHero') {
+    beranda.kegiatanHero = {
+      eyebrow: String(formData.get('kegiatanHeroEyebrow') || '').trim(),
+      title: String(formData.get('kegiatanHeroTitle') || '').trim(),
+      description: String(formData.get('kegiatanHeroDescription') || '').trim(),
+      image: String(formData.get('kegiatanHeroImage') || '').trim()
+    };
+  } else if (section === 'programUnggulan') {
+    const ids = formData.getAll('programId');
+    const images = formData.getAll('programImage');
+    const tags = formData.getAll('programTag');
+    const titles = formData.getAll('programTitle');
+    const summaries = formData.getAll('programSummary');
+    beranda.programUnggulan = ids
+      .map((id, i) => ({
+        id: id || generateId(),
+        image: images[i] || '',
+        tag: tags[i] || '',
+        title: titles[i] || '',
+        summary: summaries[i] || ''
+      }))
+      .filter((item) => item.title || item.image || item.summary);
   }
 
   await saveSingleton(supabase, 'beranda', beranda);
   revalidatePath('/');
+  revalidatePath('/kegiatan-mti');
   revalidatePath('/admin/beranda');
 }
 

@@ -1,22 +1,4 @@
 {
-  "mainVideo": {
-    "url": "https://www.youtube.com/embed/0_jL04tc3TY",
-    "title": "MTI di Media"
-  },
-  "miniVideos": [
-    {
-      "id": "v1",
-      "img": "https://mti.or.id/wp-content/uploads/2023/07/Screenshot-2023-07-01-at-17.28.41.png",
-      "title": "Liputan Kegiatan MTI",
-      "href": "https://www.youtube.com/watch?v=0_jL04tc3TY",
-      "visible": true
-    },
-    {
-      "id": "v2",
-      "img": "https://mti.or.id/wp-content/uploads/2023/07/Screenshot-2023-07-01-at-17.38.56.png",
-      "title": "Diskusi & Webinar Transportasi",
-      "href": "https://www.youtube.com/watch?v=0_jL04tc3TY",
-      "visible": true
-    }
-  ]
+  "mainVideo": {},
+  "miniVideos": []
 }

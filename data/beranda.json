@@ -1,81 +1,57 @@
 {
-  "ticker": [
-    { "id": "t1", "tag": "KEBIJAKAN", "text": "Menhub paparkan lima prioritas transportasi nasional di Kongres X MTI" },
-    { "id": "t2", "tag": "MUDIK 2026", "text": "MTI usul pembatasan angkutan barang dikurangi 50% jadi 7-8 hari" },
-    { "id": "t3", "tag": "AGENDA", "text": "16th EASTS Conference - sinergi MTI di kancah internasional" },
-    { "id": "t4", "tag": "JURNAL", "text": "AKSES Nusantara Edisi 36 Maret 2026 telah terbit" },
-    { "id": "t5", "tag": "WILAYAH", "text": "Pengukuhan pengurus MTI Wilayah Sumatera Utara" }
-  ],
-  "leadStory": {
-    "img": "https://mti.or.id/wp-content/uploads/2025/11/WhatsApp-Image-2025-11-15-at-15.20.45.jpeg",
-    "cat": "Dialog & Kebijakan",
-    "title": "Ada Lima Prioritas Transportasi, Menhub Ajak MTI Perkuat Sinergi",
-    "excerpt": "Menteri Perhubungan Dudy Purwagandhi resmi membuka Kongres X MTI di Batam, menegaskan MTI sebagai think tank independen yang menopang arah kebijakan transportasi nasional.",
-    "author": "Adjat Wiratma",
-    "date": "17 Nov 2025",
-    "readTime": "3 menit baca",
-    "href": "#"
+  "ticker": [],
+  "leadStory": {},
+  "heroSide": [],
+  "regions": [],
+  "akses": {},
+  "pengenalan": {
+    "tag": "",
+    "title": "Masyarakat Transportasi Indonesia Wilayah Sumatera Selatan",
+    "description": "Lembaga pemikir (think tank) independen yang menghimpun akademisi, praktisi, birokrat, dan pemerhati transportasi di Sumsel.",
+    "image": "https://mti.or.id/wp-content/uploads/2023/07/Dialog-dan-Sinergi-2.jpg"
   },
-  "heroSide": [
+  "visiMisi": {
+    "tag": "VISI, MISI & TUJUAN",
+    "visi": "Terwujudnya MTI sebagai organisasi yang menjadi acuan profesional bidang transportasi, menuju terbentuknya sistem transportasi yang berkelanjutan dan sesuai dengan aspirasi segenap pemangku kepentingan.",
+    "misi": [
+      "Menumbuh kembangkan profesionalitas pelaku kegiatan bidang transportasi",
+      "Memberikan pelayanan advokasi untuk pengambil keputusan bidang transportasi",
+      "Mendorong interaksi sinergis antar pemangku kepentingan untuk peningkatan kualitas layanan transportasi"
+    ],
+    "tujuan": [
+      "Meningkatnya jumlah dan kualitas pelaku profesional bidang transportasi bersertifikasi",
+      "Meningkatnya jumlah kota dan wilayah yang menerapkan prinsip-prinsip transportasi berkelanjutan",
+      "Meningkatnya jumlah regulasi bidang transportasi yang sejalan dengan aspirasi masyarakat dan prinsip transportasi berkelanjutan"
+    ],
+    "image": ""
+  },
+  "programUnggulan": [
     {
-      "id": "h1",
-      "img": "https://mti.or.id/wp-content/uploads/2026/03/WhatsApp-Image-2026-03-11-at-20.25.20-scaled.jpeg",
-      "cat": "Berita",
-      "tagColor": "#4647ae",
-      "title": "Jasa Raharja Kumpulkan Pakar Transportasi MTI Jelang Mudik",
-      "date": "18 Mar 2026",
-      "href": "#"
+      "id": "p1",
+      "image": "https://mti.or.id/wp-content/uploads/2026/03/WhatsApp-Image-2026-03-11-at-20.25.20-scaled.jpeg",
+      "tag": "FORUM DISKUSI",
+      "title": "Forum Diskusi Transportasi Sumsel (FDTS)",
+      "summary": "Diskusi berkala membahas isu hangat transportasi lokal bersama Dishub dan operator."
     },
     {
-      "id": "h2",
-      "img": "https://mti.or.id/wp-content/uploads/2026/03/jelang-mudik-lebaran-kendaraan-barang-berat-dibatasi-mulai-13-maret-1773223046236_169.jpeg",
-      "cat": "Dialog",
-      "tagColor": "#112e81",
-      "title": "MTI & BKT Bahas Pembatasan Angkutan Barang Mudik 2026",
-      "date": "15 Mar 2026",
-      "href": "#"
+      "id": "p2",
+      "image": "https://mti.or.id/wp-content/uploads/2023/07/Screenshot-2023-07-01-at-17.28.41.png",
+      "tag": "ASPIRASI PUBLIK",
+      "title": "MTI Mendengar / Suara Warga",
+      "summary": "Saluran aspirasi masyarakat terkait fasilitas halte, trotoar, dan layanan angkutan umum."
     },
     {
-      "id": "h3",
-      "img": "https://mti.or.id/wp-content/uploads/2023/07/Screenshot-2023-07-01-at-17.38.56.png",
-      "cat": "Sinergi",
-      "tagColor": "#2e6fd0",
-      "title": "Sukses Gelar Konferensi EASTS 2025 di Surakarta",
-      "date": "2025",
-      "href": "#"
+      "id": "p3",
+      "image": "https://mti.or.id/wp-content/uploads/2025/11/WhatsApp-Image-2025-11-15-at-15.20.45.jpeg",
+      "tag": "RISET & KEBIJAKAN",
+      "title": "Kajian & Policy Brief",
+      "summary": "Ringkasan riset kebijakan yang diserahkan ke pengambil keputusan."
     }
   ],
-  "regions": [
-    {
-      "id": "r1",
-      "num": "01",
-      "tag": "Opini - Lampung",
-      "title": "Pengguna Transportasi Publik Bukan Warga Kelas Dua",
-      "date": "15 Feb 2026",
-      "excerpt": "Transportasi sudah selayaknya dianggap kebutuhan dasar wajib, di luar urusan tarif semata."
-    },
-    {
-      "id": "r2",
-      "num": "02",
-      "tag": "Wilayah - Lampung",
-      "title": "Terkait Penggunaan ETLE Handheld di Lampung",
-      "date": "5 Feb 2026",
-      "excerpt": "Penerapan ETLE Handheld perlu diiringi transparansi dan edukasi publik yang memadai."
-    },
-    {
-      "id": "r3",
-      "num": "03",
-      "tag": "Wilayah - Sumut",
-      "title": "Pengukuhan Pengurus MTI Wilayah Sumatera Utara",
-      "date": "3 Feb 2026",
-      "excerpt": "Ketua Umum MTI mengukuhkan pengurus MTI Wilayah Sumatera Utara."
-    }
-  ],
-  "akses": {
-    "edition": "Edisi 36",
-    "date": "Maret 2026",
-    "topic": "Transportasi Publik",
-    "title": "Jurnal transportasi dengan tampilan editorial yang lebih kuat.",
-    "description": "Area ini memakai aset AKSES resmi dengan background putih ber-grain halus, sehingga tetap bersih seperti newsroom tapi punya aksen visual khas MTI."
+  "kegiatanHero": {
+    "eyebrow": "Kegiatan MTI",
+    "title": "Kegiatan Masyarakat Transportasi Indonesia",
+    "description": "Agenda, diskusi kebijakan, dan aksi nyata Masyarakat Transportasi Indonesia Wilayah Sumatera Selatan dari tahun ke tahun.",
+    "image": "https://mti.or.id/wp-content/uploads/2023/07/Dialog-dan-Sinergi-2.jpg"
   }
 }

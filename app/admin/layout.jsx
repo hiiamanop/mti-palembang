@@ -19,6 +19,8 @@ export default async function AdminLayout({ children }) {
             <Link href="/admin" className="adminNavItem">Dashboard</Link>
             <Link href="/admin/beranda" className="adminNavItem">Beranda</Link>
             <Link href="/admin/berita" className="adminNavItem">Berita</Link>
+            <Link href="/admin/kegiatan" className="adminNavItem">Kegiatan MTI</Link>
+            <Link href="/admin/struktur-organisasi" className="adminNavItem">Struktur Organisasi</Link>
             <Link href="/admin/media" className="adminNavItem">Media</Link>
             <Link href="/admin/jurnal" className="adminNavItem">Jurnal</Link>
             <Link href="/admin/artikel" className="adminNavItem">Artikel &amp; Opini</Link>

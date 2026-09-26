@@ -51,6 +51,16 @@ create table if not exists public.artikel (
   created_at timestamptz default now()
 );
 
+create table if not exists public.kegiatan (
+  id uuid primary key default gen_random_uuid(),
+  title text not null,
+  date date not null,
+  image text,
+  summary text,
+  published boolean default false,
+  created_at timestamptz default now()
+);
+
 -- ============ TABEL SINGLETON (JSONB) ============
 
 create table if not exists public.beranda (
@@ -65,13 +75,21 @@ create table if not exists public.media (
   constraint media_singleton check (id = 1)
 );
 
+create table if not exists public.struktur_organisasi (
+  id int primary key default 1,
+  data jsonb not null,
+  constraint struktur_organisasi_singleton check (id = 1)
+);
+
 -- ============ AKTIFKAN RLS ============
 
 alter table public.berita enable row level security;
 alter table public.jurnal enable row level security;
 alter table public.artikel enable row level security;
+alter table public.kegiatan enable row level security;
 alter table public.beranda enable row level security;
 alter table public.media enable row level security;
+alter table public.struktur_organisasi enable row level security;
 
 -- ============ POLICY: SELECT PUBLIK (hanya konten tayang) ============
 
@@ -84,11 +102,17 @@ create policy "jurnal public read" on public.jurnal
 drop policy if exists "artikel public read" on public.artikel;
 create policy "artikel public read" on public.artikel
   for select using (visible = true);
+drop policy if exists "kegiatan public read" on public.kegiatan;
+create policy "kegiatan public read" on public.kegiatan
+  for select using (published = true);
 drop policy if exists "beranda public read" on public.beranda;
 create policy "beranda public read" on public.beranda
   for select using (true);
 drop policy if exists "media public read" on public.media;
 create policy "media public read" on public.media
+  for select using (true);
+drop policy if exists "struktur organisasi public read" on public.struktur_organisasi;
+create policy "struktur organisasi public read" on public.struktur_organisasi
   for select using (true);
 
 -- ============ POLICY: ADMIN (terautentikasi) AKSES PENUH ============
@@ -102,9 +126,15 @@ create policy "jurnal admin all" on public.jurnal
 drop policy if exists "artikel admin all" on public.artikel;
 create policy "artikel admin all" on public.artikel
   for all using (auth.role() = 'authenticated') with check (auth.role() = 'authenticated');
+drop policy if exists "kegiatan admin all" on public.kegiatan;
+create policy "kegiatan admin all" on public.kegiatan
+  for all using (auth.role() = 'authenticated') with check (auth.role() = 'authenticated');
 drop policy if exists "beranda admin all" on public.beranda;
 create policy "beranda admin all" on public.beranda
   for all using (auth.role() = 'authenticated') with check (auth.role() = 'authenticated');
 drop policy if exists "media admin all" on public.media;
 create policy "media admin all" on public.media
+  for all using (auth.role() = 'authenticated') with check (auth.role() = 'authenticated');
+drop policy if exists "struktur organisasi admin all" on public.struktur_organisasi;
+create policy "struktur organisasi admin all" on public.struktur_organisasi
   for all using (auth.role() = 'authenticated') with check (auth.role() = 'authenticated');

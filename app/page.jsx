@@ -17,9 +17,10 @@ export default async function Home() {
       tickerItems={beranda.ticker || []}
       heroSide={beranda.heroSide || []}
       leadStory={beranda.leadStory || null}
-      regions={beranda.regions || []}
       mediaData={media}
-      aksesData={beranda.akses || null}
+      pengenalan={beranda.pengenalan || null}
+      visiMisi={beranda.visiMisi || null}
+      programUnggulan={beranda.programUnggulan || []}
     />
   );
 }
