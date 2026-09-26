@@ -277,6 +277,42 @@ export async function saveBeranda(section, formData) {
       title: formData.get('title') || beranda.akses.title,
       description: formData.get('description') || beranda.akses.description
     };
+  } else if (section === 'aboutSumsel') {
+    beranda.aboutSumsel = {
+      tag: String(formData.get('aboutTag') || '').trim(),
+      title: String(formData.get('aboutTitle') || '').trim(),
+      description: String(formData.get('aboutDescription') || '').trim(),
+      image: String(formData.get('aboutImage') || '').trim(),
+      pillars: [
+        {
+          title: String(formData.get('pillarTitle1') || '').trim(),
+          desc: String(formData.get('pillarDesc1') || '').trim()
+        },
+        {
+          title: String(formData.get('pillarTitle2') || '').trim(),
+          desc: String(formData.get('pillarDesc2') || '').trim()
+        },
+        {
+          title: String(formData.get('pillarTitle3') || '').trim(),
+          desc: String(formData.get('pillarDesc3') || '').trim()
+        }
+      ].filter((p) => p.title || p.desc)
+    };
+  } else if (section === 'fokusIsu') {
+    const ids = formData.getAll('fokusId');
+    const images = formData.getAll('fokusImage');
+    const tags = formData.getAll('fokusTag');
+    const titles = formData.getAll('fokusTitle');
+    const summaries = formData.getAll('fokusSummary');
+    beranda.fokusIsu = ids
+      .map((id, i) => ({
+        id: id || generateId(),
+        image: images[i] || '',
+        tag: tags[i] || '',
+        title: titles[i] || '',
+        summary: summaries[i] || ''
+      }))
+      .filter((item) => item.title || item.image || item.summary);
   }
 
   await saveSingleton(supabase, 'beranda', beranda);

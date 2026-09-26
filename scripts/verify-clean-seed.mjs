@@ -13,7 +13,15 @@ assert.deepEqual(await readJSON('beranda'), {
   leadStory: {},
   heroSide: [],
   regions: [],
-  akses: {}
+  akses: {},
+  aboutSumsel: {
+    tag: '',
+    title: '',
+    description: '',
+    image: '',
+    pillars: []
+  },
+  fokusIsu: []
 });
 
 assert.deepEqual(await readJSON('media'), {

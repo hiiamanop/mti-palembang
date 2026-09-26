@@ -3,5 +3,13 @@
   "leadStory": {},
   "heroSide": [],
   "regions": [],
-  "akses": {}
+  "akses": {},
+  "aboutSumsel": {
+    "tag": "",
+    "title": "",
+    "description": "",
+    "image": "",
+    "pillars": []
+  },
+  "fokusIsu": []
 }
