@@ -15,6 +15,7 @@ import {
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import Newsletter from './components/shared/Newsletter';
+import ProgramCarousel from './components/shared/ProgramCarousel';
 
 const catStyles = {
   Berita: { bg: '#ececf9', color: '#4647ae' },
@@ -222,7 +223,7 @@ export default function HomeClient({
         </section>
       ) : null}
 
-      {/* ── Section 3: Program Unggulan MTI Sumsel ──────────── */}
+      {/* ── Section 3: Program Unggulan MTI Sumsel (Carousel) ── */}
       {programUnggulan.length > 0 ? (
         <section className="programUnggulanSection">
           <div className="wideShell">
@@ -237,40 +238,7 @@ export default function HomeClient({
               </div>
             </div>
 
-            <div className="programBentoGrid">
-              {programUnggulan.map((item, i) => {
-                const icons = [MessageSquare, Users, FileText];
-                const IconComponent = icons[i % icons.length];
-                return (
-                  <article className="programBentoCard" key={item.id || i}>
-                    <div className="programCardTop">
-                      <div className="programIconBadge">
-                        <IconComponent size={20} strokeWidth={1.8} />
-                      </div>
-                      {item.tag ? <span className="programTagBadge">{item.tag}</span> : null}
-                    </div>
-
-                    {item.image ? (
-                      <div className="programImageFrame">
-                        <img src={item.image} alt={item.title || ''} />
-                      </div>
-                    ) : null}
-
-                    <div className="programCardBody">
-                      <h3>{item.title}</h3>
-                      {item.summary ? <p>{item.summary}</p> : null}
-                    </div>
-
-                    <div className="programCardFoot">
-                      <span className="programIndex">PROG 0{i + 1}</span>
-                      <span className="programArrow">
-                        <ArrowUpRight size={16} />
-                      </span>
-                    </div>
-                  </article>
-                );
-              })}
-            </div>
+            <ProgramCarousel items={programUnggulan} />
           </div>
         </section>
       ) : null}
