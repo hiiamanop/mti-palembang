@@ -53,4 +53,20 @@ for (const path of [
   await readFile(new URL(path, import.meta.url), 'utf8');
 }
 
-console.log('Kegiatan helpers, data access, actions, admin, and public routes verified.');
+for (const path of [
+  '../app/dialog-kebijakan/page.jsx',
+  '../app/mti-dalam-berita/page.jsx',
+  '../app/kegiatan-mti/jalan-jalan/page.jsx',
+  '../app/mti-wilayah/jalan-jalan/page.jsx'
+]) {
+  const source = await readFile(new URL(path, import.meta.url), 'utf8');
+  assert.match(source, /permanentRedirect\('\/kegiatan-mti'\)/);
+}
+
+const siteConfig = await readFile(new URL('../lib/site-config.js', import.meta.url), 'utf8');
+assert.match(siteConfig, /label: 'Kegiatan MTI', href: '\/kegiatan-mti'/);
+assert.equal(siteConfig.includes("href: '/dialog-kebijakan'"), false);
+assert.equal(siteConfig.includes("href: '/mti-dalam-berita'"), false);
+assert.equal(siteConfig.includes("href: '/kegiatan-mti/jalan-jalan'"), false);
+
+console.log('Kegiatan module contracts verified.');
