@@ -222,6 +222,10 @@ img {
   letter-spacing: 0.24em;
 }
 
+.logoLockup small + small {
+  margin-top: 3px;
+}
+
 .mastheadTools {
   display: flex;
   align-items: center;

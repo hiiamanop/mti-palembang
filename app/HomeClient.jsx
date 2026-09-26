@@ -173,8 +173,9 @@ export default function HomeClient({
             <img src={IMG.logo} alt="MTI" />
             <span className="logoFallback">MTI</span>
             <span>
-              <strong>MTI</strong>
+              <strong>MTI SUMSEL</strong>
               <small>MASYARAKAT TRANSPORTASI INDONESIA</small>
+              <small>SUMATERA SELATAN</small>
             </span>
           </a>
           <div className="mastheadTools">
