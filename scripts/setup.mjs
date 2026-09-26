@@ -53,9 +53,12 @@ const supabase = createClient(NEXT_PUBLIC_SUPABASE_URL, SUPABASE_SERVICE_ROLE_KE
 
 // ── 1 & 2: jalankan SQL skema + storage lewat koneksi Postgres ────────────────
 async function runSql() {
+  const dbHost = new URL(SUPABASE_DB_URL).hostname;
   const client = new pg.Client({
     connectionString: SUPABASE_DB_URL,
-    ssl: { rejectUnauthorized: false }
+    ...(['localhost', '127.0.0.1', '::1'].includes(dbHost)
+      ? {}
+      : { ssl: { rejectUnauthorized: false } })
   });
   await client.connect();
   try {
