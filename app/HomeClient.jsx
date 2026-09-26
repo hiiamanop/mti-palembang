@@ -91,30 +91,28 @@ export default function HomeClient({
         </section>
       ) : null}
 
-      {/* ── Section 1: Hero Pengenalan MTI Sumsel dengan Shadow Gambar Transparan ── */}
+      {/* ── Section 1: Hero Pengenalan MTI Sumsel (Sama seperti Halaman Tentang Kami) ── */}
       {hasPengenalan ? (
-        <section className="homeDialogHero">
-          <img src={heroBg} alt="" className="homeHeroBg" aria-hidden="true" />
-          <span className="homeHeroShade" />
+        <section className="dialogHero">
+          <img src={heroBg} alt="" aria-hidden="true" />
+          <span className="dialogHeroShade" />
 
-          <div className="wideShell homeHeroContent">
-            <div className="homeHeroHeader">
-              <h1 className="homeHeroTitle">
-                {pengenalan.title || 'Masyarakat Transportasi Indonesia Wilayah Sumatera Selatan'}
-              </h1>
-              {pengenalan.description ? (
-                <p className="homeHeroLead">{pengenalan.description}</p>
-              ) : null}
+          <div className="wideShell dialogHeroContent">
+            <h1>
+              {pengenalan.title || 'Masyarakat Transportasi Indonesia Wilayah Sumatera Selatan'}
+            </h1>
+            {pengenalan.description ? (
+              <p>{pengenalan.description}</p>
+            ) : null}
 
-              <div className="homeHeroActions">
-                <a href="/kegiatan-mti" className="homeHeroBtnPrimary">
-                  Jelajahi Kegiatan MTI
-                  <ArrowRight size={15} aria-hidden="true" />
-                </a>
-                <a href="/sejarah-mti" className="homeHeroBtnSecondary">
-                  Profil Organisasi
-                </a>
-              </div>
+            <div className="homeHeroActions" style={{ marginTop: 32 }}>
+              <a href="/kegiatan-mti" className="homeHeroBtnPrimary">
+                Jelajahi Kegiatan MTI
+                <ArrowRight size={15} aria-hidden="true" />
+              </a>
+              <a href="/sejarah-mti" className="homeHeroBtnSecondary">
+                Profil Organisasi
+              </a>
             </div>
           </div>
         </section>
