@@ -282,28 +282,16 @@ export async function saveBeranda(section, formData) {
       tag: '',
       title: String(formData.get('pengenalanTitle') || '').trim(),
       description: String(formData.get('pengenalanDescription') || '').trim(),
-      image: String(formData.get('pengenalanImage') || '').trim(),
-      pillars: [
-        {
-          title: String(formData.get('pillarTitle1') || '').trim(),
-          desc: String(formData.get('pillarDesc1') || '').trim()
-        },
-        {
-          title: String(formData.get('pillarTitle2') || '').trim(),
-          desc: String(formData.get('pillarDesc2') || '').trim()
-        },
-        {
-          title: String(formData.get('pillarTitle3') || '').trim(),
-          desc: String(formData.get('pillarDesc3') || '').trim()
-        }
-      ].filter((p) => p.title || p.desc)
+      image: String(formData.get('pengenalanImage') || '').trim()
     };
   } else if (section === 'visiMisi') {
     const misiItems = formData.getAll('misiItem').map((s) => String(s || '').trim()).filter(Boolean);
+    const tujuanItems = formData.getAll('tujuanItem').map((s) => String(s || '').trim()).filter(Boolean);
     beranda.visiMisi = {
       tag: String(formData.get('visiMisiTag') || '').trim(),
       visi: String(formData.get('visiText') || '').trim(),
       misi: misiItems,
+      tujuan: tujuanItems,
       image: String(formData.get('visiMisiImage') || '').trim()
     };
   } else if (section === 'programUnggulan') {

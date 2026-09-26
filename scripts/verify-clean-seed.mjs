@@ -18,13 +18,13 @@ assert.deepEqual(await readJSON('beranda'), {
     tag: '',
     title: '',
     description: '',
-    image: '',
-    pillars: []
+    image: ''
   },
   visiMisi: {
     tag: '',
     visi: '',
     misi: [],
+    tujuan: [],
     image: ''
   },
   programUnggulan: []

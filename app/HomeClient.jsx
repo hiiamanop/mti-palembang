@@ -4,12 +4,11 @@ import { useMemo, useState } from 'react';
 import {
   ArrowRight,
   ArrowUpRight,
-  CheckCircle2,
+  Compass,
   FileText,
   Flag,
   MessageSquare,
   Play,
-  Sparkles,
   Target,
   Users
 } from 'lucide-react';
@@ -56,13 +55,13 @@ export default function HomeClient({
   const hasPengenalan = Boolean(
     pengenalan?.title ||
     pengenalan?.description ||
-    pengenalan?.image ||
-    pengenalan?.pillars?.length
+    pengenalan?.image
   );
 
   const hasVisiMisi = Boolean(
     visiMisi?.visi ||
     visiMisi?.misi?.length ||
+    visiMisi?.tujuan?.length ||
     visiMisi?.image
   );
 
@@ -92,7 +91,7 @@ export default function HomeClient({
         </section>
       ) : null}
 
-      {/* ── Section 1: Hero Pengenalan MTI Sumsel dengan Shadow Gambar ── */}
+      {/* ── Section 1: Hero Pengenalan MTI Sumsel dengan Shadow Gambar Transparan ── */}
       {hasPengenalan ? (
         <section className="homeDialogHero">
           <img src={heroBg} alt="" className="homeHeroBg" aria-hidden="true" />
@@ -117,89 +116,108 @@ export default function HomeClient({
                 </a>
               </div>
             </div>
-
-            {pengenalan.pillars?.length ? (
-              <div className="homeHeroPillarsGrid">
-                {pengenalan.pillars.map((pillar, i) => (
-                  <div className="homeHeroPillarCard" key={i}>
-                    <div className="pillarCardTop">
-                      <span className="pillarNum">0{i + 1}</span>
-                      <span className="pillarAccent" />
-                    </div>
-                    <strong>{pillar.title}</strong>
-                    {pillar.desc ? <p>{pillar.desc}</p> : null}
-                  </div>
-                ))}
-              </div>
-            ) : null}
           </div>
         </section>
       ) : null}
 
-      {/* ── Section 2: Visi & Misi Organisasi ─────────────────── */}
+      {/* ── Section 2: Visi & Misi serta Tujuan Organisasi ───── */}
       {hasVisiMisi ? (
         <section className="visiMisiSection">
           <div className="wideShell">
             <div className="editorialSectionHeader">
               <div className="headerKicker">
                 <span className="kickerBar" />
-                <span className="kickerText">{visiMisi.tag || 'VISI &amp; MISI'}</span>
+                <span className="kickerText">{visiMisi.tag || 'VISI, MISI &amp; TUJUAN'}</span>
               </div>
               <div className="headerMain">
-                <h2>Arah &amp; Cita-Cita Strategis MTI Sumsel</h2>
+                <h2>Landasan Strategis MTI Sumatera Selatan</h2>
                 <p>
-                  Landasan pijak perjuangan menuju terciptanya sistem mobilitas yang adil,
-                  berkelanjutan, dan berpihak kepada kepentingan masyarakat.
+                  Arah perjuangan, komitmen advokasi, dan target capaian nyata bagi kemajuan sistem
+                  mobilitas daerah.
                 </p>
               </div>
             </div>
 
             <div className="visiMisiLayout">
-              {/* Kolom Visi */}
-              <div className="visiCard">
-                <div className="visiCardHeader">
+              {/* Kartu 1: Visi & Misi Terpadu */}
+              <div className="visiMisiCombinedCard">
+                <div className="cardSectionHeader">
                   <div className="iconCircle">
                     <Target size={22} strokeWidth={2} />
                   </div>
-                  <span className="badgeLabel">VISI ORGANISASI</span>
+                  <div>
+                    <span className="badgeLabel">VISI &amp; MISI</span>
+                    <h3 className="cardBlockTitle">Pedoman Utama Organisasi</h3>
+                  </div>
                 </div>
-                <blockquote className="visiQuote">
-                  &ldquo;{visiMisi.visi || 'Terwujudnya MTI sebagai organisasi yang menjadi acuan profesional bidang transportasi, menuju terbentuknya sistem transportasi yang berkelanjutan dan sesuai dengan aspirasi segenap pemangku kepentingan.'}&rdquo;
-                </blockquote>
-                <div className="visiFooterNote">
-                  <span>Pedoman Strategis Kebijakan Transportasi</span>
+
+                <div className="visiBlock">
+                  <span className="subHeadLabel">VISI</span>
+                  <blockquote className="visiQuoteText">
+                    &ldquo;{visiMisi.visi || 'Terwujudnya MTI sebagai organisasi yang menjadi acuan profesional bidang transportasi, menuju terbentuknya sistem transportasi yang berkelanjutan dan sesuai dengan aspirasi segenap pemangku kepentingan.'}&rdquo;
+                  </blockquote>
+                </div>
+
+                <div className="misiBlock">
+                  <span className="subHeadLabel">MISI</span>
+                  <ul className="misiList">
+                    {(visiMisi.misi?.length
+                      ? visiMisi.misi
+                      : [
+                          'Menumbuh kembangkan profesionalitas pelaku kegiatan bidang transportasi',
+                          'Memberikan pelayanan advokasi untuk pengambil keputusan bidang transportasi',
+                          'Mendorong interaksi sinergis antar pemangku kepentingan untuk peningkatan kualitas layanan transportasi'
+                        ]
+                    ).map((item, idx) => (
+                      <li key={idx} className="misiItem">
+                        <span className="misiDot">&bull;</span>
+                        <span className="misiText">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </div>
 
-              {/* Kolom Misi */}
-              <div className="misiCard">
-                <div className="misiCardHeader">
-                  <div className="iconCircle">
-                    <Flag size={22} strokeWidth={2} />
+              {/* Kartu 2: Tujuan Organisasi */}
+              <div className="tujuanCard">
+                <div className="cardSectionHeader">
+                  <div className="iconCircle alt">
+                    <Compass size={22} strokeWidth={2} />
                   </div>
-                  <span className="badgeLabel">MISI ORGANISASI</span>
+                  <div>
+                    <span className="badgeLabel alt">TUJUAN ORGANISASI</span>
+                    <h3 className="cardBlockTitle">Target &amp; Sasaran Terukur</h3>
+                  </div>
                 </div>
 
-                <ul className="misiList">
-                  {(visiMisi.misi?.length
-                    ? visiMisi.misi
+                <p className="tujuanIntro">
+                  Sasaran strategis yang secara konsisten diikhtiarkan demi perbaikan tata kelola
+                  transportasi di Sumatera Selatan:
+                </p>
+
+                <div className="tujuanList">
+                  {(visiMisi.tujuan?.length
+                    ? visiMisi.tujuan
                     : [
-                        'Menumbuhkembangkan profesionalitas pelaku kegiatan bidang transportasi',
-                        'Memberikan pelayanan advokasi untuk pengambilan keputusan bidang transportasi'
+                        'Meningkatnya jumlah dan kualitas pelaku profesional bidang transportasi bersertifikasi',
+                        'Meningkatnya jumlah kota dan wilayah yang menerapkan prinsip-prinsip transportasi berkelanjutan',
+                        'Meningkatnya jumlah regulasi bidang transportasi yang sejalan dengan aspirasi masyarakat dan prinsip transportasi berkelanjutan'
                       ]
                   ).map((item, idx) => (
-                    <li key={idx} className="misiItem">
-                      <div className="misiNumber">0{idx + 1}</div>
-                      <div className="misiText">{item}</div>
-                    </li>
+                    <div key={idx} className="tujuanItem">
+                      <div className="tujuanNumber">0{idx + 1}</div>
+                      <div className="tujuanContent">
+                        <p>{item}</p>
+                      </div>
+                    </div>
                   ))}
-                </ul>
+                </div>
               </div>
             </div>
 
             {visiMisi.image ? (
               <div className="visiMisiBannerImage">
-                <img src={visiMisi.image} alt="Visi Misi MTI Sumsel" />
+                <img src={visiMisi.image} alt="Dokumentasi MTI Sumsel" />
               </div>
             ) : null}
           </div>

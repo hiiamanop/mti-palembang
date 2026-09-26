@@ -5821,10 +5821,10 @@ details[open] .wilayahChevron { transform: rotate(-135deg); }
   margin-inline: auto;
 }
 
-/* ── Section 1: Hero Pengenalan MTI Sumsel dengan Shadow Gambar ── */
+/* ── Section 1: Hero Pengenalan MTI Sumsel dengan Shadow Gambar Transparan ── */
 .homeDialogHero {
   position: relative;
-  min-height: 520px;
+  min-height: 480px;
   display: flex;
   align-items: center;
   isolation: isolate;
@@ -5845,38 +5845,24 @@ details[open] .wilayahChevron { transform: rotate(-135deg); }
   inset: 0;
   z-index: -2;
   background:
-    linear-gradient(90deg, rgba(6, 14, 36, 0.95) 0%, rgba(17, 46, 129, 0.85) 50%, rgba(70, 71, 174, 0.45) 100%),
-    linear-gradient(180deg, rgba(0, 0, 0, 0.2), rgba(6, 14, 36, 0.7));
+    linear-gradient(90deg, rgba(6, 14, 36, 0.92) 0%, rgba(17, 46, 129, 0.74) 48%, rgba(70, 71, 174, 0.36) 100%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.1), rgba(6, 14, 36, 0.46));
 }
 
 .homeHeroContent {
-  padding-top: 80px;
-  padding-bottom: 72px;
+  padding-top: 86px;
+  padding-bottom: 86px;
   color: var(--white);
   width: 100%;
 }
 
-.homeHeroEyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  min-height: 32px;
-  padding: 0 12px;
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  border-radius: 8px;
-  color: #dbe7ff;
-  background: rgba(255, 255, 255, 0.12);
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  margin-bottom: 20px;
+.homeHeroHeader {
+  max-width: 820px;
 }
 
 .homeHeroTitle {
-  max-width: 860px;
-  margin: 0 0 18px;
-  font-size: clamp(34px, 4.5vw, 54px);
+  margin: 0 0 20px;
+  font-size: clamp(34px, 4.5vw, 56px);
   line-height: 1.05;
   font-weight: 900;
   letter-spacing: -0.02em;
@@ -5884,11 +5870,11 @@ details[open] .wilayahChevron { transform: rotate(-135deg); }
 }
 
 .homeHeroLead {
-  max-width: 720px;
-  margin: 0 0 32px;
-  font-size: 17px;
+  margin: 0 0 36px;
+  font-size: 18px;
   line-height: 1.8;
-  color: rgba(255, 255, 255, 0.85);
+  color: rgba(255, 255, 255, 0.88);
+  max-width: 720px;
 }
 
 .homeHeroActions {
@@ -5896,7 +5882,6 @@ details[open] .wilayahChevron { transform: rotate(-135deg); }
   align-items: center;
   gap: 16px;
   flex-wrap: wrap;
-  margin-bottom: 48px;
 }
 
 .homeHeroBtnPrimary {
@@ -5936,66 +5921,7 @@ details[open] .wilayahChevron { transform: rotate(-135deg); }
   background: rgba(255, 255, 255, 0.22);
 }
 
-.homeHeroPillarsGrid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-  padding-top: 36px;
-  border-top: 1px solid rgba(255, 255, 255, 0.16);
-}
-
-.homeHeroPillarCard {
-  padding: 22px 24px;
-  background: rgba(11, 19, 48, 0.65);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: 14px;
-  transition: transform 0.2s ease, border-color 0.2s ease;
-}
-
-.homeHeroPillarCard:hover {
-  transform: translateY(-3px);
-  border-color: rgba(255, 255, 255, 0.35);
-}
-
-.pillarCardTop {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 10px;
-}
-
-.pillarNum {
-  font-size: 13px;
-  font-weight: 900;
-  color: var(--sky);
-  letter-spacing: 0.1em;
-}
-
-.pillarAccent {
-  width: 24px;
-  height: 2px;
-  background: var(--sky);
-  border-radius: 2px;
-}
-
-.homeHeroPillarCard strong {
-  display: block;
-  color: var(--white);
-  font-size: 16px;
-  font-weight: 800;
-  margin-bottom: 8px;
-  line-height: 1.35;
-}
-
-.homeHeroPillarCard p {
-  margin: 0;
-  color: rgba(255, 255, 255, 0.75);
-  font-size: 13.5px;
-  line-height: 1.65;
-}
-
-/* ── Section 2: Visi & Misi Organisasi ─────────────────── */
+/* ── Section 2: Visi & Misi serta Tujuan Organisasi ───── */
 .visiMisiSection {
   padding: 80px 0 88px;
   background: #fbfcfe;
@@ -6004,27 +5930,27 @@ details[open] .wilayahChevron { transform: rotate(-135deg); }
 
 .visiMisiLayout {
   display: grid;
-  grid-template-columns: 1.05fr 1fr;
+  grid-template-columns: 1.15fr 0.85fr;
   gap: 36px;
   align-items: stretch;
 }
 
-.visiCard {
+/* Kartu 1: Visi & Misi Terpadu */
+.visiMisiCombinedCard {
   background: linear-gradient(135deg, #0b1330 0%, #112e81 100%);
   border-radius: 20px;
   padding: 40px;
   color: var(--white);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   box-shadow: 0 16px 40px -12px rgba(17, 46, 129, 0.3);
   border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
-.visiCardHeader {
+.cardSectionHeader {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
   margin-bottom: 24px;
 }
 
@@ -6038,58 +5964,62 @@ details[open] .wilayahChevron { transform: rotate(-135deg); }
   background: rgba(255, 255, 255, 0.12);
   color: var(--sky);
   border: 1px solid rgba(255, 255, 255, 0.18);
+  flex-shrink: 0;
 }
 
-.badgeLabel {
-  font-size: 11.5px;
-  font-weight: 900;
-  letter-spacing: 0.14em;
-  color: var(--sky);
-  text-transform: uppercase;
-}
-
-.visiQuote {
-  font-family: "Lora", Georgia, serif;
-  font-style: italic;
-  font-size: clamp(19px, 2.2vw, 24px);
-  line-height: 1.6;
-  color: #f8fafc;
-  margin: 0 0 28px;
-}
-
-.visiFooterNote {
-  padding-top: 16px;
-  border-top: 1px solid rgba(255, 255, 255, 0.14);
-  font-size: 12px;
-  color: rgba(255, 255, 255, 0.65);
-  letter-spacing: 0.05em;
-}
-
-.misiCard {
-  background: var(--white);
-  border: 1px solid var(--line);
-  border-radius: 20px;
-  padding: 36px 40px;
-  display: flex;
-  flex-direction: column;
-  box-shadow: 0 8px 30px -10px rgba(17, 46, 129, 0.08);
-}
-
-.misiCardHeader {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 24px;
-}
-
-.misiCardHeader .iconCircle {
+.iconCircle.alt {
   background: #eef3ff;
   color: var(--blue);
   border: 1px solid rgba(17, 46, 129, 0.12);
 }
 
-.misiCardHeader .badgeLabel {
+.badgeLabel {
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  color: var(--sky);
+  text-transform: uppercase;
+  display: block;
+}
+
+.badgeLabel.alt {
   color: var(--blue);
+}
+
+.cardBlockTitle {
+  margin: 2px 0 0;
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--white);
+}
+
+.tujuanCard .cardBlockTitle {
+  color: #0b1330;
+}
+
+.subHeadLabel {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  color: var(--sky);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.visiBlock {
+  padding-bottom: 24px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.visiQuoteText {
+  font-family: "Lora", Georgia, serif;
+  font-style: italic;
+  font-size: clamp(17px, 1.8vw, 20px);
+  line-height: 1.6;
+  color: #f8fafc;
+  margin: 0;
 }
 
 .misiList {
@@ -6098,12 +6028,55 @@ details[open] .wilayahChevron { transform: rotate(-135deg); }
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 12px;
 }
 
 .misiItem {
   display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.misiDot {
+  color: var(--sky);
+  font-size: 18px;
+  line-height: 1.2;
+}
+
+.misiText {
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Kartu 2: Tujuan Organisasi */
+.tujuanCard {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 38px 40px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 8px 30px -10px rgba(17, 46, 129, 0.08);
+}
+
+.tujuanIntro {
+  margin: 0 0 20px;
+  font-size: 14px;
+  line-height: 1.65;
+  color: #475569;
+}
+
+.tujuanList {
+  display: flex;
+  flex-direction: column;
   gap: 16px;
+  flex: 1;
+}
+
+.tujuanItem {
+  display: flex;
+  gap: 14px;
   align-items: flex-start;
   padding: 16px;
   background: #f8faff;
@@ -6112,12 +6085,12 @@ details[open] .wilayahChevron { transform: rotate(-135deg); }
   transition: transform 0.2s ease, border-color 0.2s ease;
 }
 
-.misiItem:hover {
+.tujuanItem:hover {
   transform: translateX(4px);
   border-color: #cbd5e1;
 }
 
-.misiNumber {
+.tujuanNumber {
   width: 32px;
   height: 32px;
   flex-shrink: 0;
@@ -6131,10 +6104,10 @@ details[open] .wilayahChevron { transform: rotate(-135deg); }
   font-weight: 900;
 }
 
-.misiText {
-  flex: 1;
-  font-size: 14.5px;
-  line-height: 1.65;
+.tujuanContent p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
   color: var(--ink);
   font-weight: 600;
 }
@@ -6283,10 +6256,6 @@ details[open] .wilayahChevron { transform: rotate(-135deg); }
 
 /* ── Responsive Adaptations ────────────────────────────────── */
 @media (max-width: 960px) {
-  .homeHeroPillarsGrid {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
   .visiMisiLayout {
     grid-template-columns: 1fr;
   }
@@ -6303,8 +6272,8 @@ details[open] .wilayahChevron { transform: rotate(-135deg); }
     flex-direction: column;
     align-items: stretch;
   }
-  .visiCard,
-  .misiCard {
+  .visiMisiCombinedCard,
+  .tujuanCard {
     padding: 24px;
   }
 }

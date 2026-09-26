@@ -5,8 +5,8 @@ import { saveBeranda } from '../actions';
 import ImageUpload from '../components/ImageUpload';
 
 const TABS = [
-  { key: 'pengenalan', label: '1. Pengenalan MTI Sumsel' },
-  { key: 'visiMisi', label: '2. Visi & Misi' },
+  { key: 'pengenalan', label: '1. Hero Pengenalan' },
+  { key: 'visiMisi', label: '2. Visi, Misi & Tujuan' },
   { key: 'programUnggulan', label: '3. Program Unggulan' },
   { key: 'leadStory', label: 'Berita Utama' },
   { key: 'heroSide', label: 'Sorotan' },
@@ -20,36 +20,28 @@ export default function BerandaForm({ beranda }) {
 
   const [pengenalan] = useState(
     beranda.pengenalan || {
-      tag: 'TENTANG KAMI',
+      tag: '',
       title: 'Masyarakat Transportasi Indonesia Wilayah Sumatera Selatan',
       description:
         'Lembaga pemikir (think tank) independen yang menghimpun akademisi, praktisi, birokrat, dan pemerhati transportasi di Sumsel.',
-      image: '',
-      pillars: [
-        {
-          title: 'Riset & Rekomendasi',
-          desc: 'Memberi masukan berbasis data kepada Pemprov Sumsel & Pemkot/Pemkab.'
-        },
-        {
-          title: 'Advokasi Publik',
-          desc: 'Mendorong transportasi yang inklusif, aman, dan terjangkau.'
-        },
-        {
-          title: 'Kolaborasi Multi-Pihak',
-          desc: 'Menjembatani regulator (Kemenhub/Dishub), operator, dan masyarakat.'
-        }
-      ]
+      image: ''
     }
   );
 
-  const [visiMisi, setVisiMisi] = useState(
+  const [visiMisi] = useState(
     beranda.visiMisi || {
-      tag: 'VISI & MISI',
+      tag: 'VISI, MISI & TUJUAN',
       visi:
         'Terwujudnya MTI sebagai organisasi yang menjadi acuan profesional bidang transportasi, menuju terbentuknya sistem transportasi yang berkelanjutan dan sesuai dengan aspirasi segenap pemangku kepentingan.',
       misi: [
-        'Menumbuhkembangkan profesionalitas pelaku kegiatan bidang transportasi',
-        'Memberikan pelayanan advokasi untuk pengambilan keputusan bidang transportasi'
+        'Menumbuh kembangkan profesionalitas pelaku kegiatan bidang transportasi',
+        'Memberikan pelayanan advokasi untuk pengambil keputusan bidang transportasi',
+        'Mendorong interaksi sinergis antar pemangku kepentingan untuk peningkatan kualitas layanan transportasi'
+      ],
+      tujuan: [
+        'Meningkatnya jumlah dan kualitas pelaku profesional bidang transportasi bersertifikasi',
+        'Meningkatnya jumlah kota dan wilayah yang menerapkan prinsip-prinsip transportasi berkelanjutan',
+        'Meningkatnya jumlah regulasi bidang transportasi yang sejalan dengan aspirasi masyarakat dan prinsip transportasi berkelanjutan'
       ],
       image: ''
     }
@@ -59,8 +51,19 @@ export default function BerandaForm({ beranda }) {
     visiMisi.misi?.length
       ? visiMisi.misi
       : [
-          'Menumbuhkembangkan profesionalitas pelaku kegiatan bidang transportasi',
-          'Memberikan pelayanan advokasi untuk pengambilan keputusan bidang transportasi'
+          'Menumbuh kembangkan profesionalitas pelaku kegiatan bidang transportasi',
+          'Memberikan pelayanan advokasi untuk pengambil keputusan bidang transportasi',
+          'Mendorong interaksi sinergis antar pemangku kepentingan untuk peningkatan kualitas layanan transportasi'
+        ]
+  );
+
+  const [tujuanList, setTujuanList] = useState(
+    visiMisi.tujuan?.length
+      ? visiMisi.tujuan
+      : [
+          'Meningkatnya jumlah dan kualitas pelaku profesional bidang transportasi bersertifikasi',
+          'Meningkatnya jumlah kota dan wilayah yang menerapkan prinsip-prinsip transportasi berkelanjutan',
+          'Meningkatnya jumlah regulasi bidang transportasi yang sejalan dengan aspirasi masyarakat dan prinsip transportasi berkelanjutan'
         ]
   );
 
@@ -136,8 +139,6 @@ export default function BerandaForm({ beranda }) {
     save('heroSide', new FormData(e.target));
   };
 
-  const pillars = pengenalan.pillars || [];
-
   return (
     <div>
       {status && <div className="adminAlert adminAlertSuccess">{status}</div>}
@@ -159,7 +160,7 @@ export default function BerandaForm({ beranda }) {
         <div className="adminCard" style={{ padding: '24px' }}>
           <h3 style={{ margin: '0 0 16px' }}>Section 1: Hero Pengenalan MTI Sumsel</h3>
           <p style={{ margin: '0 0 20px', color: '#667085', fontSize: 14 }}>
-            Hero section utama beranda dengan efek visual background dan bayangan (shadow) elegan seperti halaman Tentang Kami.
+            Hero section utama beranda dengan efek visual latar belakang transparan seperti halaman Tentang Kami.
           </p>
           <form onSubmit={handlePengenalanSubmit} className="adminForm">
             <div className="adminFormGroup">
@@ -178,7 +179,7 @@ export default function BerandaForm({ beranda }) {
               <label>Gambar Hero / Background Dokumentasi MTI Sumsel</label>
               <ImageUpload name="pengenalanImage" defaultValue={pengenalan.image || ''} />
               <small style={{ color: '#64748b', marginTop: 4, display: 'block' }}>
-                Gambar ini akan menjadi latar belakang hero dengan efek bayangan dan pencahayaan sinematik.
+                Foto ini akan tampil di belakang hero dengan bayangan transparan (sama seperti halaman Tentang Kami).
               </small>
             </div>
 
@@ -195,49 +196,9 @@ export default function BerandaForm({ beranda }) {
               />
             </div>
 
-            <h4 style={{ margin: '24px 0 12px', fontSize: 15 }}>
-              3 Pilar Gerak MTI Sumsel
-            </h4>
-
-            {[1, 2, 3].map((num, i) => {
-              const p = pillars[i] || {};
-              const defaultTitles = [
-                'Riset & Rekomendasi',
-                'Advokasi Publik',
-                'Kolaborasi Multi-Pihak'
-              ];
-              const defaultDescs = [
-                'Memberi masukan berbasis data kepada Pemprov Sumsel & Pemkot/Pemkab.',
-                'Mendorong transportasi yang inklusif, aman, dan terjangkau.',
-                'Menjembatani regulator (Kemenhub/Dishub), operator, dan masyarakat.'
-              ];
-              return (
-                <div key={num} className="adminFormSection" style={{ marginBottom: 16 }}>
-                  <div className="adminFormSectionTitle">Pilar {num}</div>
-                  <div className="adminFormGroup">
-                    <label>Judul Pilar</label>
-                    <input
-                      name={`pillarTitle${num}`}
-                      defaultValue={p.title ?? defaultTitles[i]}
-                      placeholder="Judul pilar..."
-                    />
-                  </div>
-                  <div className="adminFormGroup">
-                    <label>Keterangan Pilar</label>
-                    <textarea
-                      name={`pillarDesc${num}`}
-                      defaultValue={p.desc ?? defaultDescs[i]}
-                      rows={2}
-                      placeholder="Penjelasan pilar..."
-                    />
-                  </div>
-                </div>
-              );
-            })}
-
             <div className="adminFormActions">
               <button type="submit" className="adminBtn adminBtnPrimary" disabled={isPending}>
-                {isPending ? 'Menyimpan...' : 'Simpan Pengenalan MTI Sumsel'}
+                {isPending ? 'Menyimpan...' : 'Simpan Hero Pengenalan'}
               </button>
             </div>
           </form>
@@ -246,9 +207,9 @@ export default function BerandaForm({ beranda }) {
 
       {activeTab === 'visiMisi' && (
         <div className="adminCard" style={{ padding: '24px' }}>
-          <h3 style={{ margin: '0 0 8px' }}>Section 2: Visi &amp; Misi Organisasi</h3>
+          <h3 style={{ margin: '0 0 8px' }}>Section 2: Visi, Misi &amp; Tujuan Organisasi</h3>
           <p style={{ margin: '0 0 20px', color: '#667085', fontSize: 14 }}>
-            Arah dan cita-cita strategis MTI Sumatera Selatan.
+            Satu kartu memuat Visi &amp; Misi, dan kartu kedua memuat Tujuan Organisasi.
           </p>
 
           <form onSubmit={handleVisiMisiSubmit} className="adminForm">
@@ -256,8 +217,8 @@ export default function BerandaForm({ beranda }) {
               <label>Tag / Label Seksi</label>
               <input
                 name="visiMisiTag"
-                defaultValue={visiMisi.tag || 'VISI & MISI'}
-                placeholder="VISI & MISI"
+                defaultValue={visiMisi.tag || 'VISI, MISI & TUJUAN'}
+                placeholder="VISI, MISI & TUJUAN"
               />
             </div>
 
@@ -269,7 +230,7 @@ export default function BerandaForm({ beranda }) {
                   visiMisi.visi ||
                   'Terwujudnya MTI sebagai organisasi yang menjadi acuan profesional bidang transportasi, menuju terbentuknya sistem transportasi yang berkelanjutan dan sesuai dengan aspirasi segenap pemangku kepentingan.'
                 }
-                rows={4}
+                rows={3}
                 placeholder="Pernyataan visi organisasi..."
               />
             </div>
@@ -302,20 +263,54 @@ export default function BerandaForm({ beranda }) {
             <button
               type="button"
               className="adminBtn adminBtnSecondary"
-              style={{ marginBottom: 20 }}
+              style={{ marginBottom: 24 }}
               onClick={() => setMisiList([...misiList, ''])}
             >
               + Tambah Butir Misi
             </button>
 
-            <div className="adminFormGroup">
-              <label>Gambar / Dokumentasi Seksi Visi Misi (Opsional)</label>
+            <h4 style={{ margin: '24px 0 12px', fontSize: 15, borderTop: '1px solid #eef0f8', paddingTop: 20 }}>
+              Daftar Butir Tujuan Organisasi
+            </h4>
+
+            {tujuanList.map((item, i) => (
+              <div key={i} className="adminFormRow" style={{ alignItems: 'flex-start', marginBottom: 12 }}>
+                <div className="adminFormGroup" style={{ flex: 1 }}>
+                  <label>Tujuan #{i + 1}</label>
+                  <input
+                    name="tujuanItem"
+                    defaultValue={item}
+                    placeholder="Butir tujuan organisasi..."
+                  />
+                </div>
+                <button
+                  type="button"
+                  className="adminBtn adminBtnSmall adminBtnDanger"
+                  style={{ alignSelf: 'flex-end', marginBottom: 4 }}
+                  onClick={() => setTujuanList(tujuanList.filter((_, idx) => idx !== i))}
+                >
+                  Hapus
+                </button>
+              </div>
+            ))}
+
+            <button
+              type="button"
+              className="adminBtn adminBtnSecondary"
+              style={{ marginBottom: 20 }}
+              onClick={() => setTujuanList([...tujuanList, ''])}
+            >
+              + Tambah Butir Tujuan
+            </button>
+
+            <div className="adminFormGroup" style={{ borderTop: '1px solid #eef0f8', paddingTop: 20 }}>
+              <label>Gambar / Banner Tambahan (Opsional)</label>
               <ImageUpload name="visiMisiImage" defaultValue={visiMisi.image || ''} />
             </div>
 
             <div className="adminFormActions">
               <button type="submit" className="adminBtn adminBtnPrimary" disabled={isPending}>
-                {isPending ? 'Menyimpan...' : 'Simpan Visi & Misi'}
+                {isPending ? 'Menyimpan...' : 'Simpan Visi, Misi & Tujuan'}
               </button>
             </div>
           </form>
