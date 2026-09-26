@@ -278,13 +278,15 @@ img {
   min-height: 50px;
   display: flex;
   align-items: stretch;
-  justify-content: space-between;
+  justify-content: center;
   gap: 16px;
 }
 
 .desktopNav {
   display: flex;
+  flex: 1;
   align-items: stretch;
+  justify-content: center;
 }
 
 .navItem {

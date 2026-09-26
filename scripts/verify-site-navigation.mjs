@@ -2,7 +2,11 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { SITE_CONFIG } from '../lib/site-config.js';
 
-const hiddenLabels = new Set(['Rekomendasi Kebijakan', 'AKSES Nusantara']);
+const hiddenLabels = new Set([
+  '16th EASTS Conference',
+  'Rekomendasi Kebijakan',
+  'AKSES Nusantara'
+]);
 assert.equal(
   SITE_CONFIG.navItems.some((item) => hiddenLabels.has(item.label)),
   false,
@@ -24,6 +28,11 @@ assert.match(
   css,
   /\.subscribeButton,[\s\S]*?background:\s*var\(--blue\)/,
   'subscribe button must use the main blue color'
+);
+assert.match(
+  css,
+  /\.desktopNav\s*{[\s\S]*?justify-content:\s*center/,
+  'desktop navigation items must be centered'
 );
 
 console.log('Site navigation visibility and subscribe color verified.');
