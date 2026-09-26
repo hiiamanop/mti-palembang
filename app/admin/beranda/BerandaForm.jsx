@@ -8,6 +8,7 @@ const TABS = [
   { key: 'pengenalan', label: '1. Hero Pengenalan' },
   { key: 'visiMisi', label: '2. Visi, Misi & Tujuan' },
   { key: 'programUnggulan', label: '3. Program Unggulan' },
+  { key: 'kegiatanHero', label: 'Hero Kegiatan MTI' },
   { key: 'leadStory', label: 'Berita Utama' },
   { key: 'heroSide', label: 'Sorotan' },
   { key: 'ticker', label: 'Ticker' }
@@ -67,6 +68,16 @@ export default function BerandaForm({ beranda }) {
         ]
   );
 
+  const [kegiatanHero] = useState(
+    beranda.kegiatanHero || {
+      eyebrow: 'Kegiatan MTI',
+      title: 'Kegiatan Masyarakat Transportasi Indonesia',
+      description:
+        'Agenda, diskusi kebijakan, dan aksi nyata Masyarakat Transportasi Indonesia Wilayah Sumatera Selatan dari tahun ke tahun.',
+      image: ''
+    }
+  );
+
   const [programUnggulan, setProgramUnggulan] = useState(
     beranda.programUnggulan?.length
       ? beranda.programUnggulan
@@ -122,6 +133,11 @@ export default function BerandaForm({ beranda }) {
   const handleProgramSubmit = (e) => {
     e.preventDefault();
     save('programUnggulan', new FormData(e.target));
+  };
+
+  const handleKegiatanHeroSubmit = (e) => {
+    e.preventDefault();
+    save('kegiatanHero', new FormData(e.target));
   };
 
   const handleTickerSubmit = (e) => {
@@ -408,6 +424,54 @@ export default function BerandaForm({ beranda }) {
             <div className="adminFormActions">
               <button type="submit" className="adminBtn adminBtnPrimary" disabled={isPending}>
                 {isPending ? 'Menyimpan...' : 'Simpan Program Unggulan'}
+              </button>
+            </div>
+          </form>
+        </div>
+      )}
+
+      {activeTab === 'kegiatanHero' && (
+        <div className="adminCard" style={{ padding: '24px' }}>
+          <h3 style={{ margin: '0 0 8px' }}>Hero Halaman Kegiatan MTI</h3>
+          <p style={{ margin: '0 0 20px', color: '#667085', fontSize: 14 }}>
+            Kelola label, judul, deskripsi, dan gambar hero pada halaman publik Kegiatan MTI.
+          </p>
+          <form onSubmit={handleKegiatanHeroSubmit} className="adminForm">
+            <div className="adminFormGroup">
+              <label>Label Hero</label>
+              <input
+                name="kegiatanHeroEyebrow"
+                defaultValue={kegiatanHero.eyebrow || 'Kegiatan MTI'}
+                placeholder="Kegiatan MTI"
+              />
+            </div>
+            <div className="adminFormGroup">
+              <label>Judul Hero</label>
+              <input
+                name="kegiatanHeroTitle"
+                defaultValue={kegiatanHero.title || 'Kegiatan Masyarakat Transportasi Indonesia'}
+                placeholder="Kegiatan Masyarakat Transportasi Indonesia"
+              />
+            </div>
+            <div className="adminFormGroup">
+              <label>Deskripsi Hero</label>
+              <textarea
+                name="kegiatanHeroDescription"
+                defaultValue={
+                  kegiatanHero.description ||
+                  'Agenda, diskusi kebijakan, dan aksi nyata Masyarakat Transportasi Indonesia Wilayah Sumatera Selatan dari tahun ke tahun.'
+                }
+                rows={3}
+                placeholder="Deskripsi singkat halaman kegiatan..."
+              />
+            </div>
+            <div className="adminFormGroup">
+              <label>Gambar Background Hero</label>
+              <ImageUpload name="kegiatanHeroImage" defaultValue={kegiatanHero.image || ''} />
+            </div>
+            <div className="adminFormActions">
+              <button type="submit" className="adminBtn adminBtnPrimary" disabled={isPending}>
+                {isPending ? 'Menyimpan...' : 'Simpan Hero Kegiatan MTI'}
               </button>
             </div>
           </form>

@@ -3,7 +3,6 @@ import {
   Download,
   Flag,
   Info,
-  Sparkles,
   Target,
   Users,
   Video
@@ -114,7 +113,6 @@ export default function IdentitasOrganisasiPage() {
         <span className="dialogHeroShade" />
         <div className="wideShell dialogHeroContent">
           <span className="dialogEyebrow">
-            <Sparkles size={16} aria-hidden="true" />
             Tentang Kami
           </span>
           <h1>Identitas Organisasi</h1>

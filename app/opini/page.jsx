@@ -3,8 +3,7 @@ import {
   BookOpen,
   CalendarDays,
   Download,
-  PenLine,
-  Sparkles
+  PenLine
 } from "lucide-react";
 import Header from "../components/layout/Header";
 import Footer from "../components/layout/Footer";
@@ -120,7 +119,6 @@ export default function OpiniPage() {
         <span className="dialogHeroShade" />
         <div className="wideShell dialogHeroContent">
           <span className="dialogEyebrow">
-            <Sparkles size={16} aria-hidden="true" />
             Opini MTI
           </span>
           <h1>Opini Masyarakat Transportasi Indonesia</h1>

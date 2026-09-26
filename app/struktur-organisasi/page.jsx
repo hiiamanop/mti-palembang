@@ -2,7 +2,6 @@ import {
   ArrowRight,
   Building2,
   Download,
-  Sparkles,
   Users
 } from "lucide-react";
 import Header from "../components/layout/Header";
@@ -83,7 +82,6 @@ export default function StrukturOrganisasiPage() {
         <span className="dialogHeroShade" />
         <div className="wideShell dialogHeroContent">
           <span className="dialogEyebrow">
-            <Sparkles size={16} aria-hidden="true" />
             Tentang Kami
           </span>
           <h1>Struktur Organisasi MTI</h1>

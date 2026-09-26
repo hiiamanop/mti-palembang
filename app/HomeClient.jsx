@@ -92,6 +92,7 @@ export default function HomeClient({
           <span className="dialogHeroShade" />
 
           <div className="wideShell dialogHeroContent">
+            <span className="dialogEyebrow">Beranda</span>
             <h1>
               {pengenalan.title || 'Masyarakat Transportasi Indonesia Wilayah Sumatera Selatan'}
             </h1>

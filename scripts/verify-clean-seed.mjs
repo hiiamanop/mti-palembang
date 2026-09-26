@@ -27,7 +27,13 @@ assert.deepEqual(await readJSON('beranda'), {
     tujuan: [],
     image: ''
   },
-  programUnggulan: []
+  programUnggulan: [],
+  kegiatanHero: {
+    eyebrow: '',
+    title: '',
+    description: '',
+    image: ''
+  }
 });
 
 assert.deepEqual(await readJSON('media'), {

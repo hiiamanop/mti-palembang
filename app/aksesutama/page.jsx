@@ -3,8 +3,7 @@ import {
   BookMarked,
   CalendarDays,
   Download,
-  FileText,
-  Sparkles
+  FileText
 } from "lucide-react";
 import Header from "../components/layout/Header";
 import Footer from "../components/layout/Footer";
@@ -110,7 +109,6 @@ export default function AksesUtamaPage() {
         <span className="dialogHeroShade" />
         <div className="wideShell dialogHeroContent">
           <span className="dialogEyebrow">
-            <Sparkles size={16} aria-hidden="true" />
             AKSES Utama
           </span>
           <h1>AKSES Utama — Publikasi Kebijakan Transportasi MTI</h1>

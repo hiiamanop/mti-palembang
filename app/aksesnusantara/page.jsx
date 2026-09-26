@@ -3,8 +3,7 @@ import {
   BookOpen,
   CalendarDays,
   Download,
-  Layers,
-  Sparkles
+  Layers
 } from "lucide-react";
 import Header from "../components/layout/Header";
 import Footer from "../components/layout/Footer";
@@ -104,7 +103,6 @@ export default function AksesNusantaraPage() {
         <span className="dialogHeroShade" />
         <div className="wideShell dialogHeroContent">
           <span className="dialogEyebrow">
-            <Sparkles size={16} aria-hidden="true" />
             AKSES Nusantara
           </span>
           <h1>AKSES Nusantara — Jurnal Transportasi MTI</h1>

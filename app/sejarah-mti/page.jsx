@@ -3,7 +3,6 @@ import {
   Building2,
   CalendarDays,
   Download,
-  Sparkles,
   Users
 } from "lucide-react";
 import Header from "../components/layout/Header";
@@ -128,7 +127,6 @@ export default function SejarahMTIPage() {
         <span className="dialogHeroShade" />
         <div className="wideShell dialogHeroContent">
           <span className="dialogEyebrow">
-            <Sparkles size={16} aria-hidden="true" />
             Tentang Kami
           </span>
           <h1>Sejarah Masyarakat Transportasi Indonesia</h1>

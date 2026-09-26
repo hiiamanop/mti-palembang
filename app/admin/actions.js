@@ -294,6 +294,13 @@ export async function saveBeranda(section, formData) {
       tujuan: tujuanItems,
       image: String(formData.get('visiMisiImage') || '').trim()
     };
+  } else if (section === 'kegiatanHero') {
+    beranda.kegiatanHero = {
+      eyebrow: String(formData.get('kegiatanHeroEyebrow') || '').trim(),
+      title: String(formData.get('kegiatanHeroTitle') || '').trim(),
+      description: String(formData.get('kegiatanHeroDescription') || '').trim(),
+      image: String(formData.get('kegiatanHeroImage') || '').trim()
+    };
   } else if (section === 'programUnggulan') {
     const ids = formData.getAll('programId');
     const images = formData.getAll('programImage');
@@ -313,6 +320,7 @@ export async function saveBeranda(section, formData) {
 
   await saveSingleton(supabase, 'beranda', beranda);
   revalidatePath('/');
+  revalidatePath('/kegiatan-mti');
   revalidatePath('/admin/beranda');
 }
 
