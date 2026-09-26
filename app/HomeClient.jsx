@@ -1,7 +1,16 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import { ArrowRight, Play } from 'lucide-react';
+import {
+  ArrowRight,
+  ArrowUpRight,
+  FileText,
+  MessageSquare,
+  Play,
+  ShieldCheck,
+  Train,
+  Users
+} from 'lucide-react';
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import Newsletter from './components/shared/Newsletter';
@@ -70,39 +79,71 @@ export default function HomeClient({
         </section>
       ) : null}
 
-      {/* ── Section 1: Pengenalan MTI Sumsel ────────────────── */}
+      {/* ── Section 1: Pengenalan & Hero Editorial MTI Sumsel ── */}
       {hasPengenalan ? (
         <section className="pengenalanSection">
           <div className="wideShell">
-            <div className={`pengenalanGrid ${!pengenalan.image ? 'noMedia' : ''}`}>
-              <div className="pengenalanContent">
-                <span className="pengenalanTag">{pengenalan.tag || 'TENTANG KAMI'}</span>
-                <h2>
-                  {pengenalan.title ||
-                    'Masyarakat Transportasi Indonesia Wilayah Sumatera Selatan'}
-                </h2>
+            <div className="pengenalanHero">
+              <div className="pengenalanHeroBody">
+                <div className="pengenalanEyebrow">
+                  <span className="liveDot" />
+                  <span>{pengenalan.tag || 'TENTANG KAMI'}</span>
+                </div>
+                <h1 className="pengenalanTitle">
+                  {pengenalan.title || 'Masyarakat Transportasi Indonesia Wilayah Sumatera Selatan'}
+                </h1>
                 {pengenalan.description ? (
                   <p className="pengenalanLead">{pengenalan.description}</p>
                 ) : null}
-              </div>
-              {pengenalan.image ? (
-                <div className="pengenalanMedia">
-                  <img
-                    src={pengenalan.image}
-                    alt={pengenalan.title || 'MTI Sumsel'}
-                    className="pengenalanImage"
-                  />
+                <div className="pengenalanActions">
+                  <a href="/kegiatan-mti" className="pengenalanBtnPrimary">
+                    Jelajahi Kegiatan MTI
+                    <ArrowRight size={15} aria-hidden="true" />
+                  </a>
+                  <a href="/sejarah-mti" className="pengenalanBtnSecondary">
+                    Profil Organisasi
+                  </a>
                 </div>
-              ) : null}
+              </div>
+
+              <div className="pengenalanHeroVisual">
+                {pengenalan.image ? (
+                  <div className="pengenalanMediaFrame">
+                    <img
+                      src={pengenalan.image}
+                      alt={pengenalan.title || 'MTI Sumsel'}
+                      className="pengenalanImage"
+                    />
+                    <div className="pengenalanBadgeOverlay">
+                      <strong>MTI SUMSEL</strong>
+                      <small>Dokumentasi Resmi</small>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="pengenalanEditorialQuote">
+                    <div className="quoteMark">&ldquo;</div>
+                    <blockquote className="quoteText">
+                      Transportasi bukan sekadar pembangunan infrastruktur fisik, melainkan urat nadi keadilan sosial dan mobilitas peradaban.
+                    </blockquote>
+                    <div className="quoteAuthor">
+                      <strong>MTI Wilayah Sumatera Selatan</strong>
+                      <span>Mitra Kritis &amp; Konstruktif Kebijakan Publik</span>
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
 
             {pengenalan.pillars?.length ? (
-              <div className="pengenalanPillars">
+              <div className="pengenalanTriptych">
                 {pengenalan.pillars.map((pillar, i) => (
-                  <div className="pengenalanPillarCard" key={i}>
-                    <span className="pillarNumber">0{i + 1}</span>
-                    <strong>{pillar.title}</strong>
-                    {pillar.desc ? <p>{pillar.desc}</p> : null}
+                  <div className="triptychItem" key={i}>
+                    <div className="triptychHead">
+                      <span className="triptychNum">0{i + 1}</span>
+                      <span className="triptychLine" />
+                    </div>
+                    <h3 className="triptychTitle">{pillar.title}</h3>
+                    {pillar.desc ? <p className="triptychDesc">{pillar.desc}</p> : null}
                   </div>
                 ))}
               </div>
@@ -115,28 +156,62 @@ export default function HomeClient({
       {fokusIsu.length > 0 ? (
         <section className="fokusIsuSection">
           <div className="wideShell">
-            <div className="sectionHeader">
-              <div className="titleLockup">
-                <span />
-                <div>
-                  <small>Tantangan &amp; Isu Lokal</small>
-                  <h2>Fokus Isu Transportasi Sumatera Selatan</h2>
-                </div>
+            <div className="editorialSectionHeader">
+              <div className="headerKicker">
+                <span className="kickerBar" />
+                <span className="kickerText">TANTANGAN &amp; ISU LOKAL</span>
+              </div>
+              <div className="headerMain">
+                <h2>Fokus Isu Transportasi Sumatera Selatan</h2>
+                <p>Kajian kritis dan prioritas advokasi kebijakan publik untuk mobilitas Sumsel.</p>
               </div>
             </div>
-            <div className="fokusIsuGrid">
-              {fokusIsu.map((item, i) => (
-                <article className="fokusIsuCard" key={item.id || i}>
-                  {item.image ? (
-                    <img src={item.image} alt={item.title || ''} />
-                  ) : null}
-                  <div className="fokusIsuBody">
-                    {item.tag ? <span className="fokusIsuTag">{item.tag}</span> : null}
-                    <h3>{item.title}</h3>
-                    {item.summary ? <p>{item.summary}</p> : null}
+
+            <div className="fokusMagazineLayout">
+              {fokusIsu[0] ? (
+                <article className="fokusSpotlightCard">
+                  <div className="fokusSpotlightMedia">
+                    {fokusIsu[0].image ? (
+                      <img src={fokusIsu[0].image} alt={fokusIsu[0].title || ''} />
+                    ) : (
+                      <div className="fokusPatternPlaceholder">
+                        <Train size={44} strokeWidth={1.4} className="placeholderIcon" />
+                      </div>
+                    )}
+                    {fokusIsu[0].tag ? (
+                      <span className="fokusSpotlightBadge">{fokusIsu[0].tag}</span>
+                    ) : null}
+                  </div>
+                  <div className="fokusSpotlightBody">
+                    <span className="spotlightLabel">Sorotan Utama</span>
+                    <h3>{fokusIsu[0].title}</h3>
+                    {fokusIsu[0].summary ? <p>{fokusIsu[0].summary}</p> : null}
                   </div>
                 </article>
-              ))}
+              ) : null}
+
+              {fokusIsu.length > 1 ? (
+                <div className="fokusSubGrid">
+                  {fokusIsu.slice(1).map((item, idx) => (
+                    <article className="fokusSubCard" key={item.id || idx}>
+                      <div className="fokusSubMedia">
+                        {item.image ? (
+                          <img src={item.image} alt={item.title || ''} />
+                        ) : (
+                          <div className="fokusSubPattern">
+                            <ShieldCheck size={28} strokeWidth={1.5} className="placeholderIcon" />
+                          </div>
+                        )}
+                      </div>
+                      <div className="fokusSubBody">
+                        {item.tag ? <span className="fokusTagPill">{item.tag}</span> : null}
+                        <h4>{item.title}</h4>
+                        {item.summary ? <p>{item.summary}</p> : null}
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              ) : null}
             </div>
           </div>
         </section>
@@ -146,28 +221,50 @@ export default function HomeClient({
       {programUnggulan.length > 0 ? (
         <section className="programUnggulanSection">
           <div className="wideShell">
-            <div className="sectionHeader">
-              <div className="titleLockup">
-                <span />
-                <div>
-                  <small>Aksi Nyata &amp; Kolaborasi</small>
-                  <h2>Program Unggulan MTI Sumatera Selatan</h2>
-                </div>
+            <div className="editorialSectionHeader centered">
+              <div className="headerKicker">
+                <span className="kickerBar" />
+                <span className="kickerText">AKSI NYATA &amp; KOLABORASI</span>
+              </div>
+              <div className="headerMain">
+                <h2>Program Unggulan MTI Sumatera Selatan</h2>
+                <p>Wadah berkala dialog, advokasi aspirasi publik, dan kajian kebijakan berkelanjutan.</p>
               </div>
             </div>
-            <div className="programUnggulanGrid">
-              {programUnggulan.map((item, i) => (
-                <article className="programUnggulanCard" key={item.id || i}>
-                  {item.image ? (
-                    <img src={item.image} alt={item.title || ''} />
-                  ) : null}
-                  <div className="programUnggulanBody">
-                    {item.tag ? <span className="programUnggulanTag">{item.tag}</span> : null}
-                    <h3>{item.title}</h3>
-                    {item.summary ? <p>{item.summary}</p> : null}
-                  </div>
-                </article>
-              ))}
+
+            <div className="programBentoGrid">
+              {programUnggulan.map((item, i) => {
+                const icons = [MessageSquare, Users, FileText];
+                const IconComponent = icons[i % icons.length];
+                return (
+                  <article className="programBentoCard" key={item.id || i}>
+                    <div className="programCardTop">
+                      <div className="programIconBadge">
+                        <IconComponent size={20} strokeWidth={1.8} />
+                      </div>
+                      {item.tag ? <span className="programTagBadge">{item.tag}</span> : null}
+                    </div>
+
+                    {item.image ? (
+                      <div className="programImageFrame">
+                        <img src={item.image} alt={item.title || ''} />
+                      </div>
+                    ) : null}
+
+                    <div className="programCardBody">
+                      <h3>{item.title}</h3>
+                      {item.summary ? <p>{item.summary}</p> : null}
+                    </div>
+
+                    <div className="programCardFoot">
+                      <span className="programIndex">PROG 0{i + 1}</span>
+                      <span className="programArrow">
+                        <ArrowUpRight size={16} />
+                      </span>
+                    </div>
+                  </article>
+                );
+              })}
             </div>
           </div>
         </section>
