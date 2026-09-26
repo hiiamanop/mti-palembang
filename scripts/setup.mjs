@@ -121,6 +121,21 @@ async function seedSingleton(table, file) {
   console.log(`  ✓ ${table}: 1 baris (upsert)`);
 }
 
+async function seedSingletonIfMissing(table, file) {
+  const { count, error: countError } = await supabase
+    .from(table)
+    .select('*', { count: 'exact', head: true });
+  if (countError) throw countError;
+  if (count && count > 0) {
+    console.log(`  ✓ ${table}: sudah ada (dilewati)`);
+    return;
+  }
+  const data = await readJSON(file);
+  const { error } = await supabase.from(table).insert({ id: 1, data });
+  if (error) throw error;
+  console.log(`  ✓ ${table}: singleton dibuat`);
+}
+
 async function seed() {
   console.log('→ Seed data dari folder data/...');
   await seedList('berita', (i) => ({
@@ -150,6 +165,7 @@ async function seed() {
 
   await seedSingleton('beranda', 'beranda.json');
   await seedSingleton('media', 'media.json');
+  await seedSingletonIfMissing('struktur_organisasi', 'struktur-organisasi.json');
 }
 
 async function main() {

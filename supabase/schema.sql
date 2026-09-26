@@ -75,6 +75,12 @@ create table if not exists public.media (
   constraint media_singleton check (id = 1)
 );
 
+create table if not exists public.struktur_organisasi (
+  id int primary key default 1,
+  data jsonb not null,
+  constraint struktur_organisasi_singleton check (id = 1)
+);
+
 -- ============ AKTIFKAN RLS ============
 
 alter table public.berita enable row level security;
@@ -83,6 +89,7 @@ alter table public.artikel enable row level security;
 alter table public.kegiatan enable row level security;
 alter table public.beranda enable row level security;
 alter table public.media enable row level security;
+alter table public.struktur_organisasi enable row level security;
 
 -- ============ POLICY: SELECT PUBLIK (hanya konten tayang) ============
 
@@ -104,6 +111,9 @@ create policy "beranda public read" on public.beranda
 drop policy if exists "media public read" on public.media;
 create policy "media public read" on public.media
   for select using (true);
+drop policy if exists "struktur organisasi public read" on public.struktur_organisasi;
+create policy "struktur organisasi public read" on public.struktur_organisasi
+  for select using (true);
 
 -- ============ POLICY: ADMIN (terautentikasi) AKSES PENUH ============
 
@@ -124,4 +134,7 @@ create policy "beranda admin all" on public.beranda
   for all using (auth.role() = 'authenticated') with check (auth.role() = 'authenticated');
 drop policy if exists "media admin all" on public.media;
 create policy "media admin all" on public.media
+  for all using (auth.role() = 'authenticated') with check (auth.role() = 'authenticated');
+drop policy if exists "struktur organisasi admin all" on public.struktur_organisasi;
+create policy "struktur organisasi admin all" on public.struktur_organisasi
   for all using (auth.role() = 'authenticated') with check (auth.role() = 'authenticated');

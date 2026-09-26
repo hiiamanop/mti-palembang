@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { readFile } from 'node:fs/promises';
 import {
   ORGANIZATION_GROUPS,
   ORGANIZATION_KEYS,
@@ -24,4 +25,9 @@ assert.equal(resolved[0].name, 'Nama Ketua');
 assert.equal(resolved[1].name, '—');
 assert.equal(resolved.some((item) => item.key === 'unknown'), false);
 
-console.log('Fixed organization structure verified.');
+const seed = JSON.parse(
+  await readFile(new URL('../data/struktur-organisasi.json', import.meta.url), 'utf8')
+);
+assert.deepEqual(seed, { names: {} });
+
+console.log('Fixed organization structure and empty seed verified.');
