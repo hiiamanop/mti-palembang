@@ -3,14 +3,7 @@
 import { useMemo, useState } from 'react';
 import {
   ArrowRight,
-  ArrowUpRight,
-  Compass,
-  FileText,
-  Flag,
-  MessageSquare,
-  Play,
-  Target,
-  Users
+  Play
 } from 'lucide-react';
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
@@ -141,9 +134,7 @@ export default function HomeClient({
               {/* Kartu 1: Visi & Misi Terpadu */}
               <div className="visiMisiCombinedCard">
                 <div className="cardSectionHeader">
-                  <div className="iconCircle">
-                    <Target size={22} strokeWidth={2} />
-                  </div>
+                  <span className="headerBarAccent" />
                   <div>
                     <span className="badgeLabel">VISI &amp; MISI</span>
                     <h3 className="cardBlockTitle">Pedoman Utama Organisasi</h3>
@@ -180,9 +171,7 @@ export default function HomeClient({
               {/* Kartu 2: Tujuan Organisasi */}
               <div className="tujuanCard">
                 <div className="cardSectionHeader">
-                  <div className="iconCircle alt">
-                    <Compass size={22} strokeWidth={2} />
-                  </div>
+                  <span className="headerBarAccent alt" />
                   <div>
                     <span className="badgeLabel alt">TUJUAN ORGANISASI</span>
                     <h3 className="cardBlockTitle">Target &amp; Sasaran Terukur</h3>
