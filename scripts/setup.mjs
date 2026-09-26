@@ -131,6 +131,11 @@ async function seed() {
     published: i.published ?? false
   }), 'berita.json');
 
+  await seedList('kegiatan', (i) => ({
+    title: i.title, date: i.date, image: i.image ?? '', summary: i.summary ?? '',
+    published: i.published ?? false
+  }), 'kegiatan.json');
+
   await seedList('jurnal', (i) => ({
     title: i.title, edition: i.edition, date: i.date, topic: i.topic,
     description: i.description, cover: i.cover, download_url: i.downloadUrl ?? '#',

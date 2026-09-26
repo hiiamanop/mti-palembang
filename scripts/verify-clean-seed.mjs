@@ -4,7 +4,7 @@ import { readFile } from 'node:fs/promises';
 const readJSON = async (name) =>
   JSON.parse(await readFile(new URL(`../data/${name}.json`, import.meta.url), 'utf8'));
 
-for (const name of ['berita', 'jurnal', 'artikel']) {
+for (const name of ['berita', 'jurnal', 'artikel', 'kegiatan']) {
   assert.deepEqual(await readJSON(name), [], `${name}.json must be empty`);
 }
 
