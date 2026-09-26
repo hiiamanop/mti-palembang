@@ -4,11 +4,13 @@ import { useMemo, useState } from 'react';
 import {
   ArrowRight,
   ArrowUpRight,
+  CheckCircle2,
   FileText,
+  Flag,
   MessageSquare,
   Play,
-  ShieldCheck,
-  Train,
+  Sparkles,
+  Target,
   Users
 } from 'lucide-react';
 import Header from './components/layout/Header';
@@ -21,6 +23,9 @@ const catStyles = {
   Dialog: { bg: '#e6eaf7', color: '#112e81' }
 };
 
+const DEFAULT_HERO_BG =
+  'https://mti.or.id/wp-content/uploads/2023/07/Dialog-dan-Sinergi-2.jpg';
+
 export default function HomeClient({
   beritaItems = [],
   tickerItems = [],
@@ -28,7 +33,7 @@ export default function HomeClient({
   leadStory = null,
   mediaData = null,
   pengenalan = null,
-  fokusIsu = [],
+  visiMisi = null,
   programUnggulan = []
 }) {
   const [filter, setFilter] = useState('Semua');
@@ -55,6 +60,14 @@ export default function HomeClient({
     pengenalan?.pillars?.length
   );
 
+  const hasVisiMisi = Boolean(
+    visiMisi?.visi ||
+    visiMisi?.misi?.length ||
+    visiMisi?.image
+  );
+
+  const heroBg = pengenalan?.image || DEFAULT_HERO_BG;
+
   return (
     <main className="newsroom">
       <Header activeItem="Beranda" />
@@ -79,71 +92,46 @@ export default function HomeClient({
         </section>
       ) : null}
 
-      {/* ── Section 1: Pengenalan & Hero Editorial MTI Sumsel ── */}
+      {/* ── Section 1: Hero Pengenalan MTI Sumsel dengan Shadow Gambar ── */}
       {hasPengenalan ? (
-        <section className="pengenalanSection">
-          <div className="wideShell">
-            <div className="pengenalanHero">
-              <div className="pengenalanHeroBody">
-                <div className="pengenalanEyebrow">
-                  <span className="liveDot" />
-                  <span>{pengenalan.tag || 'TENTANG KAMI'}</span>
-                </div>
-                <h1 className="pengenalanTitle">
-                  {pengenalan.title || 'Masyarakat Transportasi Indonesia Wilayah Sumatera Selatan'}
-                </h1>
-                {pengenalan.description ? (
-                  <p className="pengenalanLead">{pengenalan.description}</p>
-                ) : null}
-                <div className="pengenalanActions">
-                  <a href="/kegiatan-mti" className="pengenalanBtnPrimary">
-                    Jelajahi Kegiatan MTI
-                    <ArrowRight size={15} aria-hidden="true" />
-                  </a>
-                  <a href="/sejarah-mti" className="pengenalanBtnSecondary">
-                    Profil Organisasi
-                  </a>
-                </div>
-              </div>
+        <section className="homeDialogHero">
+          <img src={heroBg} alt="" className="homeHeroBg" aria-hidden="true" />
+          <span className="homeHeroShade" />
 
-              <div className="pengenalanHeroVisual">
-                {pengenalan.image ? (
-                  <div className="pengenalanMediaFrame">
-                    <img
-                      src={pengenalan.image}
-                      alt={pengenalan.title || 'MTI Sumsel'}
-                      className="pengenalanImage"
-                    />
-                    <div className="pengenalanBadgeOverlay">
-                      <strong>MTI SUMSEL</strong>
-                      <small>Dokumentasi Resmi</small>
-                    </div>
-                  </div>
-                ) : (
-                  <div className="pengenalanEditorialQuote">
-                    <div className="quoteMark">&ldquo;</div>
-                    <blockquote className="quoteText">
-                      Transportasi bukan sekadar pembangunan infrastruktur fisik, melainkan urat nadi keadilan sosial dan mobilitas peradaban.
-                    </blockquote>
-                    <div className="quoteAuthor">
-                      <strong>MTI Wilayah Sumatera Selatan</strong>
-                      <span>Mitra Kritis &amp; Konstruktif Kebijakan Publik</span>
-                    </div>
-                  </div>
-                )}
+          <div className="wideShell homeHeroContent">
+            <div className="homeHeroHeader">
+              <div className="homeHeroEyebrow">
+                <Sparkles size={15} aria-hidden="true" />
+                <span>{pengenalan.tag || 'TENTANG KAMI'}</span>
+              </div>
+              <h1 className="homeHeroTitle">
+                {pengenalan.title || 'Masyarakat Transportasi Indonesia Wilayah Sumatera Selatan'}
+              </h1>
+              {pengenalan.description ? (
+                <p className="homeHeroLead">{pengenalan.description}</p>
+              ) : null}
+
+              <div className="homeHeroActions">
+                <a href="/kegiatan-mti" className="homeHeroBtnPrimary">
+                  Jelajahi Kegiatan MTI
+                  <ArrowRight size={15} aria-hidden="true" />
+                </a>
+                <a href="/sejarah-mti" className="homeHeroBtnSecondary">
+                  Profil Organisasi
+                </a>
               </div>
             </div>
 
             {pengenalan.pillars?.length ? (
-              <div className="pengenalanTriptych">
+              <div className="homeHeroPillarsGrid">
                 {pengenalan.pillars.map((pillar, i) => (
-                  <div className="triptychItem" key={i}>
-                    <div className="triptychHead">
-                      <span className="triptychNum">0{i + 1}</span>
-                      <span className="triptychLine" />
+                  <div className="homeHeroPillarCard" key={i}>
+                    <div className="pillarCardTop">
+                      <span className="pillarNum">0{i + 1}</span>
+                      <span className="pillarAccent" />
                     </div>
-                    <h3 className="triptychTitle">{pillar.title}</h3>
-                    {pillar.desc ? <p className="triptychDesc">{pillar.desc}</p> : null}
+                    <strong>{pillar.title}</strong>
+                    {pillar.desc ? <p>{pillar.desc}</p> : null}
                   </div>
                 ))}
               </div>
@@ -152,67 +140,72 @@ export default function HomeClient({
         </section>
       ) : null}
 
-      {/* ── Section 2: Fokus Isu Transportasi Sumsel ────────── */}
-      {fokusIsu.length > 0 ? (
-        <section className="fokusIsuSection">
+      {/* ── Section 2: Visi & Misi Organisasi ─────────────────── */}
+      {hasVisiMisi ? (
+        <section className="visiMisiSection">
           <div className="wideShell">
             <div className="editorialSectionHeader">
               <div className="headerKicker">
                 <span className="kickerBar" />
-                <span className="kickerText">TANTANGAN &amp; ISU LOKAL</span>
+                <span className="kickerText">{visiMisi.tag || 'VISI &amp; MISI'}</span>
               </div>
               <div className="headerMain">
-                <h2>Fokus Isu Transportasi Sumatera Selatan</h2>
-                <p>Kajian kritis dan prioritas advokasi kebijakan publik untuk mobilitas Sumsel.</p>
+                <h2>Arah &amp; Cita-Cita Strategis MTI Sumsel</h2>
+                <p>
+                  Landasan pijak perjuangan menuju terciptanya sistem mobilitas yang adil,
+                  berkelanjutan, dan berpihak kepada kepentingan masyarakat.
+                </p>
               </div>
             </div>
 
-            <div className="fokusMagazineLayout">
-              {fokusIsu[0] ? (
-                <article className="fokusSpotlightCard">
-                  <div className="fokusSpotlightMedia">
-                    {fokusIsu[0].image ? (
-                      <img src={fokusIsu[0].image} alt={fokusIsu[0].title || ''} />
-                    ) : (
-                      <div className="fokusPatternPlaceholder">
-                        <Train size={44} strokeWidth={1.4} className="placeholderIcon" />
-                      </div>
-                    )}
-                    {fokusIsu[0].tag ? (
-                      <span className="fokusSpotlightBadge">{fokusIsu[0].tag}</span>
-                    ) : null}
+            <div className="visiMisiLayout">
+              {/* Kolom Visi */}
+              <div className="visiCard">
+                <div className="visiCardHeader">
+                  <div className="iconCircle">
+                    <Target size={22} strokeWidth={2} />
                   </div>
-                  <div className="fokusSpotlightBody">
-                    <span className="spotlightLabel">Sorotan Utama</span>
-                    <h3>{fokusIsu[0].title}</h3>
-                    {fokusIsu[0].summary ? <p>{fokusIsu[0].summary}</p> : null}
-                  </div>
-                </article>
-              ) : null}
-
-              {fokusIsu.length > 1 ? (
-                <div className="fokusSubGrid">
-                  {fokusIsu.slice(1).map((item, idx) => (
-                    <article className="fokusSubCard" key={item.id || idx}>
-                      <div className="fokusSubMedia">
-                        {item.image ? (
-                          <img src={item.image} alt={item.title || ''} />
-                        ) : (
-                          <div className="fokusSubPattern">
-                            <ShieldCheck size={28} strokeWidth={1.5} className="placeholderIcon" />
-                          </div>
-                        )}
-                      </div>
-                      <div className="fokusSubBody">
-                        {item.tag ? <span className="fokusTagPill">{item.tag}</span> : null}
-                        <h4>{item.title}</h4>
-                        {item.summary ? <p>{item.summary}</p> : null}
-                      </div>
-                    </article>
-                  ))}
+                  <span className="badgeLabel">VISI ORGANISASI</span>
                 </div>
-              ) : null}
+                <blockquote className="visiQuote">
+                  &ldquo;{visiMisi.visi || 'Terwujudnya MTI sebagai organisasi yang menjadi acuan profesional bidang transportasi, menuju terbentuknya sistem transportasi yang berkelanjutan dan sesuai dengan aspirasi segenap pemangku kepentingan.'}&rdquo;
+                </blockquote>
+                <div className="visiFooterNote">
+                  <span>Pedoman Strategis Kebijakan Transportasi</span>
+                </div>
+              </div>
+
+              {/* Kolom Misi */}
+              <div className="misiCard">
+                <div className="misiCardHeader">
+                  <div className="iconCircle">
+                    <Flag size={22} strokeWidth={2} />
+                  </div>
+                  <span className="badgeLabel">MISI ORGANISASI</span>
+                </div>
+
+                <ul className="misiList">
+                  {(visiMisi.misi?.length
+                    ? visiMisi.misi
+                    : [
+                        'Menumbuhkembangkan profesionalitas pelaku kegiatan bidang transportasi',
+                        'Memberikan pelayanan advokasi untuk pengambilan keputusan bidang transportasi'
+                      ]
+                  ).map((item, idx) => (
+                    <li key={idx} className="misiItem">
+                      <div className="misiNumber">0{idx + 1}</div>
+                      <div className="misiText">{item}</div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
+
+            {visiMisi.image ? (
+              <div className="visiMisiBannerImage">
+                <img src={visiMisi.image} alt="Visi Misi MTI Sumsel" />
+              </div>
+            ) : null}
           </div>
         </section>
       ) : null}

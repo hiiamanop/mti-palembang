@@ -5821,438 +5821,336 @@ details[open] .wilayahChevron { transform: rotate(-135deg); }
   margin-inline: auto;
 }
 
-/* ── Section 1: Hero Editorial Pengenalan MTI Sumsel ───────── */
-.pengenalanSection {
-  padding: 72px 0 64px;
-  background: linear-gradient(180deg, #fcfbf8 0%, #f6f8fd 100%);
-  border-bottom: 1px solid var(--line);
+/* ── Section 1: Hero Pengenalan MTI Sumsel dengan Shadow Gambar ── */
+.homeDialogHero {
   position: relative;
+  min-height: 520px;
+  display: flex;
+  align-items: center;
+  isolation: isolate;
   overflow: hidden;
 }
 
-.pengenalanHero {
-  display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
-  gap: 56px;
-  align-items: center;
+.homeHeroBg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -3;
 }
 
-.pengenalanEyebrow {
+.homeHeroShade {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background:
+    linear-gradient(90deg, rgba(6, 14, 36, 0.95) 0%, rgba(17, 46, 129, 0.85) 50%, rgba(70, 71, 174, 0.45) 100%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.2), rgba(6, 14, 36, 0.7));
+}
+
+.homeHeroContent {
+  padding-top: 80px;
+  padding-bottom: 72px;
+  color: var(--white);
+  width: 100%;
+}
+
+.homeHeroEyebrow {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  padding: 6px 14px;
-  border-radius: 999px;
-  background: rgba(17, 46, 129, 0.08);
+  gap: 8px;
+  min-height: 32px;
+  padding: 0 12px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 8px;
+  color: #dbe7ff;
+  background: rgba(255, 255, 255, 0.12);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
   margin-bottom: 20px;
 }
 
-.pengenalanEyebrow span {
-  color: var(--blue);
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
+.homeHeroTitle {
+  max-width: 860px;
+  margin: 0 0 18px;
+  font-size: clamp(34px, 4.5vw, 54px);
+  line-height: 1.05;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  color: var(--white);
 }
 
-.pengenalanTitle {
-  font-size: clamp(32px, 4vw, 46px);
-  color: #0b1330;
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  line-height: 1.15;
-  margin: 0 0 20px;
-}
-
-.pengenalanLead {
+.homeHeroLead {
+  max-width: 720px;
+  margin: 0 0 32px;
   font-size: 17px;
   line-height: 1.8;
-  color: #475569;
-  margin: 0 0 32px;
-  max-width: 640px;
+  color: rgba(255, 255, 255, 0.85);
 }
 
-.pengenalanActions {
+.homeHeroActions {
   display: flex;
   align-items: center;
   gap: 16px;
   flex-wrap: wrap;
+  margin-bottom: 48px;
 }
 
-.pengenalanBtnPrimary {
+.homeHeroBtnPrimary {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   padding: 13px 24px;
   border-radius: 10px;
-  color: var(--white);
-  background: var(--blue);
+  color: #0b1330;
+  background: var(--white);
   font-size: 14px;
   font-weight: 800;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 10px 24px -10px rgba(17, 46, 129, 0.6);
+  transition: all 0.2s ease;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
 }
 
-.pengenalanBtnPrimary:hover {
+.homeHeroBtnPrimary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 14px 28px -10px rgba(17, 46, 129, 0.8);
+  background: #eef3ff;
 }
 
-.pengenalanBtnSecondary {
+.homeHeroBtnSecondary {
   display: inline-flex;
   align-items: center;
   padding: 12px 22px;
   border-radius: 10px;
-  color: var(--blue);
-  background: var(--white);
-  border: 1px solid var(--line);
+  color: var(--white);
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.28);
   font-size: 14px;
   font-weight: 700;
   transition: all 0.2s ease;
+  backdrop-filter: blur(4px);
 }
 
-.pengenalanBtnSecondary:hover {
-  border-color: var(--blue);
-  background: #f0f4fc;
+.homeHeroBtnSecondary:hover {
+  background: rgba(255, 255, 255, 0.22);
 }
 
-.pengenalanHeroVisual {
-  display: flex;
-  justify-content: center;
-}
-
-.pengenalanMediaFrame {
-  position: relative;
-  width: 100%;
-  max-width: 480px;
-  border-radius: 20px;
-  overflow: hidden;
-  box-shadow: 0 24px 50px -16px rgba(17, 46, 129, 0.3);
-  border: 1px solid rgba(255, 255, 255, 0.8);
-}
-
-.pengenalanImage {
-  width: 100%;
-  height: 100%;
-  max-height: 400px;
-  object-fit: cover;
-  display: block;
-}
-
-.pengenalanBadgeOverlay {
-  position: absolute;
-  bottom: 16px;
-  left: 16px;
-  right: 16px;
-  padding: 12px 18px;
-  border-radius: 12px;
-  background: rgba(11, 19, 48, 0.85);
-  backdrop-filter: blur(10px);
-  color: var(--white);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-}
-
-.pengenalanBadgeOverlay strong {
-  display: block;
-  font-size: 14px;
-  letter-spacing: 0.05em;
-}
-
-.pengenalanBadgeOverlay small {
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 11px;
-}
-
-/* Institutional Quote Showcase (when no image yet) */
-.pengenalanEditorialQuote {
-  position: relative;
-  padding: 40px 36px 36px;
-  background: linear-gradient(135deg, #0b1330 0%, #112e81 100%);
-  border-radius: 20px;
-  color: var(--white);
-  box-shadow: 0 24px 50px -16px rgba(17, 46, 129, 0.35);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-}
-
-.pengenalanEditorialQuote .quoteMark {
-  font-family: "Lora", Georgia, serif;
-  font-size: 64px;
-  line-height: 0.8;
-  color: var(--sky);
-  opacity: 0.6;
-  margin-bottom: 8px;
-}
-
-.pengenalanEditorialQuote .quoteText {
-  font-family: "Lora", Georgia, serif;
-  font-style: italic;
-  font-size: 19px;
-  line-height: 1.65;
-  color: #f1f5f9;
-  margin: 0 0 24px;
-}
-
-.pengenalanEditorialQuote .quoteAuthor {
-  border-top: 1px solid rgba(255, 255, 255, 0.15);
-  padding-top: 18px;
-}
-
-.pengenalanEditorialQuote .quoteAuthor strong {
-  display: block;
-  font-size: 14px;
-  color: var(--white);
-  letter-spacing: 0.03em;
-}
-
-.pengenalanEditorialQuote .quoteAuthor span {
-  display: block;
-  font-size: 12px;
-  color: rgba(255, 255, 255, 0.65);
-  margin-top: 2px;
-}
-
-/* Horizontal Triptych */
-.pengenalanTriptych {
+.homeHeroPillarsGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 36px;
-  margin-top: 56px;
-  padding-top: 40px;
-  border-top: 1px solid rgba(17, 46, 129, 0.12);
+  gap: 24px;
+  padding-top: 36px;
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
 }
 
-.triptychItem {
-  position: relative;
+.homeHeroPillarCard {
+  padding: 22px 24px;
+  background: rgba(11, 19, 48, 0.65);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 14px;
+  transition: transform 0.2s ease, border-color 0.2s ease;
 }
 
-.triptychHead {
+.homeHeroPillarCard:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.pillarCardTop {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 12px;
+  justify-content: space-between;
+  margin-bottom: 10px;
 }
 
-.triptychNum {
-  font-size: 15px;
+.pillarNum {
+  font-size: 13px;
   font-weight: 900;
   color: var(--sky);
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
 }
 
-.triptychLine {
-  flex: 1;
-  height: 1px;
-  background: rgba(17, 46, 129, 0.12);
+.pillarAccent {
+  width: 24px;
+  height: 2px;
+  background: var(--sky);
+  border-radius: 2px;
 }
 
-.triptychTitle {
-  font-size: 18px;
+.homeHeroPillarCard strong {
+  display: block;
+  color: var(--white);
+  font-size: 16px;
   font-weight: 800;
-  color: #0b1330;
-  margin: 0 0 8px;
+  margin-bottom: 8px;
   line-height: 1.35;
 }
 
-.triptychDesc {
-  font-size: 14px;
-  line-height: 1.7;
-  color: #475569;
+.homeHeroPillarCard p {
   margin: 0;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 13.5px;
+  line-height: 1.65;
 }
 
-/* ── Section 2: Fokus Isu Transportasi Sumsel ──────────────── */
-.fokusIsuSection {
+/* ── Section 2: Visi & Misi Organisasi ─────────────────── */
+.visiMisiSection {
   padding: 80px 0 88px;
-  background: var(--white);
+  background: #fbfcfe;
   border-bottom: 1px solid var(--line);
 }
 
-.fokusMagazineLayout {
+.visiMisiLayout {
   display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
-  gap: 32px;
+  grid-template-columns: 1.05fr 1fr;
+  gap: 36px;
   align-items: stretch;
 }
 
-/* Lead Spotlight Card */
-.fokusSpotlightCard {
-  background: #fbfcfe;
-  border: 1px solid var(--line);
+.visiCard {
+  background: linear-gradient(135deg, #0b1330 0%, #112e81 100%);
   border-radius: 20px;
-  overflow: hidden;
+  padding: 40px;
+  color: var(--white);
   display: flex;
   flex-direction: column;
-  box-shadow: 0 12px 32px -16px rgba(17, 46, 129, 0.12);
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  justify-content: space-between;
+  box-shadow: 0 16px 40px -12px rgba(17, 46, 129, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
-.fokusSpotlightCard:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 42px -16px rgba(17, 46, 129, 0.2);
-  border-color: #cbd5e1;
+.visiCardHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
 }
 
-.fokusSpotlightMedia {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 16 / 10;
-  overflow: hidden;
-  background: #0f172a;
-}
-
-.fokusSpotlightMedia img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.4s ease;
-}
-
-.fokusSpotlightCard:hover .fokusSpotlightMedia img {
-  transform: scale(1.03);
-}
-
-.fokusPatternPlaceholder {
-  width: 100%;
-  height: 100%;
+.iconCircle {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #0b1330 0%, #1e3a8a 100%);
-  color: var(--white);
-}
-
-.fokusPatternPlaceholder .placeholderIcon {
+  background: rgba(255, 255, 255, 0.12);
   color: var(--sky);
-  opacity: 0.8;
+  border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
-.fokusSpotlightBadge {
-  position: absolute;
-  top: 16px;
-  left: 16px;
-  padding: 6px 12px;
-  border-radius: 8px;
-  background: rgba(11, 19, 48, 0.88);
-  backdrop-filter: blur(8px);
-  color: var(--white);
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.fokusSpotlightBody {
-  padding: 32px;
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-}
-
-.spotlightLabel {
-  font-size: 11px;
-  font-weight: 800;
+.badgeLabel {
+  font-size: 11.5px;
+  font-weight: 900;
   letter-spacing: 0.14em;
   color: var(--sky);
   text-transform: uppercase;
-  margin-bottom: 8px;
 }
 
-.fokusSpotlightBody h3 {
-  font-size: 24px;
-  font-weight: 800;
-  color: #0b1330;
-  line-height: 1.3;
-  margin: 0 0 12px;
+.visiQuote {
+  font-family: "Lora", Georgia, serif;
+  font-style: italic;
+  font-size: clamp(19px, 2.2vw, 24px);
+  line-height: 1.6;
+  color: #f8fafc;
+  margin: 0 0 28px;
 }
 
-.fokusSpotlightBody p {
-  font-size: 15px;
-  line-height: 1.7;
-  color: #475569;
-  margin: 0;
+.visiFooterNote {
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.65);
+  letter-spacing: 0.05em;
 }
 
-/* Secondary Editorial Cards */
-.fokusSubGrid {
+.misiCard {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 36px 40px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  box-shadow: 0 8px 30px -10px rgba(17, 46, 129, 0.08);
 }
 
-.fokusSubCard {
-  background: #fbfcfe;
-  border: 1px solid var(--line);
-  border-radius: 16px;
-  padding: 22px;
+.misiCardHeader {
   display: flex;
-  gap: 20px;
   align-items: center;
-  transition: all 0.2s ease;
-  box-shadow: 0 4px 16px rgba(17, 46, 129, 0.04);
+  gap: 12px;
+  margin-bottom: 24px;
 }
 
-.fokusSubCard:hover {
+.misiCardHeader .iconCircle {
+  background: #eef3ff;
+  color: var(--blue);
+  border: 1px solid rgba(17, 46, 129, 0.12);
+}
+
+.misiCardHeader .badgeLabel {
+  color: var(--blue);
+}
+
+.misiList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.misiItem {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 16px;
+  background: #f8faff;
+  border: 1px solid #e7ecf8;
+  border-radius: 12px;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.misiItem:hover {
   transform: translateX(4px);
   border-color: #cbd5e1;
-  box-shadow: 0 10px 24px rgba(17, 46, 129, 0.08);
 }
 
-.fokusSubMedia {
-  width: 120px;
-  height: 96px;
+.misiNumber {
+  width: 32px;
+  height: 32px;
   flex-shrink: 0;
-  border-radius: 12px;
-  overflow: hidden;
-  background: #0f172a;
-}
-
-.fokusSubMedia img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.fokusSubPattern {
-  width: 100%;
-  height: 100%;
+  border-radius: 8px;
+  background: var(--blue);
+  color: var(--white);
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-  color: var(--sky);
+  font-size: 12px;
+  font-weight: 900;
 }
 
-.fokusSubBody {
+.misiText {
   flex: 1;
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: var(--ink);
+  font-weight: 600;
 }
 
-.fokusTagPill {
-  display: inline-block;
-  font-size: 10.5px;
-  font-weight: 800;
-  letter-spacing: 0.1em;
-  color: var(--blue);
-  background: #e9effc;
-  padding: 3px 8px;
-  border-radius: 6px;
-  margin-bottom: 6px;
-  text-transform: uppercase;
+.visiMisiBannerImage {
+  margin-top: 36px;
+  border-radius: 18px;
+  overflow: hidden;
+  max-height: 360px;
+  box-shadow: 0 12px 36px -12px rgba(17, 46, 129, 0.2);
 }
 
-.fokusSubBody h4 {
-  font-size: 17px;
-  font-weight: 800;
-  color: #0b1330;
-  line-height: 1.35;
-  margin: 0 0 6px;
-}
-
-.fokusSubBody p {
-  font-size: 13.5px;
-  line-height: 1.6;
-  color: #475569;
-  margin: 0;
+.visiMisiBannerImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 /* ── Section 3: Program Unggulan MTI Sumsel (Bento Grid) ────── */
@@ -6385,15 +6283,11 @@ details[open] .wilayahChevron { transform: rotate(-135deg); }
 
 /* ── Responsive Adaptations ────────────────────────────────── */
 @media (max-width: 960px) {
-  .pengenalanHero {
+  .homeHeroPillarsGrid {
     grid-template-columns: 1fr;
-    gap: 36px;
+    gap: 16px;
   }
-  .pengenalanTriptych {
-    grid-template-columns: 1fr;
-    gap: 24px;
-  }
-  .fokusMagazineLayout {
+  .visiMisiLayout {
     grid-template-columns: 1fr;
   }
   .programBentoGrid {
@@ -6402,20 +6296,16 @@ details[open] .wilayahChevron { transform: rotate(-135deg); }
 }
 
 @media (max-width: 640px) {
-  .fokusSubCard {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .fokusSubMedia {
-    width: 100%;
-    height: 160px;
-  }
   .programBentoGrid {
     grid-template-columns: 1fr;
   }
-  .pengenalanActions {
+  .homeHeroActions {
     flex-direction: column;
     align-items: stretch;
+  }
+  .visiCard,
+  .misiCard {
+    padding: 24px;
   }
 }
 

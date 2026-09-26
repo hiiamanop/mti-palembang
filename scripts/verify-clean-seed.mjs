@@ -21,7 +21,12 @@ assert.deepEqual(await readJSON('beranda'), {
     image: '',
     pillars: []
   },
-  fokusIsu: [],
+  visiMisi: {
+    tag: '',
+    visi: '',
+    misi: [],
+    image: ''
+  },
   programUnggulan: []
 });
 

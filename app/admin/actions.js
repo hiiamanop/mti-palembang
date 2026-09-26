@@ -298,21 +298,14 @@ export async function saveBeranda(section, formData) {
         }
       ].filter((p) => p.title || p.desc)
     };
-  } else if (section === 'fokusIsu') {
-    const ids = formData.getAll('fokusId');
-    const images = formData.getAll('fokusImage');
-    const tags = formData.getAll('fokusTag');
-    const titles = formData.getAll('fokusTitle');
-    const summaries = formData.getAll('fokusSummary');
-    beranda.fokusIsu = ids
-      .map((id, i) => ({
-        id: id || generateId(),
-        image: images[i] || '',
-        tag: tags[i] || '',
-        title: titles[i] || '',
-        summary: summaries[i] || ''
-      }))
-      .filter((item) => item.title || item.image || item.summary);
+  } else if (section === 'visiMisi') {
+    const misiItems = formData.getAll('misiItem').map((s) => String(s || '').trim()).filter(Boolean);
+    beranda.visiMisi = {
+      tag: String(formData.get('visiMisiTag') || '').trim(),
+      visi: String(formData.get('visiText') || '').trim(),
+      misi: misiItems,
+      image: String(formData.get('visiMisiImage') || '').trim()
+    };
   } else if (section === 'programUnggulan') {
     const ids = formData.getAll('programId');
     const images = formData.getAll('programImage');

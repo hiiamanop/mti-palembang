@@ -19,7 +19,7 @@ export default async function Home() {
       leadStory={beranda.leadStory || null}
       mediaData={media}
       pengenalan={beranda.pengenalan || null}
-      fokusIsu={beranda.fokusIsu || []}
+      visiMisi={beranda.visiMisi || null}
       programUnggulan={beranda.programUnggulan || []}
     />
   );

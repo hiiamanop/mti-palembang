@@ -6,7 +6,7 @@ import ImageUpload from '../components/ImageUpload';
 
 const TABS = [
   { key: 'pengenalan', label: '1. Pengenalan MTI Sumsel' },
-  { key: 'fokusIsu', label: '2. Fokus Isu Sumsel' },
+  { key: 'visiMisi', label: '2. Visi & Misi' },
   { key: 'programUnggulan', label: '3. Program Unggulan' },
   { key: 'leadStory', label: 'Berita Utama' },
   { key: 'heroSide', label: 'Sorotan' },
@@ -42,26 +42,25 @@ export default function BerandaForm({ beranda }) {
     }
   );
 
-  const [fokusIsu, setFokusIsu] = useState(
-    beranda.fokusIsu?.length
-      ? beranda.fokusIsu
+  const [visiMisi, setVisiMisi] = useState(
+    beranda.visiMisi || {
+      tag: 'VISI & MISI',
+      visi:
+        'Terwujudnya MTI sebagai organisasi yang menjadi acuan profesional bidang transportasi, menuju terbentuknya sistem transportasi yang berkelanjutan dan sesuai dengan aspirasi segenap pemangku kepentingan.',
+      misi: [
+        'Menumbuhkembangkan profesionalitas pelaku kegiatan bidang transportasi',
+        'Memberikan pelayanan advokasi untuk pengambilan keputusan bidang transportasi'
+      ],
+      image: ''
+    }
+  );
+
+  const [misiList, setMisiList] = useState(
+    visiMisi.misi?.length
+      ? visiMisi.misi
       : [
-          {
-            id: 'f1',
-            image: '',
-            tag: 'INTEGRASI MODA',
-            title: 'Integrasi Moda LRT & Feeder Palembang',
-            summary:
-              'Optimalisasi okupansi LRT Sumsel, integrasi feeder bus, dan tarif integrasi.'
-          },
-          {
-            id: 'f2',
-            image: '',
-            tag: 'KESELAMATAN JALAN',
-            title: 'Keselamatan & Mobilitas Publik Jalan Raya',
-            summary:
-              'Standar keselamatan angkutan jalan, fasilitas pejalan kaki, dan perlindungan pengguna jalan.'
-          }
+          'Menumbuhkembangkan profesionalitas pelaku kegiatan bidang transportasi',
+          'Memberikan pelayanan advokasi untuk pengambilan keputusan bidang transportasi'
         ]
   );
 
@@ -112,9 +111,9 @@ export default function BerandaForm({ beranda }) {
     save('pengenalan', new FormData(e.target));
   };
 
-  const handleFokusSubmit = (e) => {
+  const handleVisiMisiSubmit = (e) => {
     e.preventDefault();
-    save('fokusIsu', new FormData(e.target));
+    save('visiMisi', new FormData(e.target));
   };
 
   const handleProgramSubmit = (e) => {
@@ -158,7 +157,10 @@ export default function BerandaForm({ beranda }) {
 
       {activeTab === 'pengenalan' && (
         <div className="adminCard" style={{ padding: '24px' }}>
-          <h3 style={{ margin: '0 0 16px' }}>Section 1: Pengenalan MTI Sumatera Selatan</h3>
+          <h3 style={{ margin: '0 0 16px' }}>Section 1: Hero Pengenalan MTI Sumsel</h3>
+          <p style={{ margin: '0 0 20px', color: '#667085', fontSize: 14 }}>
+            Hero section utama beranda dengan efek visual background dan bayangan (shadow) elegan seperti halaman Tentang Kami.
+          </p>
           <form onSubmit={handlePengenalanSubmit} className="adminForm">
             <div className="adminFormRow">
               <div className="adminFormGroup" style={{ flex: '0 0 180px' }}>
@@ -183,8 +185,11 @@ export default function BerandaForm({ beranda }) {
             </div>
 
             <div className="adminFormGroup">
-              <label>Gambar Resmi / Dokumentasi Pengenalan</label>
+              <label>Gambar Hero / Background Dokumentasi MTI Sumsel</label>
               <ImageUpload name="pengenalanImage" defaultValue={pengenalan.image || ''} />
+              <small style={{ color: '#64748b', marginTop: 4, display: 'block' }}>
+                Gambar ini akan menjadi latar belakang hero dengan efek bayangan dan pencahayaan sinematik.
+              </small>
             </div>
 
             <div className="adminFormGroup">
@@ -249,69 +254,58 @@ export default function BerandaForm({ beranda }) {
         </div>
       )}
 
-      {activeTab === 'fokusIsu' && (
+      {activeTab === 'visiMisi' && (
         <div className="adminCard" style={{ padding: '24px' }}>
-          <h3 style={{ margin: '0 0 8px' }}>Section 2: Fokus Isu Transportasi Sumsel</h3>
+          <h3 style={{ margin: '0 0 8px' }}>Section 2: Visi &amp; Misi Organisasi</h3>
           <p style={{ margin: '0 0 20px', color: '#667085', fontSize: 14 }}>
-            Tantangan transportasi lokal Sumatera Selatan. Setiap item memiliki slot upload
-            gambar dan ringkasan.
+            Arah dan cita-cita strategis MTI Sumatera Selatan.
           </p>
 
-          <form onSubmit={handleFokusSubmit} className="adminForm">
-            {fokusIsu.map((item, i) => (
-              <div key={item.id || i} className="adminFormSection" style={{ marginBottom: 20 }}>
-                <input type="hidden" name="fokusId" value={item.id || ''} />
-                <div
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    marginBottom: 12
-                  }}
-                >
-                  <div className="adminFormSectionTitle">Kartu Fokus #{i + 1}</div>
-                  <button
-                    type="button"
-                    className="adminBtn adminBtnSmall adminBtnDanger"
-                    onClick={() => setFokusIsu(fokusIsu.filter((_, idx) => idx !== i))}
-                  >
-                    Hapus
-                  </button>
-                </div>
+          <form onSubmit={handleVisiMisiSubmit} className="adminForm">
+            <div className="adminFormGroup">
+              <label>Tag / Label Seksi</label>
+              <input
+                name="visiMisiTag"
+                defaultValue={visiMisi.tag || 'VISI & MISI'}
+                placeholder="VISI & MISI"
+              />
+            </div>
 
-                <div className="adminFormGroup">
-                  <label>Gambar Fokus</label>
-                  <ImageUpload name="fokusImage" defaultValue={item.image || ''} />
-                </div>
+            <div className="adminFormGroup">
+              <label>Pernyataan Visi</label>
+              <textarea
+                name="visiText"
+                defaultValue={
+                  visiMisi.visi ||
+                  'Terwujudnya MTI sebagai organisasi yang menjadi acuan profesional bidang transportasi, menuju terbentuknya sistem transportasi yang berkelanjutan dan sesuai dengan aspirasi segenap pemangku kepentingan.'
+                }
+                rows={4}
+                placeholder="Pernyataan visi organisasi..."
+              />
+            </div>
 
-                <div className="adminFormRow">
-                  <div className="adminFormGroup" style={{ flex: '0 0 220px' }}>
-                    <label>Tag / Kategori</label>
-                    <input
-                      name="fokusTag"
-                      defaultValue={item.tag || ''}
-                      placeholder="INTEGRASI MODA / KESELAMATAN JALAN"
-                    />
-                  </div>
-                  <div className="adminFormGroup" style={{ flex: 1 }}>
-                    <label>Judul Fokus</label>
-                    <input
-                      name="fokusTitle"
-                      defaultValue={item.title || ''}
-                      placeholder="Judul fokus transportasi..."
-                    />
-                  </div>
-                </div>
+            <h4 style={{ margin: '24px 0 12px', fontSize: 15 }}>
+              Daftar Butir Misi
+            </h4>
 
-                <div className="adminFormGroup">
-                  <label>Ringkasan</label>
-                  <textarea
-                    name="fokusSummary"
-                    defaultValue={item.summary || ''}
-                    rows={3}
-                    placeholder="Penjelasan ringkas fokus isu..."
+            {misiList.map((item, i) => (
+              <div key={i} className="adminFormRow" style={{ alignItems: 'flex-start', marginBottom: 12 }}>
+                <div className="adminFormGroup" style={{ flex: 1 }}>
+                  <label>Misi #{i + 1}</label>
+                  <input
+                    name="misiItem"
+                    defaultValue={item}
+                    placeholder="Butir misi organisasi..."
                   />
                 </div>
+                <button
+                  type="button"
+                  className="adminBtn adminBtnSmall adminBtnDanger"
+                  style={{ alignSelf: 'flex-end', marginBottom: 4 }}
+                  onClick={() => setMisiList(misiList.filter((_, idx) => idx !== i))}
+                >
+                  Hapus
+                </button>
               </div>
             ))}
 
@@ -319,25 +313,19 @@ export default function BerandaForm({ beranda }) {
               type="button"
               className="adminBtn adminBtnSecondary"
               style={{ marginBottom: 20 }}
-              onClick={() =>
-                setFokusIsu([
-                  ...fokusIsu,
-                  {
-                    id: Date.now().toString(),
-                    image: '',
-                    tag: 'FOKUS SUMSEL',
-                    title: '',
-                    summary: ''
-                  }
-                ])
-              }
+              onClick={() => setMisiList([...misiList, ''])}
             >
-              + Tambah Kartu Fokus
+              + Tambah Butir Misi
             </button>
+
+            <div className="adminFormGroup">
+              <label>Gambar / Dokumentasi Seksi Visi Misi (Opsional)</label>
+              <ImageUpload name="visiMisiImage" defaultValue={visiMisi.image || ''} />
+            </div>
 
             <div className="adminFormActions">
               <button type="submit" className="adminBtn adminBtnPrimary" disabled={isPending}>
-                {isPending ? 'Menyimpan...' : 'Simpan Fokus Isu'}
+                {isPending ? 'Menyimpan...' : 'Simpan Visi & Misi'}
               </button>
             </div>
           </form>

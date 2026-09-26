@@ -11,6 +11,11 @@
     "image": "",
     "pillars": []
   },
-  "fokusIsu": [],
+  "visiMisi": {
+    "tag": "",
+    "visi": "",
+    "misi": [],
+    "image": ""
+  },
   "programUnggulan": []
 }
