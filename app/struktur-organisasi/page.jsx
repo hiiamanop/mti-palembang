@@ -21,12 +21,6 @@ const IMG = {
   orgChart: "https://mti.or.id/wp-content/uploads/2025/11/1761963524570.jpg"
 };
 
-const ticker = [
-  { tag: "KEBIJAKAN", text: "Menhub paparkan lima prioritas transportasi nasional di Kongres X MTI" },
-  { tag: "MUDIK 2026", text: "MTI usul pembatasan angkutan barang dikurangi 50% jadi 7-8 hari" },
-  { tag: "AGENDA", text: "16th EASTS Conference - sinergi MTI di kancah internasional" },
-  { tag: "JURNAL", text: "AKSES Nusantara Edisi 36 Maret 2026 telah terbit" }
-];
 
 const leadership = [
   { role: "Ketua Umum", name: "Dr. Ir. Tulus Abadi, M.M.", badge: "Ketua" },
@@ -84,23 +78,6 @@ export default function StrukturOrganisasiPage() {
     <main className="dialogPolicyPage">
       <Header activeItem="Tentang Kami" />
 
-      <section className="tickerBand" aria-label="Berita terkini">
-        <div className="tickerLabel">
-          <span />
-          TERKINI
-        </div>
-        <div className="tickerWindow">
-          <div className="tickerTrack">
-            {[...ticker, ...ticker].map((item, index) => (
-              <span className="tickerItem" key={`${item.tag}-${index}`}>
-                <strong>{item.tag}</strong>
-                {item.text}
-                <i />
-              </span>
-            ))}
-          </div>
-        </div>
-      </section>
 
       <section className="dialogHero">
         <img src={IMG.hero} alt="" aria-hidden="true" />

@@ -25,12 +25,6 @@ const IMG = {
   akses36: "https://mti.or.id/wp-content/uploads/2026/04/36.jpg"
 };
 
-const ticker = [
-  { tag: "KEBIJAKAN", text: "Menhub paparkan lima prioritas transportasi nasional di Kongres X MTI" },
-  { tag: "MUDIK 2026", text: "MTI usul pembatasan angkutan barang dikurangi 50% jadi 7-8 hari" },
-  { tag: "AGENDA", text: "16th EASTS Conference - sinergi MTI di kancah internasional" },
-  { tag: "JURNAL", text: "AKSES Nusantara Edisi 36 Maret 2026 telah terbit" }
-];
 
 const maknaLogo = [
   {
@@ -115,23 +109,6 @@ export default function IdentitasOrganisasiPage() {
     <main className="dialogPolicyPage">
       <Header activeItem="Tentang Kami" />
 
-      <section className="tickerBand" aria-label="Berita terkini">
-        <div className="tickerLabel">
-          <span />
-          TERKINI
-        </div>
-        <div className="tickerWindow">
-          <div className="tickerTrack">
-            {[...ticker, ...ticker].map((item, index) => (
-              <span className="tickerItem" key={`${item.tag}-${index}`}>
-                <strong>{item.tag}</strong>
-                {item.text}
-                <i />
-              </span>
-            ))}
-          </div>
-        </div>
-      </section>
 
       <section className="dialogHero">
         <img src={IMG.hero} alt="" aria-hidden="true" />
