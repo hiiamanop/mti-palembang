@@ -100,10 +100,6 @@ export default function HomeClient({
 
           <div className="wideShell homeHeroContent">
             <div className="homeHeroHeader">
-              <div className="homeHeroEyebrow">
-                <Sparkles size={15} aria-hidden="true" />
-                <span>{pengenalan.tag || 'TENTANG KAMI'}</span>
-              </div>
               <h1 className="homeHeroTitle">
                 {pengenalan.title || 'Masyarakat Transportasi Indonesia Wilayah Sumatera Selatan'}
               </h1>

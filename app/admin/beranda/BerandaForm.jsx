@@ -162,26 +162,16 @@ export default function BerandaForm({ beranda }) {
             Hero section utama beranda dengan efek visual background dan bayangan (shadow) elegan seperti halaman Tentang Kami.
           </p>
           <form onSubmit={handlePengenalanSubmit} className="adminForm">
-            <div className="adminFormRow">
-              <div className="adminFormGroup" style={{ flex: '0 0 180px' }}>
-                <label>Tag / Label</label>
-                <input
-                  name="pengenalanTag"
-                  defaultValue={pengenalan.tag || 'TENTANG KAMI'}
-                  placeholder="TENTANG KAMI"
-                />
-              </div>
-              <div className="adminFormGroup" style={{ flex: 1 }}>
-                <label>Judul Utama</label>
-                <input
-                  name="pengenalanTitle"
-                  defaultValue={
-                    pengenalan.title ||
-                    'Masyarakat Transportasi Indonesia Wilayah Sumatera Selatan'
-                  }
-                  placeholder="Judul profil organisasi..."
-                />
-              </div>
+            <div className="adminFormGroup">
+              <label>Judul Utama</label>
+              <input
+                name="pengenalanTitle"
+                defaultValue={
+                  pengenalan.title ||
+                  'Masyarakat Transportasi Indonesia Wilayah Sumatera Selatan'
+                }
+                placeholder="Judul profil organisasi..."
+              />
             </div>
 
             <div className="adminFormGroup">

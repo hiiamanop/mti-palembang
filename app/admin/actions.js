@@ -279,7 +279,7 @@ export async function saveBeranda(section, formData) {
     };
   } else if (section === 'pengenalan') {
     beranda.pengenalan = {
-      tag: String(formData.get('pengenalanTag') || '').trim(),
+      tag: '',
       title: String(formData.get('pengenalanTitle') || '').trim(),
       description: String(formData.get('pengenalanDescription') || '').trim(),
       image: String(formData.get('pengenalanImage') || '').trim(),
