@@ -126,14 +126,19 @@ export default function HomeClient({
   const dateText = now ? formatDate(now) : 'Sabtu, 20 Juni 2026';
   const timeText = now ? formatTime(now) : '17.00';
 
-  const mainVideoUrl = mediaData?.mainVideo?.url || 'https://www.youtube.com/embed/0_jL04tc3TY';
+  const mainVideoUrl = mediaData?.mainVideo?.url || '';
   const miniVideos = mediaData?.miniVideos?.filter((v) => v.visible) || [];
+  const hasMedia = Boolean(mainVideoUrl || miniVideos.length);
 
-  const aksesEdition = aksesData?.edition || 'Edisi 36';
-  const aksesDate = aksesData?.date || 'Maret 2026';
-  const aksesTopic = aksesData?.topic || 'Transportasi Publik';
-  const aksesTitle = aksesData?.title || 'Jurnal transportasi dengan tampilan editorial yang lebih kuat.';
-  const aksesDescription = aksesData?.description || 'Area ini memakai aset AKSES resmi dengan background putih ber-grain halus.';
+  const aksesEdition = aksesData?.edition || '';
+  const aksesDate = aksesData?.date || '';
+  const aksesTopic = aksesData?.topic || '';
+  const aksesTitle = aksesData?.title || '';
+  const aksesDescription = aksesData?.description || '';
+  const hasAkses = Boolean(
+    aksesEdition || aksesDate || aksesTopic || aksesTitle || aksesDescription
+  );
+  const hasHero = Boolean(leadStory?.title || heroSide.length);
 
   return (
     <main className="newsroom">
@@ -249,7 +254,7 @@ export default function HomeClient({
             ))}
           </nav>
           <a className="aksesLink desktopOnly" href="/aksesnusantara">
-            AKSES Nusantara {aksesEdition}
+            AKSES Nusantara{aksesEdition ? ` ${aksesEdition}` : ''}
             <ArrowRight size={14} aria-hidden="true" />
           </a>
         </div>
@@ -292,23 +297,25 @@ export default function HomeClient({
         ) : null}
       </header>
 
-      <section className="tickerBand" aria-label="Berita terkini">
-        <div className="tickerLabel">
-          <span />
-          TERKINI
-        </div>
-        <div className="tickerWindow">
-          <div className="tickerTrack">
-            {[...tickerItems, ...tickerItems].map((item, index) => (
-              <span className="tickerItem" key={`${item.tag}-${index}`}>
-                <strong>{item.tag}</strong>
-                {item.text}
-                <i />
-              </span>
-            ))}
+      {tickerItems.length > 0 ? (
+        <section className="tickerBand" aria-label="Berita terkini">
+          <div className="tickerLabel">
+            <span />
+            TERKINI
           </div>
-        </div>
-      </section>
+          <div className="tickerWindow">
+            <div className="tickerTrack">
+              {[...tickerItems, ...tickerItems].map((item, index) => (
+                <span className="tickerItem" key={`${item.tag}-${index}`}>
+                  <strong>{item.tag}</strong>
+                  {item.text}
+                  <i />
+                </span>
+              ))}
+            </div>
+          </div>
+        </section>
+      ) : null}
 
       <section className="signatureSection" aria-label="Sorotan beranda MTI">
         <div className="wideShell signatureGrid">
@@ -365,7 +372,8 @@ export default function HomeClient({
         </div>
       </section>
 
-      <section className="wideShell aksesShowcase" id="akses">
+      {hasAkses ? (
+        <section className="wideShell aksesShowcase" id="akses">
         <div className="aksesSurface">
           <div className="aksesCopy">
             <span>AKSES Nusantara</span>
@@ -395,10 +403,12 @@ export default function HomeClient({
             />
           </div>
         </div>
-      </section>
+        </section>
+      ) : null}
 
-      <section className="wideShell heroGrid">
-        {leadStory && (
+      {hasHero ? (
+        <section className="wideShell heroGrid">
+        {leadStory?.title ? (
           <article className="leadStory riseCard">
             <a href={leadStory.href || '#'} className="newsCard">
               <div className="leadImage">
@@ -420,7 +430,7 @@ export default function HomeClient({
               </div>
             </a>
           </article>
-        )}
+        ) : null}
 
         <aside className="sideStories riseCard">
           <div className="sideHeading">
@@ -452,9 +462,11 @@ export default function HomeClient({
             </span>
           </a>
         </aside>
-      </section>
+        </section>
+      ) : null}
 
-      <section className="wideShell newsSection" id="berita">
+      {news.length > 0 ? (
+        <section className="wideShell newsSection" id="berita">
         <div className="sectionHeader">
           <div className="titleLockup">
             <span />
@@ -495,13 +507,17 @@ export default function HomeClient({
             </a>
           ))}
         </div>
-      </section>
+        </section>
+      ) : null}
 
-      <section className="aksesFullBanner" aria-label="Banner AKSES Nusantara">
-        <img src={aksesBanner.src} alt="AKSES Nusantara" />
-      </section>
+      {hasAkses ? (
+        <section className="aksesFullBanner" aria-label="Banner AKSES Nusantara">
+          <img src={aksesBanner.src} alt="AKSES Nusantara" />
+        </section>
+      ) : null}
 
-      <section className="regionalBand" id="tentang">
+      {regions.length > 0 ? (
+        <section className="regionalBand" id="tentang">
         <div className="wideShell">
           <div className="regionalHeader">
             <div className="titleLockup">
@@ -530,9 +546,11 @@ export default function HomeClient({
             ))}
           </div>
         </div>
-      </section>
+        </section>
+      ) : null}
 
-      <section className="wideShell mediaSection">
+      {hasMedia ? (
+        <section className="wideShell mediaSection">
         <div className="sectionHeader single">
           <div className="titleLockup">
             <span />
@@ -540,14 +558,16 @@ export default function HomeClient({
           </div>
         </div>
         <div className="mediaGrid">
-          <div className="videoFrame">
-            <iframe
-              src={mainVideoUrl}
-              title="MTI di Media"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            />
-          </div>
+          {mainVideoUrl ? (
+            <div className="videoFrame">
+              <iframe
+                src={mainVideoUrl}
+                title={mediaData?.mainVideo?.title || 'MTI di Media'}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            </div>
+          ) : null}
           <div className="videoList">
             {miniVideos.map((video) => (
               <a className="miniVideo" href={video.href || '#'} key={video.id || video.title}>
@@ -561,7 +581,8 @@ export default function HomeClient({
             ))}
           </div>
         </div>
-      </section>
+        </section>
+      ) : null}
 
       <section className="newsletter" id="newsletter">
         <div className="newsletterTexture" />
