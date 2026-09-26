@@ -3673,7 +3673,6 @@ details[open].eastsFaqItem summary::after { content: "−"; }
 }
 
 .dialogHeroContent {
-  width: 100%;
   padding-top: 56px;
   padding-bottom: 56px;
   color: var(--white);
