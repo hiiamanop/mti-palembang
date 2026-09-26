@@ -46,4 +46,11 @@ for (const path of [
   await readFile(new URL(path, import.meta.url), 'utf8');
 }
 
-console.log('Kegiatan helpers, data access, actions, and admin routes verified.');
+for (const path of [
+  '../app/kegiatan-mti/page.jsx',
+  '../app/kegiatan-mti/KegiatanClient.jsx'
+]) {
+  await readFile(new URL(path, import.meta.url), 'utf8');
+}
+
+console.log('Kegiatan helpers, data access, actions, admin, and public routes verified.');
