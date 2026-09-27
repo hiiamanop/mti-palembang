@@ -5,7 +5,7 @@ import KegiatanClient from './KegiatanClient';
 
 const DEFAULT_HERO = {
   eyebrow: 'Kegiatan MTI',
-  title: 'Kegiatan Masyarakat Transportasi Indonesia',
+  title: 'Kegiatan Masyarakat Transportasi Sumatera Selatan',
   description:
     'Agenda, diskusi kebijakan, dan aksi nyata Masyarakat Transportasi Indonesia Wilayah Sumatera Selatan dari tahun ke tahun.',
   image: 'https://mti.or.id/wp-content/uploads/2023/07/Dialog-dan-Sinergi-2.jpg'

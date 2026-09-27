@@ -87,7 +87,7 @@ export default function HomeClient({
           image:
             'https://mti.or.id/wp-content/uploads/2026/03/WhatsApp-Image-2026-03-11-at-20.25.20-scaled.jpeg',
           tag: 'FORUM DISKUSI',
-          title: 'Forum Diskusi Transportasi Sumsel (FDTS)',
+          title: 'Forum Diskusi Transportasi wilayah Sumsel (FDTS)',
           summary:
             'Diskusi berkala membahas isu hangat transportasi lokal bersama Dishub dan operator.'
         },
