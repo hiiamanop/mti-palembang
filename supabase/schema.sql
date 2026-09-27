@@ -61,6 +61,30 @@ create table if not exists public.kegiatan (
   created_at timestamptz default now()
 );
 
+create table if not exists public.crm_contacts (
+  id uuid primary key default gen_random_uuid(),
+  name text not null,
+  email text not null,
+  institution text not null,
+  status text not null default 'baru'
+    check (status in ('baru', 'sudah_dihubungi', 'selesai')),
+  ip_hash text,
+  internal_email_status text not null default 'pending'
+    check (internal_email_status in ('pending', 'terkirim', 'gagal')),
+  confirmation_email_status text not null default 'pending'
+    check (confirmation_email_status in ('pending', 'terkirim', 'gagal')),
+  email_error text,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
+);
+
+create index if not exists crm_contacts_email_created_idx
+  on public.crm_contacts (email, created_at desc);
+create index if not exists crm_contacts_ip_hash_created_idx
+  on public.crm_contacts (ip_hash, created_at desc);
+create index if not exists crm_contacts_status_created_idx
+  on public.crm_contacts (status, created_at desc);
+
 -- ============ TABEL SINGLETON (JSONB) ============
 
 create table if not exists public.beranda (
@@ -90,6 +114,7 @@ alter table public.kegiatan enable row level security;
 alter table public.beranda enable row level security;
 alter table public.media enable row level security;
 alter table public.struktur_organisasi enable row level security;
+alter table public.crm_contacts enable row level security;
 
 -- ============ POLICY: SELECT PUBLIK (hanya konten tayang) ============
 
@@ -137,4 +162,7 @@ create policy "media admin all" on public.media
   for all using (auth.role() = 'authenticated') with check (auth.role() = 'authenticated');
 drop policy if exists "struktur organisasi admin all" on public.struktur_organisasi;
 create policy "struktur organisasi admin all" on public.struktur_organisasi
+  for all using (auth.role() = 'authenticated') with check (auth.role() = 'authenticated');
+drop policy if exists "crm contacts admin all" on public.crm_contacts;
+create policy "crm contacts admin all" on public.crm_contacts
   for all using (auth.role() = 'authenticated') with check (auth.role() = 'authenticated');
