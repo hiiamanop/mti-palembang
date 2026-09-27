@@ -41,7 +41,8 @@ for (const name of [
 
 for (const path of [
   '../app/admin/kegiatan/page.jsx',
-  '../app/admin/kegiatan/KegiatanForm.jsx'
+  '../app/admin/kegiatan/KegiatanTable.jsx',
+  '../app/admin/kegiatan/KegiatanEditorForm.jsx'
 ]) {
   await readFile(new URL(path, import.meta.url), 'utf8');
 }
