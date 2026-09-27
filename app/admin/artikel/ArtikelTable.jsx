@@ -1,32 +1,42 @@
 'use client';
 
-import { useState, useTransition } from 'react';
+import { useState, useMemo, useTransition } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Search, Edit, Trash2 } from 'lucide-react';
 import { toggleArtikelVisible, deleteArtikelItem } from '../actions';
 import ConfirmDeleteModal from '../components/ConfirmDeleteModal';
 import AdminAlert from '../components/AdminAlert';
+import Pagination from '../components/Pagination';
 
+const PAGE_SIZE = 10;
 const CATEGORIES = ['Semua', 'Opini', 'Berita Wilayah', 'Analisis'];
 
 export default function ArtikelTable({ initialArtikel = [] }) {
   const [artikel, setArtikel] = useState(initialArtikel);
   const [selectedCat, setSelectedCat] = useState('Semua');
   const [search, setSearch] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
   const [deleteTarget, setDeleteTarget] = useState(null);
   const [isPending, startTransition] = useTransition();
   const [feedback, setFeedback] = useState(null);
   const router = useRouter();
 
-  const filtered = artikel.filter((item) => {
-    const matchCat =
-      selectedCat === 'Semua' || (item.kategori && item.kategori.toLowerCase() === selectedCat.toLowerCase());
-    const q = search.trim().toLowerCase();
-    const matchSearch =
-      !q || item.title?.toLowerCase().includes(q) || item.ringkasan?.toLowerCase().includes(q) || item.daerah?.toLowerCase().includes(q);
-    return matchCat && matchSearch;
-  });
+  const filtered = useMemo(() => {
+    return artikel.filter((item) => {
+      const matchCat =
+        selectedCat === 'Semua' || (item.kategori && item.kategori.toLowerCase() === selectedCat.toLowerCase());
+      const q = search.trim().toLowerCase();
+      const matchSearch =
+        !q || item.title?.toLowerCase().includes(q) || item.ringkasan?.toLowerCase().includes(q) || item.daerah?.toLowerCase().includes(q);
+      return matchCat && matchSearch;
+    });
+  }, [artikel, selectedCat, search]);
+
+  const paginated = useMemo(() => {
+    const start = (currentPage - 1) * PAGE_SIZE;
+    return filtered.slice(start, start + PAGE_SIZE);
+  }, [filtered, currentPage]);
 
   const handleToggle = (item) => {
     setFeedback(null);
@@ -83,7 +93,10 @@ export default function ArtikelTable({ initialArtikel = [] }) {
             <button
               key={cat}
               type="button"
-              onClick={() => setSelectedCat(cat)}
+              onClick={() => {
+                setSelectedCat(cat);
+                setCurrentPage(1);
+              }}
               style={{
                 padding: '6px 14px',
                 borderRadius: 6,
@@ -109,7 +122,10 @@ export default function ArtikelTable({ initialArtikel = [] }) {
           <input
             type="text"
             value={search}
-            onChange={(e) => setSearch(e.target.value)}
+            onChange={(e) => {
+              setSearch(e.target.value);
+              setCurrentPage(1);
+            }}
             placeholder="Cari judul atau topik artikel..."
             style={{
               width: '100%',
@@ -138,8 +154,8 @@ export default function ArtikelTable({ initialArtikel = [] }) {
             </tr>
           </thead>
           <tbody>
-            {filtered.length > 0 ? (
-              filtered.map((item) => (
+            {paginated.length > 0 ? (
+              paginated.map((item) => (
                 <tr key={item.id}>
                   <td>
                     {item.gambar ? (
@@ -245,6 +261,12 @@ export default function ArtikelTable({ initialArtikel = [] }) {
             )}
           </tbody>
         </table>
+        <Pagination
+          totalItems={filtered.length}
+          pageSize={PAGE_SIZE}
+          currentPage={currentPage}
+          onPageChange={setCurrentPage}
+        />
       </div>
 
       <ConfirmDeleteModal

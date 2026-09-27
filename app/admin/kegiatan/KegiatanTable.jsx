@@ -1,25 +1,36 @@
 'use client';
 
-import { useState, useTransition } from 'react';
+import { useState, useMemo, useTransition } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Search, Edit, Trash2, Eye, EyeOff } from 'lucide-react';
 import { toggleKegiatanPublished, deleteKegiatanItem } from '../actions';
 import ConfirmDeleteModal from '../components/ConfirmDeleteModal';
 import AdminAlert from '../components/AdminAlert';
+import Pagination from '../components/Pagination';
+
+const PAGE_SIZE = 10;
 
 export default function KegiatanTable({ initialKegiatan = [] }) {
   const [kegiatan, setKegiatan] = useState(initialKegiatan);
   const [search, setSearch] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
   const [deleteTarget, setDeleteTarget] = useState(null);
   const [isPending, startTransition] = useTransition();
   const [feedback, setFeedback] = useState(null);
   const router = useRouter();
 
-  const filtered = kegiatan.filter((item) => {
+  const filtered = useMemo(() => {
     const q = search.trim().toLowerCase();
-    return !q || item.title?.toLowerCase().includes(q) || item.summary?.toLowerCase().includes(q);
-  });
+    return kegiatan.filter((item) => {
+      return !q || item.title?.toLowerCase().includes(q) || item.summary?.toLowerCase().includes(q);
+    });
+  }, [kegiatan, search]);
+
+  const paginated = useMemo(() => {
+    const start = (currentPage - 1) * PAGE_SIZE;
+    return filtered.slice(start, start + PAGE_SIZE);
+  }, [filtered, currentPage]);
 
   const handleToggle = (item) => {
     setFeedback(null);
@@ -79,7 +90,10 @@ export default function KegiatanTable({ initialKegiatan = [] }) {
           <input
             type="text"
             value={search}
-            onChange={(e) => setSearch(e.target.value)}
+            onChange={(e) => {
+              setSearch(e.target.value);
+              setCurrentPage(1);
+            }}
             placeholder="Cari kegiatan berdasarkan judul..."
             style={{
               width: '100%',
@@ -109,8 +123,8 @@ export default function KegiatanTable({ initialKegiatan = [] }) {
             </tr>
           </thead>
           <tbody>
-            {filtered.length > 0 ? (
-              filtered.map((item) => (
+            {paginated.length > 0 ? (
+              paginated.map((item) => (
                 <tr key={item.id}>
                   <td>
                     {item.image ? (
@@ -202,6 +216,12 @@ export default function KegiatanTable({ initialKegiatan = [] }) {
             )}
           </tbody>
         </table>
+        <Pagination
+          totalItems={filtered.length}
+          pageSize={PAGE_SIZE}
+          currentPage={currentPage}
+          onPageChange={setCurrentPage}
+        />
       </div>
 
       <ConfirmDeleteModal

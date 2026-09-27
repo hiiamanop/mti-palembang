@@ -1774,13 +1774,21 @@ img {
 .successBox {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
-  padding: 18px 28px;
-  border: 1px solid rgba(255, 255, 255, 0.26);
+  gap: 14px;
+  padding: 20px 28px 24px;
+  margin-bottom: 26px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
   border-radius: 14px;
-  background: rgba(255, 255, 255, 0.1);
-  font-size: 16px;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(8px);
+  font-size: 15px;
   font-weight: 700;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.crmSuccessBox {
+  max-width: 680px;
+  width: 100%;
 }
 
 .successBox i {
@@ -5900,6 +5908,72 @@ details[open] .wilayahChevron { transform: rotate(-135deg); }
   display: flex;
   align-items: center;
   gap: 8px;
+}
+
+/* ── Pagination ────────────────────────── */
+
+.adminPagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  border-top: 1px solid #eef0f8;
+  background: #ffffff;
+  font-size: 13px;
+  color: #64748b;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.adminPaginationInfo strong {
+  color: #0f172a;
+}
+
+.adminPaginationButtons {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.adminPageBtn {
+  min-width: 32px;
+  height: 32px;
+  padding: 0 10px;
+  border-radius: 6px;
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  color: #334155;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  transition: all 0.15s ease;
+}
+
+.adminPageBtn:hover:not(:disabled) {
+  border-color: #112e81;
+  color: #112e81;
+  background: #f8faff;
+}
+
+.adminPageBtnActive {
+  background: #112e81 !important;
+  color: #ffffff !important;
+  border-color: #112e81 !important;
+}
+
+.adminPageBtn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.adminPageEllipsis {
+  padding: 0 4px;
+  color: #94a3b8;
+  font-weight: 700;
 }
 
 /* ── Buttons ───────────────────────────── */

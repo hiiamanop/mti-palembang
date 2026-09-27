@@ -6,6 +6,9 @@ import { useRouter } from 'next/navigation';
 import { deleteCrmContact, updateCrmContactStatus } from '../actions';
 import AdminAlert from '../components/AdminAlert';
 import ConfirmDeleteModal from '../components/ConfirmDeleteModal';
+import Pagination from '../components/Pagination';
+
+const PAGE_SIZE = 10;
 
 const FILTERS = [
   ['semua', 'Semua'],
@@ -34,6 +37,7 @@ export default function CrmContactsTable({ initialContacts = [] }) {
   const [contacts, setContacts] = useState(initialContacts);
   const [filter, setFilter] = useState('semua');
   const [query, setQuery] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
   const [feedback, setFeedback] = useState(null);
   const [deleteTarget, setDeleteTarget] = useState(null);
   const [isPending, startTransition] = useTransition();
@@ -51,6 +55,11 @@ export default function CrmContactsTable({ initialContacts = [] }) {
       return statusMatch && queryMatch;
     });
   }, [contacts, filter, query]);
+
+  const paginated = useMemo(() => {
+    const start = (currentPage - 1) * PAGE_SIZE;
+    return filtered.slice(start, start + PAGE_SIZE);
+  }, [filtered, currentPage]);
 
   function changeStatus(contact, status) {
     setFeedback(null);
@@ -90,7 +99,10 @@ export default function CrmContactsTable({ initialContacts = [] }) {
             <button
               key={value}
               type="button"
-              onClick={() => setFilter(value)}
+              onClick={() => {
+                setFilter(value);
+                setCurrentPage(1);
+              }}
               className={`adminBtn adminBtnSmall ${filter === value ? 'adminBtnPrimary' : 'adminBtnSecondary'}`}
             >
               {label}
@@ -101,7 +113,10 @@ export default function CrmContactsTable({ initialContacts = [] }) {
           <Search size={16} style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', color: '#94a3b8' }} />
           <input
             value={query}
-            onChange={(event) => setQuery(event.target.value)}
+            onChange={(event) => {
+              setQuery(event.target.value);
+              setCurrentPage(1);
+            }}
             placeholder="Cari nama, email, atau institusi..."
             style={{ width: '100%', padding: '9px 12px 9px 36px', border: '1.5px solid #cbd5e1', borderRadius: 8, fontSize: 13.5 }}
           />
@@ -122,7 +137,7 @@ export default function CrmContactsTable({ initialContacts = [] }) {
             </tr>
           </thead>
           <tbody>
-            {filtered.length ? filtered.map((contact) => (
+            {paginated.length ? paginated.map((contact) => (
               <tr key={contact.id}>
                 <td>
                   <strong style={{ display: 'block', color: '#0f172a' }}>{contact.name}</strong>
@@ -156,6 +171,12 @@ export default function CrmContactsTable({ initialContacts = [] }) {
             )}
           </tbody>
         </table>
+        <Pagination
+          totalItems={filtered.length}
+          pageSize={PAGE_SIZE}
+          currentPage={currentPage}
+          onPageChange={setCurrentPage}
+        />
       </div>
 
       <ConfirmDeleteModal

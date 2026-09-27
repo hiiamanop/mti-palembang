@@ -1,15 +1,24 @@
 'use client';
 
-import React, { useState, useTransition } from 'react';
+import React, { useState, useMemo, useTransition } from 'react';
 import { addJurnalItem, saveJurnalItem, deleteJurnalItem, toggleJurnalVisible } from '../actions';
 import ImageUpload from '../components/ImageUpload';
+import Pagination from '../components/Pagination';
+
+const PAGE_SIZE = 10;
 
 export default function JurnalForm({ jurnal: initialJurnal }) {
   const [jurnal, setJurnal] = useState(initialJurnal);
+  const [currentPage, setCurrentPage] = useState(1);
   const [isPending, startTransition] = useTransition();
   const [showAdd, setShowAdd] = useState(false);
   const [editId, setEditId] = useState(null);
   const [status, setStatus] = useState('');
+
+  const paginated = useMemo(() => {
+    const start = (currentPage - 1) * PAGE_SIZE;
+    return jurnal.slice(start, start + PAGE_SIZE);
+  }, [jurnal, currentPage]);
 
   const saveStatus = () => {
     setStatus('Tersimpan!');
@@ -90,7 +99,7 @@ export default function JurnalForm({ jurnal: initialJurnal }) {
             </tr>
           </thead>
           <tbody>
-            {jurnal.map((item) => (
+            {paginated.map((item) => (
               <React.Fragment key={item.id}>
                 <tr>
                   <td>{item.title}</td>
@@ -141,6 +150,12 @@ export default function JurnalForm({ jurnal: initialJurnal }) {
             ))}
           </tbody>
         </table>
+        <Pagination
+          totalItems={jurnal.length}
+          pageSize={PAGE_SIZE}
+          currentPage={currentPage}
+          onPageChange={setCurrentPage}
+        />
       </div>
     </div>
   );

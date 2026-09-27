@@ -134,10 +134,10 @@ export default function KegiatanEditorForm({ item = null, id = null, isNew = fal
                 style={{
                   fontSize: 12,
                   fontWeight: 700,
-                  color: summary.length >= 200 ? '#dc2626' : summary.length >= 170 ? '#d97706' : '#64748b'
+                  color: summary.length >= 400 ? '#dc2626' : summary.length >= 350 ? '#d97706' : '#64748b'
                 }}
               >
-                {summary.length} / 200 karakter
+                {summary.length} / 400 karakter
               </span>
             </div>
             <textarea
@@ -148,12 +148,12 @@ export default function KegiatanEditorForm({ item = null, id = null, isNew = fal
                 setSummary(e.target.value);
                 setIsDirty(true);
               }}
-              maxLength={200}
-              rows={3}
-              placeholder="Tuliskan rangkuman pokok bahasan, peserta, dan poin penting hasil kegiatan (maksimal 200 karakter)..."
+              maxLength={400}
+              rows={4}
+              placeholder="Tuliskan rangkuman pokok bahasan, peserta, dan poin penting hasil kegiatan (maksimal 400 karakter)..."
             />
             <small style={{ color: '#64748b', marginTop: 2 }}>
-              Dibatasi maksimal 200 karakter agar tampilan kartu pada halaman publik tetap rapi, seimbang, dan proporsional.
+              Dibatasi maksimal 400 karakter agar tampilan kartu pada halaman publik tetap rapi, seimbang, dan proporsional.
             </small>
           </div>
 

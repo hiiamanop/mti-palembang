@@ -70,9 +70,9 @@ assert.equal(siteConfig.includes("href: '/dialog-kebijakan'"), false);
 assert.equal(siteConfig.includes("href: '/mti-dalam-berita'"), false);
 assert.equal(siteConfig.includes("href: '/kegiatan-mti/jalan-jalan'"), false);
 
-assert.ok(actionsSource.includes('summary.length > 200'), 'actions must enforce 200 char limit on summary');
+assert.ok(actionsSource.includes('summary.length > 400'), 'actions must enforce 400 char limit on summary');
 const formSource = await readFile(new URL('../app/admin/kegiatan/KegiatanEditorForm.jsx', import.meta.url), 'utf8');
-assert.ok(formSource.includes('maxLength={200}'), 'KegiatanEditorForm must set maxLength={200}');
-assert.ok(formSource.includes('/ 200 karakter'), 'KegiatanEditorForm must show / 200 karakter counter');
+assert.ok(formSource.includes('maxLength={400}'), 'KegiatanEditorForm must set maxLength={400}');
+assert.ok(formSource.includes('/ 400 karakter'), 'KegiatanEditorForm must show / 400 karakter counter');
 
 console.log('Kegiatan module contracts verified.');

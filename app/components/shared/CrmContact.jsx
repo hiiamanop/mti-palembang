@@ -50,11 +50,22 @@ export default function CrmContact() {
         </span>
 
         {result ? (
-          <div className={result.type === 'success' ? 'successBox' : 'crmErrorBox'} role={result.type === 'error' ? 'alert' : 'status'}>
+          <div
+            className={result.type === 'success' ? 'successBox crmSuccessBox' : 'crmErrorBox'}
+            role={result.type === 'error' ? 'alert' : 'status'}
+            style={{ marginBottom: 28, paddingBottom: 24 }}
+          >
             <i>
-              {result.type === 'success' ? <Check size={16} aria-hidden="true" /> : <AlertCircle size={16} aria-hidden="true" />}
+              {result.type === 'success' ? <Check size={18} aria-hidden="true" /> : <AlertCircle size={18} aria-hidden="true" />}
             </i>
-            {result.message}
+            <div style={{ textAlign: 'left' }}>
+              <div style={{ fontSize: 15.5, fontWeight: 800, marginBottom: 3 }}>
+                {result.type === 'success' ? 'Permintaan Kontak Berhasil Dikirim' : 'Gagal Mengirim Permintaan'}
+              </div>
+              <div style={{ fontSize: 13.5, fontWeight: 500, color: 'rgba(255,255,255,0.92)', lineHeight: 1.5 }}>
+                {result.message}
+              </div>
+            </div>
           </div>
         ) : null}
 
