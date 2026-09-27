@@ -71,6 +71,13 @@ assert.deepEqual(await readJSON('beranda'), {
     description:
       'Agenda, diskusi kebijakan, dan aksi nyata Masyarakat Transportasi Indonesia Wilayah Sumatera Selatan dari tahun ke tahun.',
     image: 'https://mti.or.id/wp-content/uploads/2023/07/Dialog-dan-Sinergi-2.jpg'
+  },
+  artikelHero: {
+    title: 'Artikel & Opini Transportasi',
+    description:
+      'Kajian mendalam, analisis kebijakan, dan perspektif kritis para pakar Masyarakat Transportasi Indonesia Wilayah Sumatera Selatan.',
+    image:
+      'https://mti.or.id/wp-content/uploads/2023/07/Screenshot-2023-07-01-at-17.28.41.png'
   }
 });
 

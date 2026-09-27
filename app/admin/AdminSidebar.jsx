@@ -35,8 +35,9 @@ export default function AdminSidebar() {
       title: 'PENGELOLAAN HALAMAN',
       items: [
         { label: 'Beranda', href: '/admin/beranda', icon: Home, desc: 'Hero, Visi-Misi, Program' },
-        { label: 'Tentang Kami', href: '/admin/tentang-kami', icon: Users, desc: 'Profil, Struktur, Identitas' },
-        { label: 'Hero Halaman Kegiatan', href: '/admin/hero-kegiatan', icon: Compass, desc: 'Banner atas /kegiatan-mti' }
+        { label: 'Hero Halaman Kegiatan', href: '/admin/hero-kegiatan', icon: Compass, desc: 'Banner atas /kegiatan-mti' },
+        { label: 'Header Artikel & Opini', href: '/admin/header-artikel', icon: FileText, desc: 'Banner atas /artikel' },
+        { label: 'Tentang Kami', href: '/admin/tentang-kami', icon: Users, desc: 'Profil, Struktur, Identitas' }
       ]
     },
     {
