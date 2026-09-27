@@ -1,20 +1,9 @@
 import { getBeranda } from '../../../lib/cms';
-import BerandaForm from './BerandaForm';
+import BerandaHub from './BerandaHub';
 
-export const metadata = { title: 'Edit Beranda - MTI CMS' };
+export const metadata = { title: 'Kelola Beranda - MTI CMS' };
 
 export default async function AdminBerandaPage() {
   const beranda = await getBeranda();
-
-  return (
-    <div>
-      <div className="adminPageHeader">
-        <div>
-          <h1>Edit Beranda</h1>
-          <p>Kelola konten halaman utama</p>
-        </div>
-      </div>
-      <BerandaForm beranda={beranda} />
-    </div>
-  );
+  return <BerandaHub beranda={beranda} />;
 }

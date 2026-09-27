@@ -5396,19 +5396,89 @@ details[open] .wilayahChevron { transform: rotate(-135deg); }
 }
 
 .adminNavItem {
-  display: block;
-  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 12px;
   border-radius: 8px;
-  color: rgba(255, 255, 255, 0.65);
+  color: rgba(255, 255, 255, 0.7);
   font-size: 13.5px;
   font-weight: 600;
   text-decoration: none;
-  transition: background 0.15s, color 0.15s;
+  transition: all 0.15s ease;
 }
 
 .adminNavItem:hover {
   background: rgba(255, 255, 255, 0.08);
   color: #fff;
+}
+
+.adminNavItemActive {
+  background: #1e4fd8 !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  box-shadow: 0 4px 12px rgba(30, 79, 216, 0.35);
+}
+
+.adminNavSection {
+  margin-top: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.adminNavSectionTitle {
+  font-size: 10.5px;
+  font-weight: 800;
+  color: #64748b;
+  letter-spacing: 0.08em;
+  padding: 0 12px 6px;
+  text-transform: uppercase;
+}
+
+.adminNavSub {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.adminNavItemActive .adminNavSub {
+  color: #bfdbfe;
+}
+
+.adminMobileTopBar {
+  display: none;
+  background: #0d1a42;
+  padding: 12px 18px;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+@media (max-width: 900px) {
+  .adminWrap {
+    flex-direction: column;
+  }
+  .adminMobileTopBar {
+    display: flex;
+  }
+  .adminSidebar {
+    display: none;
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    position: static;
+  }
+  .adminSidebarMobileOpen {
+    display: flex;
+  }
+  .adminMain {
+    padding: 20px 16px;
+  }
 }
 
 .adminSidebarFooter {

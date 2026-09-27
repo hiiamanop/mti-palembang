@@ -43,15 +43,16 @@ export default async function AdminDashboard() {
       </div>
 
       <div className="adminCard" style={{ padding: '24px', marginTop: '28px' }}>
-        <h2 style={{ margin: '0 0 16px', fontSize: 16 }}>Akses Cepat</h2>
+        <h2 style={{ margin: '0 0 16px', fontSize: 16 }}>Akses Cepat Pengelolaan</h2>
         <div className="adminQuickLinks">
-          <Link href="/admin/berita" className="adminBtn adminBtnPrimary">Kelola Berita</Link>
-          <Link href="/admin/kegiatan" className="adminBtn adminBtnSecondary">Kelola Kegiatan</Link>
-          <Link href="/admin/struktur-organisasi" className="adminBtn adminBtnSecondary">Struktur Organisasi</Link>
-          <Link href="/admin/beranda" className="adminBtn adminBtnSecondary">Edit Beranda</Link>
-          <Link href="/admin/media" className="adminBtn adminBtnSecondary">Kelola Media</Link>
-          <Link href="/admin/jurnal" className="adminBtn adminBtnSecondary">Kelola Jurnal</Link>
-          <Link href="/admin/artikel" className="adminBtn adminBtnSecondary">Kelola Artikel</Link>
+          <Link href="/admin/beranda" className="adminBtn adminBtnPrimary">Kelola Beranda</Link>
+          <Link href="/admin/tentang-kami" className="adminBtn adminBtnSecondary">Tentang Kami (Hub)</Link>
+          <Link href="/admin/hero-kegiatan" className="adminBtn adminBtnSecondary">Hero Kegiatan</Link>
+          <Link href="/admin/kegiatan" className="adminBtn adminBtnSecondary">Kegiatan MTI</Link>
+          <Link href="/admin/artikel" className="adminBtn adminBtnSecondary">Artikel &amp; Opini</Link>
+          <Link href="/admin/berita" className="adminBtn adminBtnSecondary">Berita</Link>
+          <Link href="/admin/jurnal" className="adminBtn adminBtnSecondary">Jurnal AKSES</Link>
+          <Link href="/admin/media" className="adminBtn adminBtnSecondary">Media Video</Link>
         </div>
       </div>
 
