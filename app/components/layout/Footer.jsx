@@ -6,7 +6,7 @@ export default function Footer() {
       <div className="wideShell footerGrid">
         <div>
           <div className="footerBrand">
-            <img src={SITE_CONFIG.logo} alt="MTI" />
+            <img src={SITE_CONFIG.logoEmblem || SITE_CONFIG.logo} alt="MTI" />
             <span>
               <strong>{SITE_CONFIG.name}</strong>
               <small>{SITE_CONFIG.fullName}</small>

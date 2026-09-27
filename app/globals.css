@@ -181,11 +181,46 @@ img {
   display: flex;
   align-items: center;
   gap: 14px;
+  text-decoration: none;
 }
 
-.logoLockup img {
+.logoLockup img,
+.logoWordmarkImg {
   width: auto;
-  height: 54px;
+  height: 52px;
+  object-fit: contain;
+}
+
+.logoDivider {
+  width: 2px;
+  height: 38px;
+  background: #cbd5e1;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.logoRegionLockup {
+  display: flex;
+  flex-direction: column;
+}
+
+.logoLockup .logoRegionLockup strong {
+  display: block;
+  font-size: 15px;
+  color: var(--blue);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+}
+
+.logoLockup .logoRegionLockup small {
+  display: block;
+  margin-top: 3px;
+  color: #64748b;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
 }
 
 .logoFallback {
@@ -1994,8 +2029,22 @@ img {
     padding-inline: 14px;
   }
 
-  .logoLockup img {
-    height: 42px;
+  .logoLockup img,
+  .logoWordmarkImg {
+    height: 38px;
+  }
+
+  .logoDivider {
+    height: 28px;
+  }
+
+  .logoLockup .logoRegionLockup strong {
+    font-size: 13px;
+  }
+
+  .logoLockup .logoRegionLockup small {
+    font-size: 8.5px;
+    letter-spacing: 0.1em;
   }
 
   .logoLockup strong {
