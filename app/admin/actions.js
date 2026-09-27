@@ -473,7 +473,9 @@ export async function saveArtikelItem(id, formData) {
   const { error } = await supabase.from('artikel').update(update).eq('id', id);
   if (error) return { error: error.message };
   revalidatePath('/');
+  revalidatePath('/artikel');
   revalidatePath('/admin/artikel');
+  return { success: true };
 }
 
 export async function addArtikelItem(formData) {
@@ -486,26 +488,34 @@ export async function addArtikelItem(formData) {
     ringkasan: formData.get('ringkasan') || '',
     konten: (formData.get('konten') || '').split('\n\n').filter(Boolean),
     gambar: formData.get('gambar') || '',
-    visible: false
+    visible: true
   };
   const { error } = await supabase.from('artikel').insert(row);
   if (error) return { error: error.message };
   revalidatePath('/');
+  revalidatePath('/artikel');
   revalidatePath('/admin/artikel');
+  return { success: true };
 }
 
 export async function deleteArtikelItem(id) {
   const supabase = await checkAuth();
-  await supabase.from('artikel').delete().eq('id', id);
+  const { error } = await supabase.from('artikel').delete().eq('id', id);
+  if (error) return { error: error.message };
   revalidatePath('/');
+  revalidatePath('/artikel');
   revalidatePath('/admin/artikel');
+  return { success: true };
 }
 
 export async function toggleArtikelVisible(id) {
   const supabase = await checkAuth();
   const { data } = await supabase.from('artikel').select('visible').eq('id', id).single();
-  if (!data) return;
-  await supabase.from('artikel').update({ visible: !data.visible }).eq('id', id);
+  if (!data) return { error: 'Artikel tidak ditemukan' };
+  const { error } = await supabase.from('artikel').update({ visible: !data.visible }).eq('id', id);
+  if (error) return { error: error.message };
   revalidatePath('/');
+  revalidatePath('/artikel');
   revalidatePath('/admin/artikel');
+  return { success: true };
 }
