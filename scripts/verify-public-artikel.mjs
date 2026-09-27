@@ -19,7 +19,9 @@ await access(new URL('../app/artikel/[id]/page.jsx', import.meta.url));
 
 // 3. Verify page content has dialogHero and standard heading
 const pageSource = await readFile(new URL('../app/artikel/page.jsx', import.meta.url), 'utf8');
-assert.ok(pageSource.includes('dialogHero'), 'app/artikel/page.jsx must use dialogHero');
-assert.ok(pageSource.includes('Artikel & Opini'), 'app/artikel/page.jsx must feature Artikel & Opini title');
+assert.ok(pageSource.includes('<ArtikelHero'), 'app/artikel/page.jsx must render ArtikelHero');
+const heroSource = await readFile(new URL('../app/artikel/ArtikelHero.jsx', import.meta.url), 'utf8');
+assert.ok(heroSource.includes('dialogHero'), 'ArtikelHero must use dialogHero');
+assert.ok(heroSource.includes('Artikel & Opini'), 'ArtikelHero must feature Artikel & Opini title');
 
 console.log('Public artikel page and navigation contract verified.');
