@@ -6,6 +6,7 @@ import { createClient } from '../../lib/supabase/server';
 import { createAdminClient } from '../../lib/supabase/admin';
 import { isValidISODate } from '../../lib/kegiatan';
 import { ORGANIZATION_KEYS } from '../../lib/organization-structure';
+import { validateImage } from '../../lib/image-upload';
 
 async function checkAuth() {
   const supabase = await createClient();
@@ -69,9 +70,11 @@ export async function logout() {
 export async function uploadImage(formData) {
   await checkAuth();
   const file = formData.get('file');
-  if (!file || typeof file === 'string' || file.size === 0) {
-    return { error: 'File tidak valid.' };
+  if (!file || typeof file === 'string') {
+    return { error: 'Pilih file gambar terlebih dahulu.' };
   }
+  const validationError = validateImage(file);
+  if (validationError) return { error: validationError };
   const admin = createAdminClient();
   const ext = (file.name?.split('.').pop() || 'bin').toLowerCase();
   const path = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
