@@ -1,6 +1,7 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
 import {
   ArrowRight,
   Play
@@ -9,6 +10,8 @@ import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import Newsletter from './components/shared/Newsletter';
 import ProgramCarousel from './components/shared/ProgramCarousel';
+import { loadPreviewDraft } from '../lib/preview-storage';
+import PreviewBanner from './components/shared/PreviewBanner';
 
 const catStyles = {
   Berita: { bg: '#ececf9', color: '#4647ae' },
@@ -29,6 +32,17 @@ export default function HomeClient({
   visiMisi = null,
   programUnggulan = []
 }) {
+  const searchParams = useSearchParams();
+  const isPreview = searchParams.get('preview') === '1';
+  const [previewData, setPreviewData] = useState(null);
+
+  useEffect(() => {
+    if (isPreview) {
+      const draft = loadPreviewDraft('beranda');
+      if (draft) setPreviewData(draft);
+    }
+  }, [isPreview]);
+
   const [filter, setFilter] = useState('Semua');
 
   const news = useMemo(() => {
@@ -45,42 +59,46 @@ export default function HomeClient({
   const miniVideos = mediaData?.miniVideos?.filter((v) => v.visible) || [];
   const hasMedia = Boolean(mainVideoUrl || miniVideos.length);
 
+  const effectivePengenalan = previewData?.pengenalan || pengenalan;
+  const effectiveVisiMisi = previewData?.visiMisi || visiMisi;
+  const effectivePrograms = previewData?.programUnggulan || programUnggulan;
+
   const activePengenalan = {
     title:
-      pengenalan?.title ||
+      effectivePengenalan?.title ||
       'Masyarakat Transportasi Indonesia Wilayah Sumatera Selatan',
     description:
-      pengenalan?.description ||
+      effectivePengenalan?.description ||
       'Lembaga pemikir (think tank) independen yang menghimpun akademisi, praktisi, birokrat, dan pemerhati transportasi di Sumsel.',
-    image: pengenalan?.image || DEFAULT_HERO_BG
+    image: effectivePengenalan?.image || DEFAULT_HERO_BG
   };
 
   const activeVisiMisi = {
-    tag: visiMisi?.tag || 'VISI, MISI & TUJUAN',
+    tag: effectiveVisiMisi?.tag || 'VISI, MISI & TUJUAN',
     visi:
-      visiMisi?.visi ||
+      effectiveVisiMisi?.visi ||
       'Terwujudnya MTI sebagai organisasi yang menjadi acuan profesional bidang transportasi, menuju terbentuknya sistem transportasi yang berkelanjutan dan sesuai dengan aspirasi segenap pemangku kepentingan.',
     misi:
-      visiMisi?.misi?.length
-        ? visiMisi.misi
+      effectiveVisiMisi?.misi?.length
+        ? effectiveVisiMisi.misi
         : [
             'Menumbuh kembangkan profesionalitas pelaku kegiatan bidang transportasi',
             'Memberikan pelayanan advokasi untuk pengambil keputusan bidang transportasi',
             'Mendorong interaksi sinergis antar pemangku kepentingan untuk peningkatan kualitas layanan transportasi'
           ],
     tujuan:
-      visiMisi?.tujuan?.length
-        ? visiMisi.tujuan
+      effectiveVisiMisi?.tujuan?.length
+        ? effectiveVisiMisi.tujuan
         : [
             'Meningkatnya jumlah dan kualitas pelaku profesional bidang transportasi bersertifikasi',
             'Meningkatnya jumlah kota dan wilayah yang menerapkan prinsip-prinsip transportasi berkelanjutan',
             'Meningkatnya jumlah regulasi bidang transportasi yang sejalan dengan aspirasi masyarakat dan prinsip transportasi berkelanjutan'
           ],
-    image: visiMisi?.image || ''
+    image: effectiveVisiMisi?.image || ''
   };
 
-  const activePrograms = programUnggulan?.length
-    ? programUnggulan
+  const activePrograms = effectivePrograms?.length
+    ? effectivePrograms
     : [
         {
           id: 'p1',
@@ -118,6 +136,7 @@ export default function HomeClient({
 
   return (
     <main className="newsroom">
+      {isPreview ? <PreviewBanner /> : null}
       <Header activeItem="Beranda" />
 
       {tickerItems.length > 0 ? (
