@@ -17,10 +17,11 @@ export default function ArtikelHero({ savedHero = {} }) {
   const title = hero.title || 'Artikel & Opini Transportasi';
   const description = hero.description || 'Kajian mendalam, analisis kebijakan, dan perspektif kritis para pakar Masyarakat Transportasi Indonesia Wilayah Sumatera Selatan.';
   const image = hero.image || 'https://mti.or.id/wp-content/uploads/2023/07/Screenshot-2023-07-01-at-17.28.41.png';
+  const imagePosition = hero.imagePosition || 'center center';
 
   return (
     <section className="dialogHero">
-      <img src={image} alt="" aria-hidden="true" />
+      <img src={image} alt="" aria-hidden="true" style={{ objectPosition: imagePosition }} />
       <span className="dialogHeroShade" />
       <div className="wideShell dialogHeroContent">
         <span className="dialogEyebrow">Artikel &amp; Opini</span>

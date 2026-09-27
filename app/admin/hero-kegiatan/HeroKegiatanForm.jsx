@@ -17,7 +17,8 @@ export default function HeroKegiatanForm({ hero = {} }) {
     description:
       hero.description ||
       'Agenda, diskusi kebijakan, dan aksi nyata Masyarakat Transportasi Indonesia Wilayah Sumatera Selatan dari tahun ke tahun.',
-    image: hero.image || ''
+    image: hero.image || '',
+    imagePosition: hero.imagePosition || 'center center'
   };
 
   const handleSave = (e) => {
@@ -43,7 +44,8 @@ export default function HeroKegiatanForm({ hero = {} }) {
       eyebrow: document.querySelector('[name="kegiatanHeroEyebrow"]')?.value || initial.eyebrow,
       title: document.querySelector('[name="kegiatanHeroTitle"]')?.value || initial.title,
       description: document.querySelector('[name="kegiatanHeroDescription"]')?.value || initial.description,
-      image: document.querySelector('[name="kegiatanHeroImage"]')?.value || initial.image
+      image: document.querySelector('[name="kegiatanHeroImage"]')?.value || initial.image,
+      imagePosition: document.querySelector('[name="kegiatanHeroImagePosition"]')?.value || initial.imagePosition
     });
     window.open('/kegiatan-mti?preview=1', '_blank');
   };
@@ -89,9 +91,16 @@ export default function HeroKegiatanForm({ hero = {} }) {
 
           <div className="adminFormGroup">
             <label>Foto Banner Latar Belakang (Maksimal 5 MB)</label>
-            <ImageUpload name="kegiatanHeroImage" defaultValue={initial.image} />
+            <ImageUpload
+              name="kegiatanHeroImage"
+              defaultValue={initial.image}
+              withPosition={true}
+              positionName="kegiatanHeroImagePosition"
+              defaultPosition={initial.imagePosition || 'center center'}
+              previewTitle={initial.title}
+            />
             <small style={{ color: '#64748b', marginTop: 4 }}>
-              Foto ini tampil dengan bayangan gelap transparan agar teks judul mudah terbaca.
+              Foto ini tampil dengan bayangan transparan cerah agar teks judul tetap mudah terbaca.
             </small>
           </div>
 

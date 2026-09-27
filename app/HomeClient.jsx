@@ -70,7 +70,8 @@ export default function HomeClient({
     description:
       effectivePengenalan?.description ||
       'Lembaga pemikir (think tank) independen yang menghimpun akademisi, praktisi, birokrat, dan pemerhati transportasi di Sumsel.',
-    image: effectivePengenalan?.image || DEFAULT_HERO_BG
+    image: effectivePengenalan?.image || DEFAULT_HERO_BG,
+    imagePosition: effectivePengenalan?.imagePosition || 'center center'
   };
 
   const activeVisiMisi = {
@@ -162,7 +163,12 @@ export default function HomeClient({
       {/* ── Section 1: Hero Pengenalan MTI Sumsel (Sama seperti Halaman Tentang Kami) ── */}
       {hasPengenalan ? (
         <section className="dialogHero">
-          <img src={heroBg} alt="" aria-hidden="true" />
+          <img
+            src={heroBg}
+            alt=""
+            aria-hidden="true"
+            style={{ objectPosition: activePengenalan.imagePosition || 'center center' }}
+          />
           <span className="dialogHeroShade" />
 
           <div className="wideShell dialogHeroContent">

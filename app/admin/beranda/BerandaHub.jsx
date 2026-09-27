@@ -100,7 +100,8 @@ export default function BerandaHub({ beranda }) {
       pengenalan: {
         title: document.querySelector('[name="pengenalanTitle"]')?.value || pengenalan.title,
         description: document.querySelector('[name="pengenalanDescription"]')?.value || pengenalan.description,
-        image: document.querySelector('[name="pengenalanImage"]')?.value || pengenalan.image
+        image: document.querySelector('[name="pengenalanImage"]')?.value || pengenalan.image,
+        imagePosition: document.querySelector('[name="pengenalanImagePosition"]')?.value || pengenalan.imagePosition || 'center center'
       },
       visiMisi: {
         tag: document.querySelector('[name="tag"]')?.value || visiMisi.tag,
@@ -239,9 +240,16 @@ export default function BerandaHub({ beranda }) {
 
             <div className="adminFormGroup">
               <label>Foto Dokumentasi Latar Belakang (Maksimal 5 MB)</label>
-              <ImageUpload name="pengenalanImage" defaultValue={pengenalan.image} />
+              <ImageUpload
+                name="pengenalanImage"
+                defaultValue={pengenalan.image}
+                withPosition={true}
+                positionName="pengenalanImagePosition"
+                defaultPosition={pengenalan.imagePosition || 'center center'}
+                previewTitle={pengenalan.title || 'Masyarakat Transportasi Indonesia'}
+              />
               <small style={{ color: '#64748b', marginTop: 4 }}>
-                Foto ini tampil di belakang hero dengan bayangan transparan sinematik.
+                Foto ini tampil di belakang hero dengan bayangan transparan cerah sinematik.
               </small>
             </div>
 

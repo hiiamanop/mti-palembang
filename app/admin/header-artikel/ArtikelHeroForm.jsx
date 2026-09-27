@@ -17,14 +17,16 @@ export default function ArtikelHeroForm({ hero = {} }) {
   const initial = {
     title: hero.title || 'Artikel & Opini Transportasi',
     description: hero.description || 'Kajian mendalam, analisis kebijakan, dan perspektif kritis para pakar Masyarakat Transportasi Indonesia Wilayah Sumatera Selatan.',
-    image: hero.image || ''
+    image: hero.image || '',
+    imagePosition: hero.imagePosition || 'center center'
   };
 
   function currentDraft() {
     return {
       title: document.querySelector('[name="title"]')?.value || initial.title,
       description: document.querySelector('[name="description"]')?.value || initial.description,
-      image: document.querySelector('[name="image"]')?.value || initial.image
+      image: document.querySelector('[name="image"]')?.value || initial.image,
+      imagePosition: document.querySelector('[name="imagePosition"]')?.value || initial.imagePosition
     };
   }
 
@@ -70,7 +72,14 @@ export default function ArtikelHeroForm({ hero = {} }) {
           </div>
           <div className="adminFormGroup">
             <label>Gambar Latar Hero (Maksimal 5 MB)</label>
-            <ImageUpload name="image" defaultValue={initial.image} />
+            <ImageUpload
+              name="image"
+              defaultValue={initial.image}
+              withPosition={true}
+              positionName="imagePosition"
+              defaultPosition={initial.imagePosition || 'center center'}
+              previewTitle={initial.title}
+            />
           </div>
           <div className="adminFormActions" style={{ justifyContent: 'flex-end', gap: 10 }}>
             <button type="button" onClick={preview} className="adminBtn adminBtnSecondary"><Eye size={15} /> Pratinjau Dulu</button>

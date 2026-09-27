@@ -304,7 +304,8 @@ export async function saveBeranda(section, formData) {
       tag: '',
       title: String(formData.get('pengenalanTitle') || '').trim(),
       description: String(formData.get('pengenalanDescription') || '').trim(),
-      image: String(formData.get('pengenalanImage') || '').trim()
+      image: String(formData.get('pengenalanImage') || '').trim(),
+      imagePosition: String(formData.get('pengenalanImagePosition') || 'center center').trim()
     };
   } else if (section === 'visiMisi') {
     const misiItems = formData.getAll('misiItem').map((s) => String(s || '').trim()).filter(Boolean);
@@ -321,7 +322,8 @@ export async function saveBeranda(section, formData) {
       eyebrow: String(formData.get('kegiatanHeroEyebrow') || '').trim(),
       title: String(formData.get('kegiatanHeroTitle') || '').trim(),
       description: String(formData.get('kegiatanHeroDescription') || '').trim(),
-      image: String(formData.get('kegiatanHeroImage') || '').trim()
+      image: String(formData.get('kegiatanHeroImage') || '').trim(),
+      imagePosition: String(formData.get('kegiatanHeroImagePosition') || 'center center').trim()
     };
   } else if (section === 'programUnggulan') {
     const ids = formData.getAll('programId');
@@ -351,10 +353,11 @@ export async function saveArtikelHero(formData) {
   const title = String(formData.get('title') || '').trim();
   const description = String(formData.get('description') || '').trim();
   const image = String(formData.get('image') || '').trim();
+  const imagePosition = String(formData.get('imagePosition') || 'center center').trim();
   if (!title) return { error: 'Judul header artikel wajib diisi.' };
   if (!description) return { error: 'Deskripsi header artikel wajib diisi.' };
   const beranda = await getSingleton(supabase, 'beranda');
-  beranda.artikelHero = { title, description, image };
+  beranda.artikelHero = { title, description, image, imagePosition };
   await saveSingleton(supabase, 'beranda', beranda);
   revalidatePath('/artikel');
   revalidatePath('/admin/header-artikel');

@@ -26,14 +26,20 @@ export default async function KegiatanPage() {
     eyebrow: savedHero.eyebrow || DEFAULT_HERO.eyebrow,
     title: savedHero.title || DEFAULT_HERO.title,
     description: savedHero.description || DEFAULT_HERO.description,
-    image: savedHero.image || DEFAULT_HERO.image
+    image: savedHero.image || DEFAULT_HERO.image,
+    imagePosition: savedHero.imagePosition || 'center center'
   };
 
   return (
     <main className="kegiatanPage">
       <Header activeItem="Kegiatan MTI" />
       <section className="dialogHero">
-        <img src={hero.image} alt="" aria-hidden="true" />
+        <img
+          src={hero.image}
+          alt=""
+          aria-hidden="true"
+          style={{ objectPosition: hero.imagePosition }}
+        />
         <span className="dialogHeroShade" />
         <div className="wideShell dialogHeroContent">
           <span className="dialogEyebrow">{hero.eyebrow}</span>
