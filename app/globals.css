@@ -263,6 +263,149 @@ img {
   display: none;
 }
 
+/* ── Global Search Modal ───────────────── */
+.searchModalBackdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 10vh 20px 30px;
+  background: rgba(6, 14, 36, 0.72);
+  backdrop-filter: blur(6px);
+}
+
+.searchModal {
+  width: min(720px, 100%);
+  max-height: 78vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.3);
+}
+
+.searchModalTop {
+  min-height: 66px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 18px;
+  border-bottom: 1px solid #e2e8f0;
+  color: #64748b;
+}
+
+.searchModalTop input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #0f172a;
+  font: inherit;
+  font-size: 16px;
+}
+
+.searchModalTop button {
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 8px;
+  color: #64748b;
+  background: #f1f5f9;
+  cursor: pointer;
+}
+
+.searchModalBody {
+  overflow-y: auto;
+  padding: 14px;
+}
+
+.searchGroup + .searchGroup {
+  margin-top: 16px;
+}
+
+.searchGroup h3 {
+  margin: 0 0 6px;
+  padding: 0 10px;
+  color: #64748b;
+  font-size: 10.5px;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.searchResult {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 12px;
+  border-radius: 9px;
+  color: #0f172a;
+  text-decoration: none;
+}
+
+.searchResult:hover,
+.searchResult.active {
+  color: #112e81;
+  background: #eef2ff;
+}
+
+.searchResult span,
+.searchResult strong,
+.searchResult small {
+  display: block;
+}
+
+.searchResult strong {
+  font-size: 14px;
+}
+
+.searchResult small {
+  margin-top: 2px;
+  color: #64748b;
+  font-size: 12px;
+}
+
+.searchMessage {
+  margin: 0;
+  padding: 36px 20px;
+  text-align: center;
+  color: #64748b;
+  font-size: 14px;
+}
+
+.searchMessageError {
+  color: #b91c1c;
+}
+
+.searchModalFooter {
+  padding: 10px 18px;
+  border-top: 1px solid #e2e8f0;
+  color: #64748b;
+  background: #f8fafc;
+  font-size: 11.5px;
+}
+
+@media (max-width: 560px) {
+  .searchModalBackdrop {
+    padding: 10px;
+  }
+  .searchModal {
+    max-height: calc(100vh - 20px);
+    border-radius: 12px;
+  }
+  .searchModalFooter {
+    display: none;
+  }
+}
+
 .navStrip {
   position: sticky;
   top: 0;
