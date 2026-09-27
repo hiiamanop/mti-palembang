@@ -8,7 +8,7 @@ import {
 } from 'lucide-react';
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
-import Newsletter from './components/shared/Newsletter';
+import CrmContact from './components/shared/CrmContact';
 import ProgramCarousel from './components/shared/ProgramCarousel';
 import { loadPreviewDraft } from '../lib/preview-storage';
 import PreviewBanner from './components/shared/PreviewBanner';
@@ -410,7 +410,7 @@ export default function HomeClient({
         </section>
       ) : null}
 
-      <Newsletter />
+      <CrmContact />
       <Footer />
     </main>
   );

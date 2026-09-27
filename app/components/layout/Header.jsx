@@ -33,8 +33,8 @@ export default function Header({ activeItem }) {
             <button className="iconButton" type="button" aria-label="Cari">
               <Search size={18} aria-hidden="true" />
             </button>
-            <a className="subscribeButton desktopOnly" href="/#newsletter">
-              Berlangganan
+            <a className="subscribeButton desktopOnly" href="/#crm">
+              Hubungi Kami
             </a>
             <button
               className="iconButton mobileOnly"
@@ -142,8 +142,8 @@ export default function Header({ activeItem }) {
                 ) : null}
               </div>
             ))}
-            <a className="mobileSubscribe" href="/#newsletter" onClick={() => setMobileOpen(false)}>
-              Berlangganan Newsletter
+            <a className="mobileSubscribe" href="/#crm" onClick={() => setMobileOpen(false)}>
+              Hubungi Kami
             </a>
           </nav>
         ) : null}
