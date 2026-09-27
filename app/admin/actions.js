@@ -346,6 +346,21 @@ export async function saveBeranda(section, formData) {
   revalidatePath('/admin/beranda');
 }
 
+export async function saveArtikelHero(formData) {
+  const supabase = await checkAuth();
+  const title = String(formData.get('title') || '').trim();
+  const description = String(formData.get('description') || '').trim();
+  const image = String(formData.get('image') || '').trim();
+  if (!title) return { error: 'Judul header artikel wajib diisi.' };
+  if (!description) return { error: 'Deskripsi header artikel wajib diisi.' };
+  const beranda = await getSingleton(supabase, 'beranda');
+  beranda.artikelHero = { title, description, image };
+  await saveSingleton(supabase, 'beranda', beranda);
+  revalidatePath('/artikel');
+  revalidatePath('/admin/header-artikel');
+  return { success: true };
+}
+
 // ── Media ─────────────────────────────────────────────────────────────────────
 
 export async function saveMainVideo(formData) {
