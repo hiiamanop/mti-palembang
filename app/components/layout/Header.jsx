@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { ChevronDown, Menu, Search, X } from 'lucide-react';
 import UtilityBar from './UtilityBar';
 import LogoLockup from './LogoLockup';
+import SearchModal from './SearchModal';
 import { SITE_CONFIG } from '../../../lib/site-config';
 
 function isItemActive(item, activeItem) {
@@ -19,6 +20,7 @@ export default function Header({ activeItem }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
   const [openSubLabel, setOpenSubLabel] = useState(null);
+  const [searchOpen, setSearchOpen] = useState(false);
 
   return (
     <>
@@ -30,7 +32,7 @@ export default function Header({ activeItem }) {
           <LogoLockup href="/" />
 
           <div className="mastheadTools">
-            <button className="iconButton" type="button" aria-label="Cari">
+            <button className="iconButton" type="button" aria-label="Cari" onClick={() => setSearchOpen(true)}>
               <Search size={18} aria-hidden="true" />
             </button>
             <a className="subscribeButton desktopOnly" href="/#crm">
@@ -148,6 +150,8 @@ export default function Header({ activeItem }) {
           </nav>
         ) : null}
       </header>
+
+      <SearchModal open={searchOpen} onClose={() => setSearchOpen(false)} />
     </>
   );
 }
