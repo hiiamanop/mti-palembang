@@ -519,3 +519,26 @@ export async function toggleArtikelVisible(id) {
   revalidatePath('/admin/artikel');
   return { success: true };
 }
+
+// ── Kontak CRM ────────────────────────────────────────────────────────────────
+
+export async function updateCrmContactStatus(id, status) {
+  const allowed = ['baru', 'sudah_dihubungi', 'selesai'];
+  if (!allowed.includes(status)) return { error: 'Status kontak tidak valid.' };
+  const supabase = await checkAuth();
+  const { error } = await supabase
+    .from('crm_contacts')
+    .update({ status, updated_at: new Date().toISOString() })
+    .eq('id', id);
+  if (error) return { error: error.message };
+  revalidatePath('/admin/kontak-crm');
+  return { success: true };
+}
+
+export async function deleteCrmContact(id) {
+  const supabase = await checkAuth();
+  const { error } = await supabase.from('crm_contacts').delete().eq('id', id);
+  if (error) return { error: error.message };
+  revalidatePath('/admin/kontak-crm');
+  return { success: true };
+}

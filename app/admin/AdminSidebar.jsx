@@ -13,6 +13,7 @@ import {
   Newspaper,
   BookOpen,
   Video,
+  Mail,
   ExternalLink,
   LogOut,
   Menu,
@@ -46,6 +47,12 @@ export default function AdminSidebar() {
         { label: 'Berita', href: '/admin/berita', icon: Newspaper },
         { label: 'Jurnal AKSES', href: '/admin/jurnal', icon: BookOpen },
         { label: 'Media Video', href: '/admin/media', icon: Video }
+      ]
+    },
+    {
+      title: 'HUBUNGAN PUBLIK',
+      items: [
+        { label: 'Kontak CRM', href: '/admin/kontak-crm', icon: Mail, desc: 'Permintaan kontak masuk' }
       ]
     }
   ];
