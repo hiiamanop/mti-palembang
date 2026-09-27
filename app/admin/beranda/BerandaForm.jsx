@@ -71,7 +71,7 @@ export default function BerandaForm({ beranda }) {
   const [kegiatanHero] = useState(
     beranda.kegiatanHero || {
       eyebrow: 'Kegiatan MTI',
-      title: 'Kegiatan Masyarakat Transportasi Indonesia',
+      title: 'Kegiatan Masyarakat Transportasi Sumatera Selatan',
       description:
         'Agenda, diskusi kebijakan, dan aksi nyata Masyarakat Transportasi Indonesia Wilayah Sumatera Selatan dari tahun ke tahun.',
       image: ''
@@ -86,7 +86,7 @@ export default function BerandaForm({ beranda }) {
             id: 'p1',
             image: '',
             tag: 'FORUM DISKUSI',
-            title: 'Forum Diskusi Transportasi Sumsel (FDTS)',
+            title: 'Forum Diskusi Transportasi wilayah Sumsel (FDTS)',
             summary:
               'Diskusi berkala membahas isu hangat transportasi lokal bersama Dishub dan operator.'
           },
@@ -449,8 +449,8 @@ export default function BerandaForm({ beranda }) {
               <label>Judul Hero</label>
               <input
                 name="kegiatanHeroTitle"
-                defaultValue={kegiatanHero.title || 'Kegiatan Masyarakat Transportasi Indonesia'}
-                placeholder="Kegiatan Masyarakat Transportasi Indonesia"
+                defaultValue={kegiatanHero.title || 'Kegiatan Masyarakat Transportasi Sumatera Selatan'}
+                placeholder="Kegiatan Masyarakat Transportasi Sumatera Selatan"
               />
             </div>
             <div className="adminFormGroup">
