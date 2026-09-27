@@ -15,6 +15,7 @@ export default function KegiatanEditorForm({ item = null, id = null, isNew = fal
   const [isPending, startTransition] = useTransition();
   const [feedback, setFeedback] = useState(null);
   const [isDirty, setIsDirty] = useState(false);
+  const [summary, setSummary] = useState(item?.summary || '');
 
   useUnsavedChanges(isDirty);
 
@@ -127,13 +128,33 @@ export default function KegiatanEditorForm({ item = null, id = null, isNew = fal
           </div>
 
           <div className="adminFormGroup">
-            <label>Ringkasan Kegiatan</label>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <label htmlFor="kegiatan-summary">Ringkasan Kegiatan</label>
+              <span
+                style={{
+                  fontSize: 12,
+                  fontWeight: 700,
+                  color: summary.length >= 200 ? '#dc2626' : summary.length >= 170 ? '#d97706' : '#64748b'
+                }}
+              >
+                {summary.length} / 200 karakter
+              </span>
+            </div>
             <textarea
+              id="kegiatan-summary"
               name="summary"
-              defaultValue={item?.summary || ''}
-              rows={4}
-              placeholder="Tuliskan rangkuman pokok bahasan, peserta, dan poin penting hasil kegiatan..."
+              value={summary}
+              onChange={(e) => {
+                setSummary(e.target.value);
+                setIsDirty(true);
+              }}
+              maxLength={200}
+              rows={3}
+              placeholder="Tuliskan rangkuman pokok bahasan, peserta, dan poin penting hasil kegiatan (maksimal 200 karakter)..."
             />
+            <small style={{ color: '#64748b', marginTop: 2 }}>
+              Dibatasi maksimal 200 karakter agar tampilan kartu pada halaman publik tetap rapi, seimbang, dan proporsional.
+            </small>
           </div>
 
           <div

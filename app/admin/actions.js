@@ -170,14 +170,18 @@ export async function toggleBeritaPublished(id) {
 function kegiatanInput(formData) {
   const title = String(formData.get('title') || '').trim();
   const date = String(formData.get('date') || '');
+  const summary = String(formData.get('summary') || '').trim();
   if (!title) return { error: 'Judul kegiatan wajib diisi.' };
   if (!isValidISODate(date)) return { error: 'Tanggal kegiatan tidak valid.' };
+  if (summary.length > 200) {
+    return { error: `Ringkasan kegiatan maksimal 200 karakter (saat ini ${summary.length} karakter).` };
+  }
   return {
     row: {
       title,
       date,
       image: String(formData.get('image') || '').trim(),
-      summary: String(formData.get('summary') || '').trim()
+      summary
     }
   };
 }
