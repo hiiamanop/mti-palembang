@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { readFile } from 'node:fs/promises';
 import {
   IMAGE_MAX_BYTES,
   IMAGE_MAX_LABEL,
@@ -24,5 +25,10 @@ assert.equal(
   'Ukuran gambar 5,0 MB melebihi batas maksimal 5 MB.'
 );
 assert.equal(validateImage({ size: IMAGE_MAX_BYTES, type: 'image/webp' }), '');
+
+const componentSource = await readFile(new URL('../app/admin/components/ImageUpload.jsx', import.meta.url), 'utf8');
+assert.ok(componentSource.includes('handlePinClick'), 'ImageUpload must support manual pin click');
+assert.ok(componentSource.includes('type="range"'), 'ImageUpload must support manual slider position');
+assert.ok(componentSource.includes('currentPositionStr'), 'ImageUpload must export dynamic percentage position');
 
 console.log('Image upload validation contract verified.');
