@@ -137,12 +137,6 @@ export default function IdentitasOrganisasiPage() {
         </div>
       </section>
 
-      <section className="wideShell dialogIntroStrip">
-        {["Logo MTI", "Makna Lambang", "Visi & Misi", "Bendera", "Mars MTI"].map((item) => (
-          <span key={item}>{item}</span>
-        ))}
-      </section>
-
       <section className="wideShell dialogContentGrid">
         <div className="dialogFeed">
 

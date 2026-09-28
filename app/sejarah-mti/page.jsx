@@ -151,14 +151,6 @@ export default function SejarahMTIPage() {
         </div>
       </section>
 
-      <section className="wideShell dialogIntroStrip" aria-label="Pilar MTI">
-        {["Riset Independen", "Advokasi Kebijakan", "Jaringan Wilayah", "Sinergi Internasional"].map(
-          (item) => (
-            <span key={item}>{item}</span>
-          )
-        )}
-      </section>
-
       <section className="wideShell dialogContentGrid">
         <div className="dialogFeed">
           <div className="dialogSectionHead">
