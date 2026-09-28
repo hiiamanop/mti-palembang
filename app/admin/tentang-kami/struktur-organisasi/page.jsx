@@ -30,7 +30,7 @@ export default async function AdminTentangKamiStrukturPage() {
           </Link>
           <h1>Struktur Organisasi MTI Sumatera Selatan</h1>
           <p>
-            Kelola nama lengkap pengurus pada 24 posisi jabatan tetap (Dewan Pembina, Majelis Pakar, Pengurus Harian, Bidang Teknis).
+            Kelola satu nama pengurus pada 17 posisi tetap dalam lima kelompok: Pengarah, Pengurus Harian, Bidang Organisasi, Bidang Khusus, dan Sekretariat.
           </p>
         </div>
         <a

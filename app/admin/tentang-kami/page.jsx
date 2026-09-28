@@ -15,7 +15,7 @@ export default function AdminTentangKamiPage() {
     },
     {
       title: '2. Struktur Organisasi',
-      desc: 'Kelola nama lengkap 24 posisi pengurus baku MTI Sumatera Selatan (Dewan Pembina, Pakar, Harian, Teknis).',
+      desc: 'Kelola satu nama lengkap untuk 17 posisi tetap MTI Sumatera Selatan dalam lima kelompok organisasi.',
       href: '/admin/tentang-kami/struktur-organisasi',
       publicHref: '/struktur-organisasi',
       icon: Users,

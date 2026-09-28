@@ -46,12 +46,13 @@ export async function saveStrukturOrganisasi(formData) {
   );
   const { error } = await supabase
     .from('struktur_organisasi')
-    .update({ data: { names } })
+    .update({ data: { version: 2, names } })
     .eq('id', 1);
   if (error) return { error: error.message };
   revalidatePath('/struktur-organisasi');
   revalidatePath('/admin');
   revalidatePath('/admin/struktur-organisasi');
+  revalidatePath('/admin/tentang-kami/struktur-organisasi');
   return { success: true };
 }
 

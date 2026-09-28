@@ -4450,6 +4450,41 @@ details[open].eastsFaqItem summary::after { content: "−"; }
   border-bottom: 1px solid var(--line);
 }
 
+.orgFlatGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
+}
+
+.orgFlatCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 8px;
+  min-height: 94px;
+  padding: 14px 16px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(17, 46, 129, 0.04);
+}
+
+.orgFlatCard span {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--muted);
+  line-height: 1.35;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.orgFlatCard strong {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--deep);
+  line-height: 1.35;
+}
+
 .orgAdvisoryGrid {
   display: flex;
   flex-direction: column;
