@@ -80,12 +80,6 @@ export default async function StrukturOrganisasiPage() {
         </div>
       </section>
 
-      <section className="wideShell dialogIntroStrip" aria-label="Kelompok struktur organisasi">
-        {Object.values(GROUP_LABELS).map((item) => (
-          <span key={item}>{item}</span>
-        ))}
-      </section>
-
       <section className="wideShell dialogContentGrid">
         <div className="dialogFeed">
           <div className="dialogSectionHead">
