@@ -6,12 +6,14 @@ import { ArrowLeft, Save, Eye } from 'lucide-react';
 import { saveBeritaItem, addBeritaItem } from '../../actions';
 import ImageUpload from '../../components/ImageUpload';
 import AdminAlert from '../../components/AdminAlert';
+import RichTextEditor from '../../components/RichTextEditor';
 import { useUnsavedChanges } from '../../components/useUnsavedChanges';
 
 export default function BeritaForm({ item, id }) {
   const [isPending, startTransition] = useTransition();
   const [feedback, setFeedback] = useState(null);
   const [isDirty, setIsDirty] = useState(false);
+  const [content, setContent] = useState(item?.content ? item.content.join('\n\n') : '');
 
   useUnsavedChanges(isDirty);
 
@@ -19,6 +21,7 @@ export default function BeritaForm({ item, id }) {
     e.preventDefault();
     setFeedback(null);
     const formData = new FormData(e.target);
+    formData.set('content', content);
     startTransition(async () => {
       try {
         if (id === 'baru') {
@@ -33,7 +36,6 @@ export default function BeritaForm({ item, id }) {
     });
   };
 
-  const defaultContent = item?.content ? item.content.join('\n\n') : '';
   const defaultHighlights = item?.highlights ? item.highlights.join('\n') : '';
 
   return (
@@ -123,11 +125,14 @@ export default function BeritaForm({ item, id }) {
 
           <div className="adminFormGroup">
             <label>Konten Berita Lengkap</label>
-            <textarea
+            <RichTextEditor
               name="content"
-              defaultValue={defaultContent}
-              rows={12}
-              placeholder="Tuliskan naskah berita di sini. Pisahkan antar paragraf dengan menekan tombol Enter dua kali."
+              value={content}
+              onChange={(value) => {
+                setContent(value);
+                setIsDirty(true);
+              }}
+              placeholder="Tuliskan naskah berita di sini. Tekan Enter satu kali atau gunakan tombol + Paragraf Baru agar setiap paragraf tampil terpisah di website."
             />
           </div>
 

@@ -15,8 +15,8 @@ export default function ArtikelHeroForm({ hero = {} }) {
   useUnsavedChanges(isDirty);
 
   const initial = {
-    title: hero.title || 'Artikel & Opini Transportasi',
-    description: hero.description || 'Kajian mendalam, analisis kebijakan, dan perspektif kritis para pakar Masyarakat Transportasi Indonesia Wilayah Sumatera Selatan.',
+    title: hero.title?.replace('Artikel & Opini', 'Artikel & Berita') || 'Artikel & Berita Transportasi',
+    description: hero.description || 'Artikel, kajian, dan berita transportasi dari Masyarakat Transportasi Indonesia Wilayah Sumatera Selatan.',
     image: hero.image || '',
     imagePosition: hero.imagePosition || 'center center'
   };
@@ -44,7 +44,7 @@ export default function ArtikelHeroForm({ hero = {} }) {
       if (result?.error) setFeedback({ type: 'error', message: result.error });
       else {
         setIsDirty(false);
-        setFeedback({ type: 'success', message: 'Header Artikel & Opini berhasil disimpan dan sudah tampil di website.', linkHref: '/artikel' });
+        setFeedback({ type: 'success', message: 'Header Artikel & Berita berhasil disimpan dan sudah tampil di website.', linkHref: '/artikel' });
       }
     });
   }
@@ -53,7 +53,7 @@ export default function ArtikelHeroForm({ hero = {} }) {
     <div style={{ maxWidth: 840 }}>
       <div className="adminPageHeader">
         <div>
-          <h1>Header Artikel &amp; Opini</h1>
+          <h1>Header Artikel &amp; Berita</h1>
           <p>Kelola judul, deskripsi, dan gambar latar banner halaman /artikel</p>
         </div>
         <button type="button" onClick={preview} className="adminBtn adminBtnSecondary"><Eye size={15} /> Pratinjau di Tab Baru</button>

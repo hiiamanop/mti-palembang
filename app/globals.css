@@ -5632,8 +5632,11 @@ details[open] .wilayahChevron { transform: rotate(-135deg); }
 }
 
 .adminSidebarBrand {
-  padding: 24px 20px 18px;
+  padding: 20px 18px 18px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .adminSidebarBrand strong {

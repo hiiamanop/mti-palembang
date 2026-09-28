@@ -40,6 +40,16 @@ export default async function NewsDetailPage({ params }) {
     .filter((item) => item.group === article.group || item.cat === article.cat)
     .slice(0, 3);
 
+  const paragraphs = (Array.isArray(article.content) ? article.content : [article.content])
+    .flatMap((text) =>
+      String(text || '')
+        .replace(/\r\n/g, '\n')
+        .replace(/\r/g, '\n')
+        .split(/\n+/)
+    )
+    .map((text) => text.trim())
+    .filter(Boolean);
+
   return (
     <main className="newsDetailPage">
       <Header
@@ -78,8 +88,8 @@ export default async function NewsDetailPage({ params }) {
         <article className="newsDetailArticle">
           <img className="newsDetailImage" src={article.img} alt="" />
           <div className="newsDetailBody">
-            {(article.content || []).map((paragraph, i) => (
-              <p key={i}>{paragraph}</p>
+            {paragraphs.map((paragraph, i) => (
+              <p key={i} style={{ whiteSpace: 'pre-line' }}>{paragraph}</p>
             ))}
           </div>
         </article>

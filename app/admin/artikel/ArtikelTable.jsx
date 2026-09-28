@@ -10,7 +10,7 @@ import AdminAlert from '../components/AdminAlert';
 import Pagination from '../components/Pagination';
 
 const PAGE_SIZE = 10;
-const CATEGORIES = ['Semua', 'Opini', 'Berita Wilayah', 'Analisis'];
+const CATEGORIES = ['Semua', 'Artikel', 'Berita'];
 
 export default function ArtikelTable({ initialArtikel = [] }) {
   const [artikel, setArtikel] = useState(initialArtikel);

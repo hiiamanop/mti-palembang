@@ -5,7 +5,7 @@ import { SITE_CONFIG } from '../lib/site-config.js';
 // 1. Verify site-config navigation
 const artikelNavItem = SITE_CONFIG.navItems.find((item) => item.href === '/artikel');
 assert.ok(artikelNavItem, 'SITE_CONFIG.navItems must include /artikel');
-assert.equal(artikelNavItem.label, 'Artikel & Opini');
+assert.equal(artikelNavItem.label, 'Artikel & Berita');
 
 const kegiatanFooter = SITE_CONFIG.footerLinks.find((section) => section.title === 'Kegiatan');
 assert.ok(kegiatanFooter, 'Footer must have Kegiatan section');
@@ -22,6 +22,6 @@ const pageSource = await readFile(new URL('../app/artikel/page.jsx', import.meta
 assert.ok(pageSource.includes('<ArtikelHero'), 'app/artikel/page.jsx must render ArtikelHero');
 const heroSource = await readFile(new URL('../app/artikel/ArtikelHero.jsx', import.meta.url), 'utf8');
 assert.ok(heroSource.includes('dialogHero'), 'ArtikelHero must use dialogHero');
-assert.ok(heroSource.includes('Artikel & Opini'), 'ArtikelHero must feature Artikel & Opini title');
+assert.ok(heroSource.includes('Artikel & Berita'), 'ArtikelHero must feature Artikel & Berita title');
 
 console.log('Public artikel page and navigation contract verified.');

@@ -14,7 +14,7 @@ const groups = groupSearchResults({
   artikel: [{ title: 'A' }]
 });
 assert.equal(groups.find((group) => group.key === 'pages').items.length, 5);
-assert.equal(groups.find((group) => group.key === 'artikel').label, 'Artikel & Opini');
+assert.equal(groups.find((group) => group.key === 'artikel').label, 'Artikel & Berita');
 
 await access(new URL('../app/api/search/route.js', import.meta.url));
 const route = await readFile(new URL('../app/api/search/route.js', import.meta.url), 'utf8');

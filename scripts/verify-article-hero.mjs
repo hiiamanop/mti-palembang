@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { access, readFile } from 'node:fs/promises';
 
 const seed = JSON.parse(await readFile(new URL('../data/beranda.json', import.meta.url), 'utf8'));
-assert.equal(seed.artikelHero.title, 'Artikel & Opini Transportasi');
+assert.equal(seed.artikelHero.title, 'Artikel & Berita Transportasi');
 assert.ok(seed.artikelHero.description);
 assert.ok(Object.hasOwn(seed.artikelHero, 'image'));
 

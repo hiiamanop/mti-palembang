@@ -7,7 +7,7 @@ import { Search, Calendar, MapPin, ArrowRight } from 'lucide-react';
 import { loadPreviewDraft } from '../../lib/preview-storage';
 import PreviewBanner from '../components/shared/PreviewBanner';
 
-const CATEGORIES = ['Semua', 'Opini', 'Berita Wilayah', 'Analisis'];
+const CATEGORIES = ['Semua', 'Artikel', 'Berita'];
 
 export default function ArtikelClient({ initialArticles = [] }) {
   const searchParams = useSearchParams();
@@ -179,7 +179,7 @@ export default function ArtikelClient({ initialArticles = [] }) {
                         textTransform: 'uppercase'
                       }}
                     >
-                      {item.kategori || 'Opini'}
+                      {item.kategori === 'Berita' ? 'Berita' : 'Artikel'}
                     </span>
                     {item.daerah ? (
                       <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, fontSize: 12, color: '#64748b' }}>

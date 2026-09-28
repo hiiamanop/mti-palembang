@@ -5,8 +5,8 @@ import ArtikelClient from './ArtikelClient';
 import ArtikelHero from './ArtikelHero';
 
 export const metadata = {
-  title: 'Artikel & Opini | MTI SUMSEL',
-  description: 'Artikel, analisis, dan opini Masyarakat Transportasi Indonesia Sumatera Selatan.'
+  title: 'Artikel & Berita | MTI SUMSEL',
+  description: 'Artikel dan berita resmi Masyarakat Transportasi Indonesia Sumatera Selatan.'
 };
 
 export default async function ArtikelPage() {
@@ -15,7 +15,7 @@ export default async function ArtikelPage() {
 
   return (
     <main className="artikelPage">
-      <Header activeItem="Artikel & Opini" />
+      <Header activeItem="Artikel & Berita" />
 
       {/* ── Standard Hero Header (420px, 42px font) ── */}
       <ArtikelHero savedHero={artikelHero} />

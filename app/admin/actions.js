@@ -106,7 +106,7 @@ export async function saveBeritaItem(id, formData) {
     author: formData.get('author'),
     read_time: formData.get('readTime'),
     excerpt: formData.get('excerpt'),
-    content: (formData.get('content') || '').split('\n\n').filter(Boolean),
+    content: parseParagraphs(formData.get('content')),
     highlights: (formData.get('highlights') || '').split('\n').filter(Boolean),
     source_url: formData.get('sourceUrl') || ''
   };
@@ -135,7 +135,7 @@ export async function addBeritaItem(formData) {
     author: formData.get('author') || 'Redaksi MTI',
     read_time: formData.get('readTime') || '3 menit baca',
     excerpt: formData.get('excerpt') || '',
-    content: (formData.get('content') || '').split('\n\n').filter(Boolean),
+    content: parseParagraphs(formData.get('content')),
     highlights: (formData.get('highlights') || '').split('\n').filter(Boolean),
     source_url: formData.get('sourceUrl') || '',
     published: false
@@ -478,17 +478,28 @@ export async function toggleJurnalVisible(id) {
   revalidatePath('/admin/jurnal');
 }
 
+function parseParagraphs(text) {
+  if (!text) return [];
+  return String(text)
+    .replace(/\r\n/g, '\n')
+    .replace(/\r/g, '\n')
+    .split(/\n+/)
+    .map((s) => s.trim())
+    .filter(Boolean);
+}
+
 // ── Artikel ───────────────────────────────────────────────────────────────────
 
 export async function saveArtikelItem(id, formData) {
   const supabase = await checkAuth();
+  const rawCat = formData.get('kategori');
   const update = {
     title: formData.get('title'),
-    kategori: formData.get('kategori'),
+    kategori: rawCat === 'Berita' ? 'Berita' : 'Artikel',
     daerah: formData.get('daerah'),
     date: formData.get('date'),
     ringkasan: formData.get('ringkasan'),
-    konten: (formData.get('konten') || '').split('\n\n').filter(Boolean),
+    konten: parseParagraphs(formData.get('konten')),
     gambar: formData.get('gambar')
   };
   Object.keys(update).forEach((k) => update[k] == null && delete update[k]);
@@ -502,13 +513,14 @@ export async function saveArtikelItem(id, formData) {
 
 export async function addArtikelItem(formData) {
   const supabase = await checkAuth();
+  const rawCat = formData.get('kategori');
   const row = {
     title: formData.get('title') || 'Artikel Baru',
-    kategori: formData.get('kategori') || 'Opini',
+    kategori: rawCat === 'Berita' ? 'Berita' : 'Artikel',
     daerah: formData.get('daerah') || '',
     date: formData.get('date') || '',
     ringkasan: formData.get('ringkasan') || '',
-    konten: (formData.get('konten') || '').split('\n\n').filter(Boolean),
+    konten: parseParagraphs(formData.get('konten')),
     gambar: formData.get('gambar') || '',
     visible: true
   };

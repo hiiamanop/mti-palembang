@@ -75,9 +75,9 @@ assert.deepEqual(await readJSON('beranda'), {
     imagePosition: 'center center'
   },
   artikelHero: {
-    title: 'Artikel & Opini Transportasi',
+    title: 'Artikel & Berita Transportasi',
     description:
-      'Kajian mendalam, analisis kebijakan, dan perspektif kritis para pakar Masyarakat Transportasi Indonesia Wilayah Sumatera Selatan.',
+      'Artikel, kajian, dan berita transportasi dari Masyarakat Transportasi Indonesia Wilayah Sumatera Selatan.',
     image:
       'https://mti.or.id/wp-content/uploads/2023/07/Screenshot-2023-07-01-at-17.28.41.png',
     imagePosition: 'center center'

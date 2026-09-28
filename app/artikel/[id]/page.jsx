@@ -10,8 +10,8 @@ export async function generateMetadata({ params }) {
   const artikel = await getArtikelById(id);
   if (!artikel) return { title: 'Artikel Tidak Ditemukan | MTI SUMSEL' };
   return {
-    title: `${artikel.title} | MTI SUMSEL`,
-    description: artikel.ringkasan || 'Artikel MTI Sumatera Selatan'
+    title: `${artikel.title} | Artikel & Berita MTI SUMSEL`,
+    description: artikel.ringkasan || 'Artikel & Berita MTI Sumatera Selatan'
   };
 }
 
@@ -20,9 +20,21 @@ export default async function ArtikelDetailPage({ params }) {
   const artikel = await getArtikelById(id);
   if (!artikel) notFound();
 
+  const paragraphs = (
+    Array.isArray(artikel.konten) ? artikel.konten : [artikel.konten]
+  )
+    .flatMap((p) =>
+      String(p || '')
+        .replace(/\r\n/g, '\n')
+        .replace(/\r/g, '\n')
+        .split(/\n+/)
+    )
+    .map((s) => s.trim())
+    .filter(Boolean);
+
   return (
     <main className="artikelDetailPage" style={{ background: '#f8fafc', minHeight: '100vh' }}>
-      <Header activeItem="Artikel & Opini" />
+      <Header activeItem="Artikel & Berita" />
 
       {/* ── Artikel Header Area ── */}
       <section
@@ -47,7 +59,7 @@ export default async function ArtikelDetailPage({ params }) {
             }}
           >
             <ArrowLeft size={16} />
-            Kembali ke Daftar Artikel
+            Kembali ke Daftar Artikel &amp; Berita
           </Link>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 14, flexWrap: 'wrap' }}>
@@ -63,7 +75,7 @@ export default async function ArtikelDetailPage({ params }) {
                 border: '1px solid rgba(255,255,255,0.2)'
               }}
             >
-              {artikel.kategori || 'Opini'}
+              {artikel.kategori || 'Artikel'}
             </span>
             {artikel.daerah ? (
               <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, fontSize: 13, color: '#cbd5e1' }}>
@@ -144,9 +156,9 @@ export default async function ArtikelDetailPage({ params }) {
               lineHeight: 1.8
             }}
           >
-            {artikel.konten?.length > 0 ? (
-              artikel.konten.map((p, idx) => (
-                <p key={idx} style={{ margin: '0 0 20px' }}>
+            {paragraphs.length > 0 ? (
+              paragraphs.map((p, idx) => (
+                <p key={idx} style={{ margin: '0 0 20px', whiteSpace: 'pre-line' }}>
                   {p}
                 </p>
               ))
@@ -181,7 +193,7 @@ export default async function ArtikelDetailPage({ params }) {
                 }}
               >
                 <ArrowLeft size={16} />
-                Kembali ke Semua Artikel
+                Kembali ke Semua Artikel &amp; Berita
               </Link>
             </div>
           </div>

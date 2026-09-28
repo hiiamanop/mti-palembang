@@ -36,7 +36,7 @@ export default function AdminSidebar() {
       items: [
         { label: 'Beranda', href: '/admin/beranda', icon: Home, desc: 'Hero, Visi-Misi, Program' },
         { label: 'Hero Halaman Kegiatan', href: '/admin/hero-kegiatan', icon: Compass, desc: 'Banner atas /kegiatan-mti' },
-        { label: 'Header Artikel & Opini', href: '/admin/header-artikel', icon: FileText, desc: 'Banner atas /artikel' },
+        { label: 'Header Artikel & Berita', href: '/admin/header-artikel', icon: FileText, desc: 'Banner atas /artikel' },
         { label: 'Tentang Kami', href: '/admin/tentang-kami', icon: Users, desc: 'Profil, Struktur, Identitas' }
       ]
     },
@@ -44,7 +44,7 @@ export default function AdminSidebar() {
       title: 'KONTEN BERKALA',
       items: [
         { label: 'Kegiatan MTI', href: '/admin/kegiatan', icon: Calendar },
-        { label: 'Artikel & Opini', href: '/admin/artikel', icon: FileText },
+        { label: 'Artikel & Berita', href: '/admin/artikel', icon: FileText },
         { label: 'Berita', href: '/admin/berita', icon: Newspaper },
         { label: 'Jurnal AKSES', href: '/admin/jurnal', icon: BookOpen },
         { label: 'Media Video', href: '/admin/media', icon: Video }
@@ -63,7 +63,12 @@ export default function AdminSidebar() {
       {/* ── Mobile Top Header ── */}
       <div className="adminMobileTopBar">
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-          <strong style={{ color: '#fff', fontSize: 16 }}>MTI CMS</strong>
+          <img
+            src="/images/mti-logo-emblem.png"
+            alt="Logo MTI"
+            style={{ width: 28, height: 28, objectFit: 'contain' }}
+          />
+          <strong style={{ color: '#fff', fontSize: 16 }}>MTI SUMSEL CMS</strong>
         </div>
         <button
           type="button"
@@ -78,8 +83,15 @@ export default function AdminSidebar() {
       {/* ── Sidebar ── */}
       <aside className={`adminSidebar ${mobileOpen ? 'adminSidebarMobileOpen' : ''}`}>
         <div className="adminSidebarBrand">
-          <strong>MTI SUMSEL</strong>
-          <small>Panel Pengelola Konten</small>
+          <img
+            src="/images/mti-logo-emblem.png"
+            alt="Logo MTI"
+            style={{ width: 44, height: 44, objectFit: 'contain', flexShrink: 0 }}
+          />
+          <div>
+            <strong>MTI SUMSEL</strong>
+            <small>Panel Pengelola Konten</small>
+          </div>
         </div>
 
         <nav className="adminSidebarNav">

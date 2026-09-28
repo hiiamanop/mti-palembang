@@ -14,8 +14,8 @@ export default function ArtikelHero({ savedHero = {} }) {
   }, [isPreview]);
 
   const hero = preview || savedHero;
-  const title = hero.title || 'Artikel & Opini Transportasi';
-  const description = hero.description || 'Kajian mendalam, analisis kebijakan, dan perspektif kritis para pakar Masyarakat Transportasi Indonesia Wilayah Sumatera Selatan.';
+  const title = hero.title?.replace('Artikel & Opini', 'Artikel & Berita') || 'Artikel & Berita Transportasi';
+  const description = hero.description || 'Artikel, kajian, dan berita transportasi dari Masyarakat Transportasi Indonesia Wilayah Sumatera Selatan.';
   const image = hero.image || 'https://mti.or.id/wp-content/uploads/2023/07/Screenshot-2023-07-01-at-17.28.41.png';
   const imagePosition = hero.imagePosition || 'center center';
 
@@ -24,7 +24,7 @@ export default function ArtikelHero({ savedHero = {} }) {
       <img src={image} alt="" aria-hidden="true" style={{ objectPosition: imagePosition }} />
       <span className="dialogHeroShade" />
       <div className="wideShell dialogHeroContent">
-        <span className="dialogEyebrow">Artikel &amp; Opini</span>
+        <span className="dialogEyebrow">Artikel &amp; Berita</span>
         <h1>{title}</h1>
         <p>{description}</p>
       </div>
